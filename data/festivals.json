@@ -1,0 +1,30 @@
+{
+  "2083-05-15": [
+    {
+      "name": "जनै पूर्णिमा",
+      "nameEn": "Janai Purnima",
+      "type": "festival"
+    }
+  ],
+  "2083-05-20": [
+    {
+      "name": "हरितालिका तीज",
+      "nameEn": "Haritalika Teej",
+      "type": "festival"
+    }
+  ],
+  "2083-07-04": [
+    {
+      "name": "बडा दशैं",
+      "nameEn": "Dashain",
+      "type": "festival"
+    }
+  ],
+  "2083-07-18": [
+    {
+      "name": "तिहार",
+      "nameEn": "Tihar / Deepawali",
+      "type": "festival"
+    }
+  ]
+}
