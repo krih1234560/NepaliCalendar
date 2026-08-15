@@ -1,202 +1,1634 @@
-import { bsToAd, adToBs, getTotalDaysInMonth, getNepaliMonthName, getCalendarData } from "https://cdn.jsdelivr.net/npm/@sonill/nepali-dates@1.0.7/+esm";
+import {
+  bsFromDate,
+  dateFromBs,
+  todayBs
+} from "@grahan/calendars";
+
+const MIN_BS_YEAR = 1975;
+const MAX_BS_YEAR = 2100;
 
 const MONTHS = [
-  ["बैशाख","Baisakh"],["जेठ","Jestha"],["असार","Ashar"],["श्रावण","Shrawan"],
-  ["भाद्र","Bhadra"],["आश्विन","Ashwin"],["कार्तिक","Kartik"],["मंसिर","Mangsir"],
-  ["पौष","Poush"],["माघ","Magh"],["फाल्गुन","Falgun"],["चैत्र","Chaitra"]
-];
-const WEEKDAYS = ["आइत","सोम","मंगल","बुध","बिहि","शुक्र","शनि"];
-const WEEKDAYS_EN = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-const NP_DIGITS = "०१२३४५६७८९";
-const MIN_YEAR = 2000, MAX_YEAR = 2100;
-
-// Verified/curated entries should be expanded year by year.
-// Government holiday schedules are published separately by Nepal's Ministry of Home Affairs.
-const EVENTS = [
-  {y:2083,m:5,d:15,ne:"जनै पूर्णिमा",en:"Janai Purnima",type:"festival"},
-  {y:2083,m:5,d:20,ne:"हरितालिका तीज",en:"Haritalika Teej",type:"festival"},
-  {y:2083,m:6,d:3,ne:"घटस्थापना",en:"Ghatasthapana",type:"festival"},
-  {y:2083,m:6,d:10,ne:"फूलपाती",en:"Phulpati",type:"festival"},
-  {y:2083,m:6,d:11,ne:"महाअष्टमी",en:"Maha Ashtami",type:"festival"},
-  {y:2083,m:6,d:12,ne:"महानवमी",en:"Maha Navami",type:"festival"},
-  {y:2083,m:6,d:13,ne:"विजया दशमी",en:"Vijaya Dashami / Dashain",type:"holiday"},
-  {y:2083,m:7,d:3,ne:"काग तिहार",en:"Kag Tihar",type:"festival"},
-  {y:2083,m:7,d:4,ne:"कुकुर तिहार / लक्ष्मी पूजा",en:"Kukur Tihar / Laxmi Puja",type:"holiday"},
-  {y:2083,m:7,d:5,ne:"गाई तिहार / गोवर्धन पूजा",en:"Gai Tihar / Govardhan Puja",type:"festival"},
-  {y:2083,m:7,d:6,ne:"भाइटीका",en:"Bhai Tika",type:"holiday"}
-];
-
-let state = { year: 2083, month: 5, selectedDay: null, mode:"bs" };
-
-const $ = id => document.getElementById(id);
-const toNp = n => String(n).replace(/\d/g, d => NP_DIGITS[d]);
-const dateKey = (y,m,d) => `${y}-${String(m).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
-const eventFor = (y,m,d) => EVENTS.filter(e => e.y===y && e.m===m && e.d===d);
-const eventForYear = y => EVENTS.filter(e=>e.y===y);
-
-function safeDate(y,m,d){ return new Date(Date.UTC(y,m-1,d)); }
-
-function moonPhase(adDate){
-  // Approximate synodic phase for display; not a Panchang/tithi calculation.
-  const knownNewMoon = Date.UTC(2000,0,6,18,14);
-  const synodic = 29.530588853;
-  const age = ((adDate.getTime() - knownNewMoon) / 86400000) % synodic;
-  const a = (age + synodic) % synodic;
-  let name, icon;
-  if(a < 1.84566){name="New Moon / औंसी";icon="●";}
-  else if(a < 7.38265){name="Waxing Crescent";icon="◔";}
-  else if(a < 9.22311){name="First Quarter";icon="◑";}
-  else if(a < 14.76529){name="Waxing Gibbous";icon="◕";}
-  else if(a < 16.61045){name="Full Moon / पूर्णिमा";icon="○";}
-  else if(a < 22.14794){name="Waning Gibbous";icon="◕";}
-  else if(a < 23.99335){name="Last Quarter";icon="◑";}
-  else {name="Waning Crescent";icon="◔";}
-  return {name,icon,age:Math.round(a*10)/10};
-}
-
-function fillSelects(){
-  $("yearSelect").innerHTML = Array.from({length:MAX_YEAR-MIN_YEAR+1},(_,i)=>{
-    const y=MIN_YEAR+i; return `<option value="${y}">${y} / ${toNp(y)}</option>`;
-  }).join("");
-  $("monthSelect").innerHTML = MONTHS.map((m,i)=>`<option value="${i+1}">${m[0]} / ${m[1]}</option>`).join("");
-  $("bsMonth").innerHTML = MONTHS.map((m,i)=>`<option value="${i+1}">${m[0]} / ${m[1]}</option>`).join("");
-  $("weekdays").innerHTML = WEEKDAYS.map(d=>`<div>${d}</div>`).join("");
-}
-
-function monthInfo(y,m){
-  const first = bsToAd(y,m,1);
-  const days = getTotalDaysInMonth(y,m);
-  const firstDate = safeDate(first.year,first.month,first.day);
-  return {first,days,firstDate};
-}
-
-function renderCalendar(){
-  const info = monthInfo(state.year,state.month);
-  const firstDow = info.firstDate.getUTCDay();
-  const days = info.days;
-  $("calendarTitle").textContent = `Nepali Calendar ${state.year}`;
-  $("calendarSubtitle").textContent = `${MONTHS[state.month-1][1]} / ${MONTHS[state.month-1][0]} ${state.year} BS`;
-  $("monthNepali").textContent = MONTHS[state.month-1][0];
-  $("monthEnglish").textContent = MONTHS[state.month-1][1];
-  $("yearBadge").textContent = `${state.year} BS`;
-  $("yearSelect").value = state.year;
-  $("monthSelect").value = state.month;
-
-  let html = "";
-  for(let i=0;i<firstDow;i++) html += `<div class="day empty"></div>`;
-  for(let d=1;d<=days;d++){
-    const ad=bsToAd(state.year,state.month,d);
-    const dt=safeDate(ad.year,ad.month,ad.day);
-    const ev=eventFor(state.year,state.month,d);
-    const isToday = sameBsAsToday(state.year,state.month,d);
-    const isSelected = state.selectedDay===d;
-    html += `<button class="day ${dt.getUTCDay()===6?"saturday":""} ${isToday?"today":""} ${isSelected?"selected":""}" data-day="${d}" aria-label="${MONTHS[state.month-1][1]} ${d}, ${state.year} BS">
-      ${ev.length?'<span class="event-dot"></span>':''}
-      <span class="bs-num">${toNp(d)}</span>
-      <span class="ad-num">${ad.month}/${ad.day}</span>
-      ${ev[0]?`<span class="holiday-label">${ev[0].ne}</span>`:""}
-    </button>`;
+  {
+    np: "बैशाख",
+    en: "Baisakh"
+  },
+  {
+    np: "जेठ",
+    en: "Jestha"
+  },
+  {
+    np: "असार",
+    en: "Asar"
+  },
+  {
+    np: "श्रावण",
+    en: "Shrawan"
+  },
+  {
+    np: "भदौ",
+    en: "Bhadra"
+  },
+  {
+    np: "आश्विन",
+    en: "Ashwin"
+  },
+  {
+    np: "कार्तिक",
+    en: "Kartik"
+  },
+  {
+    np: "मंसिर",
+    en: "Mangsir"
+  },
+  {
+    np: "पौष",
+    en: "Poush"
+  },
+  {
+    np: "माघ",
+    en: "Magh"
+  },
+  {
+    np: "फाल्गुण",
+    en: "Falgun"
+  },
+  {
+    np: "चैत्र",
+    en: "Chaitra"
   }
-  $("calendarGrid").innerHTML = html;
-  $("calendarGrid").querySelectorAll(".day:not(.empty)").forEach(btn=>btn.addEventListener("click",()=>selectDay(Number(btn.dataset.day))));
+];
+
+const WEEKDAYS = [
+  "आइत",
+  "सोम",
+  "मंगल",
+  "बुध",
+  "बिहि",
+  "शुक्र",
+  "शनि"
+];
+
+const DEVANAGARI = [
+  "०",
+  "१",
+  "२",
+  "३",
+  "४",
+  "५",
+  "६",
+  "७",
+  "८",
+  "९"
+];
+
+let currentYear = 2083;
+let currentMonth = 5;
+let selectedDay = null;
+
+let festivals = {};
+let holidays = {};
+
+
+function nepaliNumber(number) {
+
+  return String(number)
+    .split("")
+    .map(
+      digit => DEVANAGARI[Number(digit)] ?? digit
+    )
+    .join("");
+
 }
 
-function sameBsAsToday(y,m,d){
-  const now=new Date();
-  try { const b=adToBs(now.getUTCFullYear(),now.getUTCMonth()+1,now.getUTCDate()); return b.year===y&&b.month===m&&b.day===d; }
-  catch { return false; }
+
+function formatBsDate(year, month, day) {
+
+  return `${nepaliNumber(day)} ${
+    MONTHS[month - 1].np
+  } ${nepaliNumber(year)}`;
+
 }
 
-function selectDay(d){
-  state.selectedDay=d;
-  renderCalendar();
-  const ad=bsToAd(state.year,state.month,d);
-  const dt=safeDate(ad.year,ad.month,ad.day);
-  const ev=eventFor(state.year,state.month,d);
-  const moon=moonPhase(dt);
-  $("selectedTitle").textContent=`${MONTHS[state.month-1][0]} ${toNp(d)}, ${toNp(state.year)}`;
-  $("selectedAd").textContent=`${ad.year}-${String(ad.month).padStart(2,"0")}-${String(ad.day).padStart(2,"0")} • ${WEEKDAYS_EN[dt.getUTCDay()]}`;
-  $("selectedEvents").innerHTML=ev.length?ev.map(e=>`<div class="event-chip"><strong>${e.ne}</strong><small>${e.en} • ${e.type==="holiday"?"Holiday":"Festival"}</small></div>`).join(""):`<div class="event-chip"><strong>No listed event</strong><small>Check the official holiday notice for this year.</small></div>`;
-  $("selectedMoonIcon").textContent=moon.icon;
-  $("selectedMoon").textContent=moon.name;
-  $("selectedMoonAge").textContent=`Approx. lunar age ${moon.age} days`;
+
+function bsDateToAd(year, month, day) {
+
+  return dateFromBs({
+    year,
+    month,
+    day
+  });
+
 }
 
-function renderToday(){
-  const now=new Date();
-  const b=adToBs(now.getUTCFullYear(),now.getUTCMonth()+1,now.getUTCDate());
-  $("todayNepali").textContent=`${toNp(b.day)} ${MONTHS[b.month-1][0]} ${toNp(b.year)}`;
-  $("todayEnglish").textContent=now.toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric",timeZone:"UTC"});
-  $("todayWeekday").textContent=WEEKDAYS_EN[now.getUTCDay()];
-  $("todayMoon").textContent=moonPhase(new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()))).name;
-  $("footerYear").textContent=new Date().getFullYear();
+
+function adDateToBs(year, month, day) {
+
+  return bsFromDate({
+    year,
+    month,
+    day
+  });
+
 }
 
-function setMode(mode){
-  state.mode=mode;
-  document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));
-  $("bsFields").classList.toggle("hidden",mode!=="bs");
-  $("adFields").classList.toggle("hidden",mode!=="ad");
+
+function getEvents(year, month, day) {
+
+  const key =
+    `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+
+  return [
+    ...(festivals[key] || []),
+    ...(holidays[key] || [])
+  ];
+
 }
 
-function convertForm(e){
-  e.preventDefault();
-  try{
-    let text="";
-    if(state.mode==="bs"){
-      const y=Number($("bsYear").value),m=Number($("bsMonth").value),d=Number($("bsDay").value);
-      const a=bsToAd(y,m,d);
-      text=`${toNp(d)} ${MONTHS[m-1][0]} ${toNp(y)} BS  →  ${a.day} ${new Date(Date.UTC(a.year,a.month-1,a.day)).toLocaleString("en-US",{month:"long"})} ${a.year} AD`;
-    }else{
-      const y=Number($("adYear").value),m=Number($("adMonth").value),d=Number($("adDay").value);
-      const b=adToBs(y,m,d);
-      text=`${d} ${new Date(Date.UTC(y,m-1,d)).toLocaleString("en-US",{month:"long"})} ${y} AD  →  ${toNp(b.day)} ${MONTHS[b.month-1][0]} ${toNp(b.year)} BS`;
+
+function moonPhase(date) {
+
+  const knownNewMoon =
+    Date.UTC(
+      2000,
+      0,
+      6,
+      18,
+      14
+    );
+
+  const lunarCycle =
+    29.530588853;
+
+  const days =
+    (
+      date.getTime() -
+      knownNewMoon
+    ) / 86400000;
+
+  const age =
+    (
+      (
+        days %
+        lunarCycle
+      ) +
+      lunarCycle
+    ) %
+    lunarCycle;
+
+
+  if (age < 1.85) {
+
+    return {
+      icon: "🌑",
+      name: "New Moon",
+      np: "औंसी"
+    };
+
+  }
+
+  if (age < 7.38) {
+
+    return {
+      icon: "🌒",
+      name: "Waxing Crescent",
+      np: "शुक्ल पक्ष"
+    };
+
+  }
+
+  if (age < 9.23) {
+
+    return {
+      icon: "🌓",
+      name: "First Quarter",
+      np: "अर्धचन्द्र"
+    };
+
+  }
+
+  if (age < 14.77) {
+
+    return {
+      icon: "🌔",
+      name: "Waxing Gibbous",
+      np: "पूर्णिमा नजिक"
+    };
+
+  }
+
+  if (age < 16.62) {
+
+    return {
+      icon: "🌕",
+      name: "Full Moon",
+      np: "पूर्णिमा"
+    };
+
+  }
+
+  if (age < 22.15) {
+
+    return {
+      icon: "🌖",
+      name: "Waning Gibbous",
+      np: "कृष्ण पक्ष"
+    };
+
+  }
+
+  if (age < 23.99) {
+
+    return {
+      icon: "🌗",
+      name: "Last Quarter",
+      np: "अर्धचन्द्र"
+    };
+
+  }
+
+  return {
+
+    icon: "🌘",
+    name: "Waning Crescent",
+    np: "औंसी नजिक"
+
+  };
+
+}
+
+
+function getMonthLength(year, month) {
+
+  let day = 1;
+
+  while (true) {
+
+    try {
+
+      dateFromBs({
+        year,
+        month,
+        day
+      });
+
+      day++;
+
+    } catch {
+
+      return day - 1;
+
     }
-    $("converterResult").textContent=text;
-  }catch(err){$("converterResult").textContent="Invalid or unsupported date. Supported BS range: 2000–2100.";}
+
+  }
+
 }
 
-function renderEvents(){
-  const q=($("festivalSearch").value||"").trim().toLowerCase();
-  const rows=eventForYear(state.year).filter(e=>`${e.ne} ${e.en}`.toLowerCase().includes(q));
-  $("eventGrid").innerHTML=rows.length?rows.map(e=>`<article class="event-card"><div class="event-date">${toNp(e.d)} ${MONTHS[e.m-1][0]} ${toNp(e.y)} BS</div><h3>${e.ne}</h3><p>${e.en}</p><span class="event-type">${e.type==="holiday"?"PUBLIC HOLIDAY":"FESTIVAL"}</span></article>`).join(""):`<div class="event-card"><h3>No curated events for ${state.year} yet</h3><p>Add verified yearly entries to data/events.js. Do not invent government holidays.</p></div>`;
+
+function getFirstWeekday(year, month) {
+
+  const ad =
+    bsDateToAd(
+      year,
+      month,
+      1
+    );
+
+  return ad.weekday.index;
+
 }
 
-function moveMonth(delta){
-  state.month+=delta;
-  if(state.month<1){state.month=12;state.year--}
-  if(state.month>12){state.month=1;state.year++}
-  state.year=Math.max(MIN_YEAR,Math.min(MAX_YEAR,state.year));
-  state.selectedDay=null; renderCalendar(); renderEvents();
+
+function renderYearSelect() {
+
+  const select =
+    document.getElementById(
+      "yearSelect"
+    );
+
+  select.innerHTML = "";
+
+  for (
+    let year = MIN_BS_YEAR;
+    year <= MAX_BS_YEAR;
+    year++
+  ) {
+
+    const option =
+      document.createElement(
+        "option"
+      );
+
+    option.value = year;
+
+    option.textContent =
+      `${nepaliNumber(year)} BS (${year})`;
+
+    if (
+      year === currentYear
+    ) {
+      option.selected = true;
+    }
+
+    select.appendChild(option);
+
+  }
+
 }
-function moveYear(delta){state.year=Math.max(MIN_YEAR,Math.min(MAX_YEAR,state.year+delta));state.selectedDay=null;renderCalendar();renderEvents();}
 
-fillSelects(); renderToday(); renderCalendar(); renderEvents();
-$("bsMonth").value=5;
-document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.mode)));
-$("converterForm").addEventListener("submit",convertForm);
-$("prevMonth").addEventListener("click",()=>moveMonth(-1)); $("nextMonth").addEventListener("click",()=>moveMonth(1));
-$("prevYear").addEventListener("click",()=>moveYear(-1)); $("nextYear").addEventListener("click",()=>moveYear(1));
-$("goToday").addEventListener("click",()=>{const n=new Date(),b=adToBs(n.getUTCFullYear(),n.getUTCMonth()+1,n.getUTCDate());state.year=b.year;state.month=b.month;state.selectedDay=b.day;renderCalendar();renderEvents();selectDay(b.day)});
-$("yearSelect").addEventListener("change",e=>{state.year=Number(e.target.value);state.selectedDay=null;renderCalendar();renderEvents()});
-$("monthSelect").addEventListener("change",e=>{state.month=Number(e.target.value);state.selectedDay=null;renderCalendar();renderEvents()});
-$("festivalSearch").addEventListener("input",renderEvents);
-$("menuToggle").addEventListener("click",()=>{document.querySelector(".nav").classList.toggle("open");$("menuToggle").setAttribute("aria-expanded",document.querySelector(".nav").classList.contains("open"))});
 
-$("dateDiffTool").addEventListener("click",()=>{
-  const a=prompt("Start date (YYYY-MM-DD)", "2026-01-01"), b=prompt("End date (YYYY-MM-DD)","2026-12-31");
-  if(!a||!b)return;
-  const da=new Date(a+"T00:00:00Z"), db=new Date(b+"T00:00:00Z");
-  if(isNaN(da)||isNaN(db)) return alert("Invalid date");
-  alert(`Difference: ${Math.abs(Math.round((db-da)/86400000))} days`);
-});
-$("age-tool").addEventListener("click",()=>{
-  const dob=prompt("Date of birth (YYYY-MM-DD)");
-  if(!dob)return;
-  const d=new Date(dob+"T00:00:00Z"), n=new Date();
-  if(isNaN(d)) return alert("Invalid date");
-  let age=n.getUTCFullYear()-d.getUTCFullYear();
-  const before=(n.getUTCMonth()<d.getUTCMonth())||(n.getUTCMonth()===d.getUTCMonth()&&n.getUTCDate()<d.getUTCDate());
-  if(before)age--;
-  alert(`Approximate age: ${age} years`);
-});
+function renderMonthSelect() {
+
+  const select =
+    document.getElementById(
+      "monthSelect"
+    );
+
+  select.innerHTML = "";
+
+  MONTHS.forEach(
+    (month, index) => {
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+      option.value =
+        index + 1;
+
+      option.textContent =
+        `${month.np} (${month.en})`;
+
+      if (
+        index + 1 === currentMonth
+      ) {
+        option.selected = true;
+      }
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+}
+
+
+function renderConverterMonths() {
+
+  const select =
+    document.getElementById(
+      "bsMonth"
+    );
+
+  select.innerHTML = "";
+
+  MONTHS.forEach(
+    (month, index) => {
+
+      const option =
+        document.createElement(
+          "option"
+        );
+
+      option.value =
+        index + 1;
+
+      option.textContent =
+        `${month.np} (${month.en})`;
+
+      select.appendChild(
+        option
+      );
+
+    }
+  );
+
+  select.value =
+    currentMonth;
+
+}
+
+
+function renderWeekdays() {
+
+  const container =
+    document.getElementById(
+      "weekdays"
+    );
+
+  container.innerHTML =
+    WEEKDAYS
+      .map(
+        day => `<div>${day}</div>`
+      )
+      .join("");
+
+}
+
+
+function isToday(
+  year,
+  month,
+  day
+) {
+
+  const now =
+    new Date();
+
+  try {
+
+    const bs =
+      adDateToBs(
+        now.getFullYear(),
+        now.getMonth() + 1,
+        now.getDate()
+      );
+
+    return (
+      bs.year === year &&
+      bs.month === month &&
+      bs.day === day
+    );
+
+  } catch {
+
+    return false;
+
+  }
+
+}
+
+
+function renderCalendar() {
+
+  const grid =
+    document.getElementById(
+      "calendarGrid"
+    );
+
+  grid.innerHTML = "";
+
+  let firstWeekday;
+
+  try {
+
+    firstWeekday =
+      getFirstWeekday(
+        currentYear,
+        currentMonth
+      );
+
+  } catch (error) {
+
+    grid.innerHTML =
+      `<p>Calendar data unavailable.</p>`;
+
+    console.error(error);
+
+    return;
+
+  }
+
+
+  const days =
+    getMonthLength(
+      currentYear,
+      currentMonth
+    );
+
+
+  for (
+    let i = 0;
+    i < firstWeekday;
+    i++
+  ) {
+
+    const blank =
+      document.createElement(
+        "div"
+      );
+
+    blank.className =
+      "calendar-day empty";
+
+    grid.appendChild(
+      blank
+    );
+
+  }
+
+
+  for (
+    let day = 1;
+    day <= days;
+    day++
+  ) {
+
+    const button =
+      document.createElement(
+        "button"
+      );
+
+    button.type =
+      "button";
+
+    button.className =
+      "calendar-day";
+
+
+    const events =
+      getEvents(
+        currentYear,
+        currentMonth,
+        day
+      );
+
+
+    if (
+      isToday(
+        currentYear,
+        currentMonth,
+        day
+      )
+    ) {
+
+      button.classList.add(
+        "today"
+      );
+
+    }
+
+
+    if (
+      selectedDay === day
+    ) {
+
+      button.classList.add(
+        "selected"
+      );
+
+    }
+
+
+    if (
+      events.some(
+        event =>
+          event.type === "holiday"
+      )
+    ) {
+
+      button.classList.add(
+        "holiday"
+      );
+
+    }
+
+
+    if (
+      events.some(
+        event =>
+          event.type === "festival"
+      )
+    ) {
+
+      button.classList.add(
+        "festival"
+      );
+
+    }
+
+
+    const ad =
+      bsDateToAd(
+        currentYear,
+        currentMonth,
+        day
+      );
+
+
+    button.innerHTML = `
+
+      <span class="bs-day">
+        ${nepaliNumber(day)}
+      </span>
+
+      <small>
+        ${ad.day}
+      </small>
+
+      ${
+        events.length
+          ? `<i>●</i>`
+          : ""
+      }
+
+    `;
+
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        selectedDay =
+          day;
+
+        renderCalendar();
+
+        showSelectedDate();
+
+      }
+    );
+
+
+    grid.appendChild(
+      button
+    );
+
+  }
+
+
+  document.getElementById(
+    "monthNepali"
+  ).textContent =
+    MONTHS[
+      currentMonth - 1
+    ].np;
+
+
+  document.getElementById(
+    "monthEnglish"
+  ).textContent =
+    MONTHS[
+      currentMonth - 1
+    ].en;
+
+
+  document.getElementById(
+    "yearBadge"
+  ).textContent =
+    `${nepaliNumber(currentYear)} BS`;
+
+
+  document.getElementById(
+    "calendarTitle"
+  ).textContent =
+    `Nepali Calendar ${nepaliNumber(currentYear)}`;
+
+
+  document.getElementById(
+    "calendarSubtitle"
+  ).textContent =
+    `${MONTHS[currentMonth - 1].en} / ${
+      MONTHS[currentMonth - 1].np
+    } ${currentYear}`;
+
+}
+
+
+function showSelectedDate() {
+
+  if (!selectedDay) {
+    return;
+  }
+
+
+  const ad =
+    bsDateToAd(
+      currentYear,
+      currentMonth,
+      selectedDay
+    );
+
+
+  const events =
+    getEvents(
+      currentYear,
+      currentMonth,
+      selectedDay
+    );
+
+
+  const moon =
+    moonPhase(
+      new Date(
+        Date.UTC(
+          ad.year,
+          ad.month - 1,
+          ad.day
+        )
+      )
+    );
+
+
+  document.getElementById(
+    "selectedTitle"
+  ).textContent =
+    formatBsDate(
+      currentYear,
+      currentMonth,
+      selectedDay
+    );
+
+
+  document.getElementById(
+    "selectedAd"
+  ).textContent =
+    `${ad.day}/${ad.month}/${ad.year} AD • ${
+      ad.weekday.name
+    }`;
+
+
+  document.getElementById(
+    "selectedEvents"
+  ).innerHTML =
+
+    events.length
+
+      ? events
+          .map(
+            event => `
+
+              <div class="event-item">
+
+                <strong>
+                  ${event.name}
+                </strong>
+
+                ${
+                  event.nameEn
+                    ? `<small>${event.nameEn}</small>`
+                    : ""
+                }
+
+              </div>
+
+            `
+          )
+          .join("")
+
+      : `<p>No festival or holiday listed.</p>`;
+
+
+  document.getElementById(
+    "selectedMoonIcon"
+  ).textContent =
+    moon.icon;
+
+
+  document.getElementById(
+    "selectedMoon"
+  ).textContent =
+    moon.name;
+
+
+  document.getElementById(
+    "selectedMoonAge"
+  ).textContent =
+    moon.np;
+
+}
+
+
+function updateToday() {
+
+  try {
+
+    const bs =
+      todayBs({
+        timezone:
+          "Asia/Kathmandu"
+      });
+
+
+    const now =
+      new Date();
+
+
+    document.getElementById(
+      "todayNepali"
+    ).textContent =
+      formatBsDate(
+        bs.year,
+        bs.month,
+        bs.day
+      );
+
+
+    document.getElementById(
+      "todayEnglish"
+    ).textContent =
+      now.toLocaleDateString(
+        "en-US",
+        {
+          year: "numeric",
+          month: "long",
+          day: "numeric"
+        }
+      );
+
+
+    document.getElementById(
+      "todayWeekday"
+    ).textContent =
+      bs.weekday.name;
+
+
+    document.getElementById(
+      "todayMoon"
+    ).textContent =
+      moonPhase(
+        now
+      ).name;
+
+  } catch (error) {
+
+    console.error(
+      "Today's date error:",
+      error
+    );
+
+  }
+
+}
+
+
+function setupNavigation() {
+
+  document
+    .getElementById(
+      "prevMonth"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        currentMonth--;
+
+        if (
+          currentMonth < 1
+        ) {
+
+          currentMonth = 12;
+          currentYear--;
+
+        }
+
+        currentYear =
+          Math.max(
+            MIN_BS_YEAR,
+            currentYear
+          );
+
+        selectedDay =
+          null;
+
+        renderCalendar();
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "nextMonth"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        currentMonth++;
+
+        if (
+          currentMonth > 12
+        ) {
+
+          currentMonth = 1;
+          currentYear++;
+
+        }
+
+        currentYear =
+          Math.min(
+            MAX_BS_YEAR,
+            currentYear
+          );
+
+        selectedDay =
+          null;
+
+        renderCalendar();
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "prevYear"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        currentYear =
+          Math.max(
+            MIN_BS_YEAR,
+            currentYear - 1
+          );
+
+        selectedDay =
+          null;
+
+        renderCalendar();
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "nextYear"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        currentYear =
+          Math.min(
+            MAX_BS_YEAR,
+            currentYear + 1
+          );
+
+        selectedDay =
+          null;
+
+        renderCalendar();
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "goToday"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        try {
+
+          const bs =
+            todayBs({
+              timezone:
+                "Asia/Kathmandu"
+            });
+
+          currentYear =
+            bs.year;
+
+          currentMonth =
+            bs.month;
+
+          selectedDay =
+            bs.day;
+
+          renderCalendar();
+
+          showSelectedDate();
+
+        } catch (error) {
+
+          console.error(
+            error
+          );
+
+        }
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "yearSelect"
+    )
+    .addEventListener(
+      "change",
+      event => {
+
+        currentYear =
+          Number(
+            event.target.value
+          );
+
+        selectedDay =
+          null;
+
+        renderCalendar();
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "monthSelect"
+    )
+    .addEventListener(
+      "change",
+      event => {
+
+        currentMonth =
+          Number(
+            event.target.value
+          );
+
+        selectedDay =
+          null;
+
+        renderCalendar();
+
+      }
+    );
+
+}
+
+
+function setupConverter() {
+
+  const form =
+    document.getElementById(
+      "converterForm"
+    );
+
+
+  form.addEventListener(
+    "submit",
+    event => {
+
+      event.preventDefault();
+
+
+      const result =
+        document.getElementById(
+          "converterResult"
+        );
+
+
+      const mode =
+        document.querySelector(
+          ".tab.active"
+        ).dataset.mode;
+
+
+      try {
+
+        if (
+          mode === "bs"
+        ) {
+
+          const year =
+            Number(
+              document.getElementById(
+                "bsYear"
+              ).value
+            );
+
+          const month =
+            Number(
+              document.getElementById(
+                "bsMonth"
+              ).value
+            );
+
+          const day =
+            Number(
+              document.getElementById(
+                "bsDay"
+              ).value
+            );
+
+
+          const ad =
+            bsDateToAd(
+              year,
+              month,
+              day
+            );
+
+
+          result.innerHTML = `
+
+            <strong>
+              ${formatBsDate(
+                year,
+                month,
+                day
+              )}
+            </strong>
+
+            →
+
+            <strong>
+              ${ad.day}
+              ${new Date(
+                Date.UTC(
+                  2000,
+                  ad.month - 1,
+                  1
+                )
+              ).toLocaleString(
+                "en-US",
+                {
+                  month: "long",
+                  timeZone: "UTC"
+                }
+              )}
+              ${ad.year} AD
+            </strong>
+
+          `;
+
+        } else {
+
+          const year =
+            Number(
+              document.getElementById(
+                "adYear"
+              ).value
+            );
+
+          const month =
+            Number(
+              document.getElementById(
+                "adMonth"
+              ).value
+            );
+
+          const day =
+            Number(
+              document.getElementById(
+                "adDay"
+              ).value
+            );
+
+
+          const bs =
+            adDateToBs(
+              year,
+              month,
+              day
+            );
+
+
+          result.innerHTML = `
+
+            <strong>
+              ${day}/${month}/${year} AD
+            </strong>
+
+            →
+
+            <strong>
+              ${formatBsDate(
+                bs.year,
+                bs.month,
+                bs.day
+              )}
+            </strong>
+
+          `;
+
+        }
+
+      } catch (error) {
+
+        result.textContent =
+          error.message ||
+          "Invalid date.";
+
+      }
+
+    }
+  );
+
+}
+
+
+function setupTabs() {
+
+  document
+    .querySelectorAll(
+      ".tab"
+    )
+    .forEach(
+      tab => {
+
+        tab.addEventListener(
+          "click",
+          () => {
+
+            document
+              .querySelectorAll(
+                ".tab"
+              )
+              .forEach(
+                button =>
+                  button.classList.remove(
+                    "active"
+                  )
+              );
+
+
+            tab.classList.add(
+              "active"
+            );
+
+
+            const mode =
+              tab.dataset.mode;
+
+
+            document
+              .getElementById(
+                "bsFields"
+              )
+              .classList.toggle(
+                "hidden",
+                mode !== "bs"
+              );
+
+
+            document
+              .getElementById(
+                "adFields"
+              )
+              .classList.toggle(
+                "hidden",
+                mode !== "ad"
+              );
+
+          }
+        );
+
+      }
+    );
+
+}
+
+
+async function loadEvents() {
+
+  try {
+
+    const [
+      festivalResponse,
+      holidayResponse
+    ] = await Promise.all([
+      fetch(
+        "/data/festivals.json"
+      ),
+      fetch(
+        "/data/holidays.json"
+      )
+    ]);
+
+
+    if (
+      festivalResponse.ok
+    ) {
+
+      festivals =
+        await festivalResponse.json();
+
+    }
+
+
+    if (
+      holidayResponse.ok
+    ) {
+
+      holidays =
+        await holidayResponse.json();
+
+    }
+
+  } catch (error) {
+
+    console.warn(
+      "Event data could not be loaded.",
+      error
+    );
+
+  }
+
+}
+
+
+function renderEvents() {
+
+  const container =
+    document.getElementById(
+      "eventGrid"
+    );
+
+  const input =
+    document.getElementById(
+      "festivalSearch"
+    );
+
+
+  function render() {
+
+    const query =
+      input.value
+        .trim()
+        .toLowerCase();
+
+
+    const all = [];
+
+
+    Object.entries(
+      festivals
+    ).forEach(
+      ([date, items]) => {
+
+        items.forEach(
+          item => {
+
+            all.push({
+              date,
+              ...item
+            });
+
+          }
+        );
+
+      }
+    );
+
+
+    Object.entries(
+      holidays
+    ).forEach(
+      ([date, items]) => {
+
+        items.forEach(
+          item => {
+
+            all.push({
+              date,
+              ...item
+            });
+
+          }
+        );
+
+      }
+    );
+
+
+    const filtered =
+      all.filter(
+        item =>
+          `${item.name} ${
+            item.nameEn || ""
+          }`
+            .toLowerCase()
+            .includes(query)
+      );
+
+
+    container.innerHTML =
+      filtered
+        .slice(0, 100)
+        .map(
+          item => {
+
+            const [
+              year,
+              month,
+              day
+            ] =
+              item.date
+                .split("-")
+                .map(Number);
+
+
+            return `
+
+              <article class="event-card">
+
+                <div class="event-date">
+
+                  <strong>
+                    ${nepaliNumber(day)}
+                  </strong>
+
+                  <span>
+                    ${MONTHS[
+                      month - 1
+                    ].np}
+                  </span>
+
+                </div>
+
+
+                <div>
+
+                  <h3>
+                    ${item.name}
+                  </h3>
+
+                  <p>
+                    ${item.nameEn || ""}
+                  </p>
+
+                  <small>
+                    ${nepaliNumber(year)} BS
+                  </small>
+
+                </div>
+
+              </article>
+
+            `;
+
+          }
+        )
+        .join("");
+
+
+    if (
+      !filtered.length
+    ) {
+
+      container.innerHTML =
+        "<p>No matching events found.</p>";
+
+    }
+
+  }
+
+
+  input.addEventListener(
+    "input",
+    render
+  );
+
+
+  render();
+
+}
+
+
+function setupTools() {
+
+  document
+    .getElementById(
+      "dateDiffTool"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        const start =
+          prompt(
+            "Start date YYYY-MM-DD"
+          );
+
+        const end =
+          prompt(
+            "End date YYYY-MM-DD"
+          );
+
+        if (
+          !start ||
+          !end
+        ) return;
+
+
+        const a =
+          new Date(
+            `${start}T00:00:00`
+          );
+
+        const b =
+          new Date(
+            `${end}T00:00:00`
+          );
+
+
+        const days =
+          Math.abs(
+            b - a
+          ) / 86400000;
+
+
+        alert(
+          `Difference: ${days} days`
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "age-tool"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        const dob =
+          prompt(
+            "Date of birth YYYY-MM-DD"
+          );
+
+        if (!dob) return;
+
+
+        const birth =
+          new Date(
+            `${dob}T00:00:00`
+          );
+
+        const now =
+          new Date();
+
+
+        let age =
+          now.getFullYear() -
+          birth.getFullYear();
+
+
+        if (
+          now.getMonth() <
+            birth.getMonth() ||
+
+          (
+            now.getMonth() ===
+            birth.getMonth() &&
+
+            now.getDate() <
+            birth.getDate()
+          )
+        ) {
+
+          age--;
+
+        }
+
+
+        alert(
+          `Age: ${age} years`
+        );
+
+      }
+    );
+
+}
+
+
+async function init() {
+
+  await loadEvents();
+
+
+  renderYearSelect();
+
+  renderMonthSelect();
+
+  renderConverterMonths();
+
+  renderWeekdays();
+
+  setupNavigation();
+
+  setupConverter();
+
+  setupTabs();
+
+  renderEvents();
+
+  setupTools();
+
+  updateToday();
+
+  renderCalendar();
+
+
+  document.getElementById(
+    "footerYear"
+  ).textContent =
+    new Date().getFullYear();
+
+}
+
+
+init();
