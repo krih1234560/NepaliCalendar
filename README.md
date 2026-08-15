@@ -1,20 +1,35 @@
 # Nepali Calendar
 
-Static Nepali Calendar for GitHub + Cloudflare Pages.
+A fast Nepali Bikram Sambat calendar for the web.
 
 ## Features
-- BS 2000–2100 calendar navigation using `@sonill/nepali-dates`
-- BS ↔ AD conversion
-- Nepali numerals and month names
-- Festival/event UI
-- Approximate moon phase display
-- Nepali Unicode helper
-- Responsive design
-- Basic SEO metadata, canonical URL, Open Graph and WebApplication JSON-LD
 
-## Important data note
-The calendar conversion library provides 101 years of BS data (2000–2100). Government/public holidays are not a permanent 101-year list: Nepal's Ministry of Home Affairs publishes yearly notices. Add verified yearly holiday/event records to `EVENTS` in `script.js` rather than inventing future holidays.
+- Nepali Calendar
+- नेपाली पात्रो
+- BS to AD conversion
+- AD to BS conversion
+- BS 1975–2100 navigation
+- Nepali numerals
+- Festival search
+- Holiday search
+- Moon phase
+- Nepali Unicode tool
+- Age calculator
+- Date difference tool
+- Mobile responsive
+- SEO friendly HTML
 
-Replace `https://example.com` in `index.html`, `tools/unicode.html`, `robots.txt`, and `sitemap.xml` with your real domain before deployment.
+## Technology
 
-The moon-phase display is intentionally labeled approximate. It is not a Panchang/tithi engine.
+- HTML
+- CSS
+- JavaScript
+- Vite
+- @grahan/calendars
+
+## Development
+
+Install dependencies:
+
+```bash
+npm install
