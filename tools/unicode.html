@@ -1,1 +1,221 @@
 
+<!doctype html>
+<html lang="ne">
+
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>
+    Nepali Unicode Converter | नेपाली युनिकोड
+  </title>
+
+  <meta
+    name="description"
+    content="Free Nepali Unicode converter for typing Nepali text online."
+  >
+
+  <link
+    rel="stylesheet"
+    href="../style.css"
+  >
+
+</head>
+
+
+<body>
+
+<header class="site-header">
+
+  <div class="container nav">
+
+    <a
+      class="brand"
+      href="../"
+    >
+
+      📅
+
+      <span>
+        <strong>Nepali Calendar</strong>
+        <small>नेपाली पात्रो</small>
+      </span>
+
+    </a>
+
+    <nav>
+
+      <a href="../#calendar">
+        Calendar
+      </a>
+
+      <a href="../#converter">
+        Converter
+      </a>
+
+      <a href="../#festivals">
+        Festivals
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
+
+<main>
+
+<section class="container section">
+
+  <div class="section-heading">
+
+    <div>
+
+      <div class="eyebrow">
+        NEPALI TOOLS
+      </div>
+
+      <h1>
+        Nepali Unicode Converter
+      </h1>
+
+      <p>
+        Type Romanized Nepali and convert common words
+        into Devanagari.
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="converter-card">
+
+    <label>
+      Romanized Nepali
+
+      <textarea
+        id="roman"
+        rows="8"
+        placeholder="Type nepali here..."
+        style="width:100%;margin-top:8px;padding:15px;border:1px solid #e5e7eb;border-radius:10px;"
+      ></textarea>
+
+    </label>
+
+
+    <button
+      class="primary"
+      id="convert"
+    >
+      Convert
+    </button>
+
+
+    <div
+      class="result"
+      id="result"
+    ></div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<script>
+
+const mappings = {
+
+  "namaste": "नमस्ते",
+  "nepal": "नेपाल",
+  "nepali": "नेपाली",
+  "calendar": "क्यालेन्डर",
+  "patro": "पात्रो",
+  "nepali patro": "नेपाली पात्रो",
+  "aaja": "आज",
+  "aja": "आज",
+  "bholi": "भोलि",
+  "ramro": "राम्रो",
+  "dhanyabad": "धन्यवाद",
+  "dashain": "दशैं",
+  "tihar": "तिहार",
+  "holi": "होली",
+  "teej": "तीज",
+  "calendar": "क्यालेन्डर",
+  "date": "मिति",
+  "today": "आज",
+  "tomorrow": "भोलि",
+  "year": "वर्ष",
+  "month": "महिना",
+  "day": "दिन"
+
+};
+
+
+function convert(text) {
+
+  let output =
+    text.toLowerCase();
+
+
+  const keys =
+    Object.keys(mappings)
+      .sort(
+        (a,b) =>
+          b.length - a.length
+      );
+
+
+  for (
+    const key of keys
+  ) {
+
+    output =
+      output.replaceAll(
+        key,
+        mappings[key]
+      );
+
+  }
+
+
+  return output;
+
+}
+
+
+document
+  .getElementById(
+    "convert"
+  )
+  .addEventListener(
+    "click",
+    () => {
+
+      const input =
+        document.getElementById(
+          "roman"
+        ).value;
+
+
+      document.getElementById(
+        "result"
+      ).textContent =
+        convert(input);
+
+    }
+  );
+
+</script>
+
+</body>
+
+</html>
