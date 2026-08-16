@@ -1353,3 +1353,275 @@ input:focus {
   }
 
 }
+
+
+
+
+/* =================================
+   HOLIDAYS PAGE
+================================= */
+
+.holiday-hero {
+  padding: 70px 0 45px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.holiday-hero h1 {
+  max-width: 850px;
+  margin: 10px 0 15px;
+}
+
+.holiday-hero h1 span {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.65em;
+}
+
+.holiday-hero p {
+  max-width: 720px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+
+/* Summary */
+
+.holiday-summary {
+  display: grid;
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.holiday-summary > div {
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.holiday-summary strong,
+.holiday-summary span {
+  display: block;
+}
+
+.holiday-summary strong {
+  font-size: 28px;
+}
+
+.holiday-summary span {
+  margin-top: 4px;
+  color: var(--muted);
+}
+
+
+/* Filters */
+
+.holiday-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.holiday-filter {
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.holiday-filter.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+
+/* Month */
+
+.holiday-month {
+  margin-bottom: 25px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.holiday-month-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+
+  padding: 20px 22px;
+
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.holiday-month-header span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.holiday-month-header h2 {
+  margin: 3px 0 0;
+}
+
+.holiday-month-header small {
+  color: var(--muted);
+}
+
+
+/* Holiday */
+
+.holiday-item {
+  display: grid;
+
+  grid-template-columns:
+    70px 1fr auto;
+
+  align-items: center;
+
+  gap: 18px;
+
+  padding: 18px 22px;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.holiday-item:last-child {
+  border-bottom: 0;
+}
+
+.holiday-date {
+  text-align: center;
+}
+
+.holiday-date strong {
+  display: block;
+  font-size: 25px;
+}
+
+.holiday-date small {
+  color: var(--muted);
+}
+
+
+.holiday-info h3 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.holiday-info p {
+  margin: 4px 0;
+  color: var(--muted);
+}
+
+.holiday-ad {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+
+.holiday-badge {
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  background: var(--surface-2);
+
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+
+/* Government */
+
+.holiday-item.government {
+  border-left: 4px solid var(--primary);
+}
+
+
+/* Festival */
+
+.holiday-item.festival {
+  border-left: 4px solid var(--accent);
+}
+
+
+/* Note */
+
+.holiday-note {
+  max-width: 850px;
+}
+
+.holiday-note p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+  .holiday-hero {
+    padding: 45px 0 30px;
+  }
+
+  .holiday-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .holiday-filters {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .holiday-filter {
+    width: 100%;
+  }
+
+  .holiday-month-header {
+    display: block;
+  }
+
+  .holiday-month-header small {
+    display: block;
+    margin-top: 5px;
+  }
+
+  .holiday-item {
+    grid-template-columns:
+      55px 1fr;
+
+    gap: 12px;
+
+    padding: 15px;
+  }
+
+  .holiday-badge {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .holiday-date strong {
+    font-size: 22px;
+  }
+
+  .holiday-info h3 {
+    font-size: 15px;
+  }
+
+}
