@@ -1606,6 +1606,60 @@ function setupTools() {
 
 }
 
+function setupMobileMenu() {
+
+  const menuToggle =
+    document.getElementById("menuToggle");
+
+  const mainNav =
+    document.getElementById("mainNav");
+
+  if (!menuToggle || !mainNav) {
+    return;
+  }
+
+  menuToggle.addEventListener(
+    "click",
+    () => {
+
+      const isOpen =
+        mainNav.classList.toggle("open");
+
+      menuToggle.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+
+      menuToggle.textContent =
+        isOpen ? "✕" : "☰";
+
+    }
+  );
+
+  // Close menu after clicking a link
+  mainNav.querySelectorAll("a").forEach(
+    link => {
+
+      link.addEventListener(
+        "click",
+        () => {
+
+          mainNav.classList.remove("open");
+
+          menuToggle.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+          menuToggle.textContent = "☰";
+
+        }
+      );
+
+    }
+  );
+
+}
 
 async function init() {
 
@@ -1623,6 +1677,8 @@ async function init() {
   setupNavigation();
 
   setupConverter();
+  
+  setupMobileMenu();
 
   setupTabs();
 
