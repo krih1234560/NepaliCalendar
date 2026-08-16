@@ -117,29 +117,66 @@
           Tools ▾
         </button>
 
-        <div class="dropdown-menu">
+<div class="dropdown">
 
-          <a href="tools/unicode.html">
-            Nepali Unicode
-          </a>
+  <button
+    class="dropbtn"
+    id="toolsButton"
+    type="button"
+    aria-expanded="false"
+    aria-controls="toolsMenu"
+  >
+    Tools <span class="tools-arrow">▾</span>
+  </button>
 
-          <a href="#converter">
-            BS ↔ AD Converter
-          </a>
+  <div
+    class="dropdown-menu"
+    id="toolsMenu"
+  >
 
-          <a href="#festivals">
-            Festivals
-          </a>
+    <a href="tools/unicode.html">
+      <span class="tool-menu-icon">अ</span>
+      <span>
+        <strong>Nepali Unicode</strong>
+        <small>Romanized Nepali → Unicode</small>
+      </span>
+    </a>
 
-          <a href="#date-tools">
-            Date Difference
-          </a>
+    <a href="#converter">
+      <span class="tool-menu-icon">↔</span>
+      <span>
+        <strong>BS ↔ AD Converter</strong>
+        <small>Convert Nepali and English dates</small>
+      </span>
+    </a>
 
-          <a href="#age-tool">
-            Age Calculator
-          </a>
+    <a href="#festivals">
+      <span class="tool-menu-icon">🎉</span>
+      <span>
+        <strong>Festivals</strong>
+        <small>Nepali festivals and holidays</small>
+      </span>
+    </a>
 
-        </div>
+    <a href="#date-tools">
+      <span class="tool-menu-icon">↔</span>
+      <span>
+        <strong>Date Difference</strong>
+        <small>Calculate days between dates</small>
+      </span>
+    </a>
+
+    <a href="#age-tool">
+      <span class="tool-menu-icon">🎂</span>
+      <span>
+        <strong>Age Calculator</strong>
+        <small>Calculate age from date of birth</small>
+      </span>
+    </a>
+
+  </div>
+
+</div>
 
       </div>
 
