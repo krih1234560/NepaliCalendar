@@ -1857,25 +1857,41 @@ function displayFestivals(list) {
       "festival-card";
 
 
-    card.innerHTML = `
+const holidayClass =
+  festival.type === "Public Holiday"
+    ? " public-holiday"
+    : "";
 
-      <div class="festival-date">
-        ${festival.date}
-      </div>
+card.className =
+  "festival-card" + holidayClass;
 
-      <h3>
-        ${festival.name}
-      </h3>
+card.innerHTML = `
 
-      <p>
-        ${festival.english}
-      </p>
+  <div class="festival-card-top">
 
-      <span class="festival-type">
-        ${festival.type}
-      </span>
+    <div class="festival-icon">
+      ✦
+    </div>
 
-    `;
+    <div class="festival-date">
+      ${festival.date}
+    </div>
+
+  </div>
+
+  <h3>
+    ${festival.name}
+  </h3>
+
+  <p>
+    ${festival.english}
+  </p>
+
+  <span class="festival-type">
+    ${festival.type}
+  </span>
+
+`;
 
 
     container.appendChild(card);
