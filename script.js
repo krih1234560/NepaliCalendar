@@ -1549,60 +1549,234 @@ function setupTools() {
     );
 
 
-  document
-    .getElementById(
-      "age-tool"
-    )
-    .addEventListener(
-      "click",
-      () => {
+function setupAgeCalculator() {
 
-        const dob =
-          prompt(
-            "Date of birth YYYY-MM-DD"
-          );
+  const ageTool =
+    document.getElementById("age-tool");
 
-        if (!dob) return;
+  const dobInput =
+    document.getElementById("ageDob");
+
+  const calculateButton =
+    document.getElementById("calculateAge");
+
+  const result =
+    document.getElementById("ageResult");
+
+  const error =
+    document.getElementById("ageError");
+
+  const years =
+    document.getElementById("ageYears");
+
+  const months =
+    document.getElementById("ageMonths");
+
+  const days =
+    document.getElementById("ageDays");
+
+  const totalDays =
+    document.getElementById("ageTotalDays");
+
+  const birthday =
+    document.getElementById("ageBirthday");
 
 
-        const birth =
+  if (
+    !ageTool ||
+    !dobInput ||
+    !calculateButton
+  ) {
+    return;
+  }
+
+
+  ageTool.addEventListener("click", () => {
+
+    document
+      .getElementById("age-calculator")
+      ?.scrollIntoView({
+        behavior: "smooth"
+      });
+
+  });
+
+
+  calculateButton.addEventListener(
+    "click",
+    () => {
+
+      error.textContent = "";
+      result.classList.add("hidden");
+
+
+      if (!dobInput.value) {
+
+        error.textContent =
+          "Please select your date of birth.";
+
+        return;
+
+      }
+
+
+      const [year, month, day] =
+        dobInput.value
+          .split("-")
+          .map(Number);
+
+
+      const birthDate =
+        new Date(
+          year,
+          month - 1,
+          day
+        );
+
+      const today =
+        new Date();
+
+
+      today.setHours(0, 0, 0, 0);
+      birthDate.setHours(0, 0, 0, 0);
+
+
+      if (
+        birthDate.getFullYear() !== year ||
+        birthDate.getMonth() !== month - 1 ||
+        birthDate.getDate() !== day
+      ) {
+
+        error.textContent =
+          "Please enter a valid date.";
+
+        return;
+
+      }
+
+
+      if (birthDate > today) {
+
+        error.textContent =
+          "Date of birth cannot be in the future.";
+
+        return;
+
+      }
+
+
+      let ageYears =
+        today.getFullYear() -
+        birthDate.getFullYear();
+
+      let ageMonths =
+        today.getMonth() -
+        birthDate.getMonth();
+
+      let ageDays =
+        today.getDate() -
+        birthDate.getDate();
+
+
+      if (ageDays < 0) {
+
+        ageMonths--;
+
+        const previousMonth =
           new Date(
-            `${dob}T00:00:00`
+            today.getFullYear(),
+            today.getMonth(),
+            0
           );
 
-        const now =
-          new Date();
+        ageDays +=
+          previousMonth.getDate();
+
+      }
 
 
-        let age =
-          now.getFullYear() -
-          birth.getFullYear();
+      if (ageMonths < 0) {
+
+        ageYears--;
+        ageMonths += 12;
+
+      }
 
 
-        if (
-          now.getMonth() <
-            birth.getMonth() ||
+      const millisecondsPerDay =
+        1000 * 60 * 60 * 24;
 
-          (
-            now.getMonth() ===
-            birth.getMonth() &&
+      const total =
+        Math.floor(
+          (today - birthDate) /
+          millisecondsPerDay
+        );
 
-            now.getDate() <
-            birth.getDate()
-          )
-        ) {
 
-          age--;
+      years.textContent =
+        ageYears;
+
+      months.textContent =
+        ageMonths;
+
+      days.textContent =
+        ageDays;
+
+      totalDays.textContent =
+        total.toLocaleString();
+
+
+      const birthdayThisYear =
+        new Date(
+          today.getFullYear(),
+          month - 1,
+          day
+        );
+
+
+      if (
+        birthdayThisYear.getTime() ===
+        today.getTime()
+      ) {
+
+        birthday.textContent =
+          "🎉 Happy Birthday!";
+
+      } else {
+
+        let nextBirthday =
+          birthdayThisYear;
+
+
+        if (nextBirthday < today) {
+
+          nextBirthday =
+            new Date(
+              today.getFullYear() + 1,
+              month - 1,
+              day
+            );
 
         }
 
 
-        alert(
-          `Age: ${age} years`
-        );
+        const daysUntil =
+          Math.ceil(
+            (nextBirthday - today) /
+            millisecondsPerDay
+          );
+
+
+        birthday.textContent =
+          `Your next birthday is in ${daysUntil} days.`;
 
       }
-    );
+
+
+      result.classList.remove("hidden");
+
+    }
+  );
 
 }
 
@@ -1751,6 +1925,8 @@ async function init() {
 
   setupToolsDropdown();
   setupMobileMenu();
+
+  setupAgeCalculator();
 
   updateToday();
   renderCalendar();
