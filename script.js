@@ -598,33 +598,45 @@ function renderCalendar() {
       );
 
     }
+// Saturday = red
+const ad = bsDateToAd(
+  currentYear,
+  currentMonth,
+  day
+);
 
+if (ad.weekday.index === 6) {
+  button.classList.add("saturday");
+}
 
-    const ad =
-      bsDateToAd(
-        currentYear,
-        currentMonth,
-        day
-      );
+const ad = bsDateToAd(
+  currentYear,
+  currentMonth,
+  day
+);
 
+// Saturday = red
+if (ad.weekday.index === 6) {
+  button.classList.add("saturday");
+}
 
-    button.innerHTML = `
+button.innerHTML = `
 
-      <span class="bs-day">
-        ${nepaliNumber(day)}
-      </span>
+  <span class="bs-day">
+    ${nepaliNumber(day)}
+  </span>
 
-      <small>
-        ${ad.day}
-      </small>
+  <small>
+    ${ad.day}
+  </small>
 
-      ${
-        events.length
-          ? `<i>●</i>`
-          : ""
-      }
+  ${
+    events.length
+      ? `<i>●</i>`
+      : ""
+  }
 
-    `;
+`;
 
 
     button.addEventListener(
