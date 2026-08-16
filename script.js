@@ -1547,7 +1547,7 @@ function setupTools() {
 
       }
     );
-
+}
 
 function setupAgeCalculator() {
 
