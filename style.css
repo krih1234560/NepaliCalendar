@@ -1843,3 +1843,37 @@ input:focus {
 
   color: #d04444;
 }
+
+
+/* =====================================================
+   FESTIVALS SECTION
+===================================================== */
+
+.festivals-section {
+  width: 100%;
+  padding: 70px 20px;
+  background: linear-gradient(
+    135deg,
+    #f4f7ff,
+    #eef2f8
+  );
+  scroll-margin-top: 90px;
+}
+
+/* ...your remaining Festival CSS... */
+
+@media (max-width: 700px) {
+
+  .festivals-section {
+    padding: 45px 15px;
+  }
+
+  .festivals-header h2 {
+    font-size: 26px;
+  }
+
+  .festival-list {
+    grid-template-columns: 1fr;
+  }
+
+}
