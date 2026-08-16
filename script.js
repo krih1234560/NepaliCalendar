@@ -1267,12 +1267,12 @@ async function loadEvents() {
       festivalResponse,
       holidayResponse
     ] = await Promise.all([
-      fetch(
-        "/data/festivals.json"
-      ),
-      fetch(
-        "/data/holidays.json"
-      )
+fetch(
+  "data/festivals.json"
+),
+fetch(
+  "data/holidays.json"
+)
     ]);
 
 
