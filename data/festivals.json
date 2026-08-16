@@ -1,29 +1,543 @@
 {
-  "2083-05-15": [
+  "2083-01-01": [
     {
-      "name": "जनै पूर्णिमा",
-      "nameEn": "Janai Purnima",
+      "name": "नव वर्ष २०८३",
+      "nameEn": "Nepali New Year",
       "type": "festival"
     }
   ],
-  "2083-05-20": [
+
+  "2083-01-11": [
+    {
+      "name": "लोकतन्त्र दिवस",
+      "nameEn": "Loktantra Diwas",
+      "type": "festival"
+    }
+  ],
+
+  "2083-01-14": [
+    {
+      "name": "मोहिनी एकादशी",
+      "nameEn": "Mohini Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-01-18": [
+    {
+      "name": "बुद्ध जयन्ती",
+      "nameEn": "Buddha Jayanti",
+      "type": "festival"
+    },
+    {
+      "name": "उभौली पर्व",
+      "nameEn": "Ubhauli Parva",
+      "type": "festival"
+    },
+    {
+      "name": "श्रमिक दिवस",
+      "nameEn": "International Workers' Day",
+      "type": "festival"
+    }
+  ],
+
+  "2083-01-30": [
+    {
+      "name": "अपरा एकादशी",
+      "nameEn": "Apara Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-02-01": [
+    {
+      "name": "वृष संक्रान्ति",
+      "nameEn": "Brish Sankranti",
+      "type": "festival"
+    }
+  ],
+
+  "2083-02-15": [
+    {
+      "name": "गणतन्त्र दिवस",
+      "nameEn": "Republic Day",
+      "type": "festival"
+    }
+  ],
+
+  "2083-03-01": [
+    {
+      "name": "मिथुन संक्रान्ति",
+      "nameEn": "Mithun Sankranti",
+      "type": "festival"
+    }
+  ],
+
+  "2083-03-11": [
+    {
+      "name": "निर्जला एकादशी",
+      "nameEn": "Nirjala Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-03-26": [
+    {
+      "name": "योगिनी एकादशी",
+      "nameEn": "Yogini Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-03-29": [
+    {
+      "name": "भानु जयन्ती",
+      "nameEn": "Bhanu Jayanti",
+      "type": "festival"
+    }
+  ],
+
+  "2083-04-01": [
+    {
+      "name": "कर्कट संक्रान्ति",
+      "nameEn": "Karkat Sankranti",
+      "type": "festival"
+    }
+  ],
+
+  "2083-04-10": [
+    {
+      "name": "हरिशयनी एकादशी",
+      "nameEn": "Devshayani Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-04-25": [
+    {
+      "name": "कामिका एकादशी",
+      "nameEn": "Kamika Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-05-01": [
+    {
+      "name": "सिंह संक्रान्ति",
+      "nameEn": "Singha Sankranti",
+      "type": "festival"
+    }
+  ],
+
+  "2083-05-07": [
+    {
+      "name": "पवित्रा एकादशी",
+      "nameEn": "Pavitra Putrada Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-05-12": [
+    {
+      "name": "जनै पूर्णिमा",
+      "nameEn": "Janai Purnima / Raksha Bandhan",
+      "type": "festival"
+    }
+  ],
+
+  "2083-05-19": [
+    {
+      "name": "श्रीकृष्ण जन्माष्टमी",
+      "nameEn": "Krishna Janmashtami",
+      "type": "festival"
+    }
+  ],
+
+  "2083-05-22": [
+    {
+      "name": "अजा एकादशी",
+      "nameEn": "Aja Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-05-29": [
     {
       "name": "हरितालिका तीज",
       "nameEn": "Haritalika Teej",
       "type": "festival"
     }
   ],
-  "2083-07-04": [
+
+  "2083-05-30": [
     {
-      "name": "बडा दशैं",
-      "nameEn": "Dashain",
+      "name": "ऋषि पञ्चमी",
+      "nameEn": "Rishi Panchami",
       "type": "festival"
     }
   ],
-  "2083-07-18": [
+
+  "2083-06-01": [
     {
-      "name": "तिहार",
-      "nameEn": "Tihar / Deepawali",
+      "name": "कन्या संक्रान्ति",
+      "nameEn": "Kanya Sankranti",
+      "type": "festival"
+    }
+  ],
+
+  "2083-06-03": [
+    {
+      "name": "संविधान दिवस",
+      "nameEn": "Constitution Day",
+      "type": "festival"
+    }
+  ],
+
+  "2083-06-06": [
+    {
+      "name": "पार्श्व एकादशी",
+      "nameEn": "Haripariwartini Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-06-09": [
+    {
+      "name": "इन्द्रजात्रा",
+      "nameEn": "Indra Jatra",
+      "type": "festival"
+    }
+  ],
+
+  "2083-06-20": [
+    {
+      "name": "इन्दिरा एकादशी",
+      "nameEn": "Indira Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-06-25": [
+    {
+      "name": "घटस्थापना",
+      "nameEn": "Ghatasthapana",
+      "type": "festival"
+    }
+  ],
+
+  "2083-07-01": [
+    {
+      "name": "फूलपाती",
+      "nameEn": "Phulpati",
+      "type": "festival"
+    }
+  ],
+
+  "2083-07-02": [
+    {
+      "name": "महाअष्टमी",
+      "nameEn": "Maha Ashtami",
+      "type": "festival"
+    }
+  ],
+
+  "2083-07-04": [
+    {
+      "name": "महानवमी",
+      "nameEn": "Maha Navami",
+      "type": "festival"
+    }
+  ],
+
+  "2083-07-05": [
+    {
+      "name": "विजया दशमी",
+      "nameEn": "Vijaya Dashami / Dashain",
+      "type": "festival"
+    }
+  ],
+
+  "2083-07-06": [
+    {
+      "name": "पापाङ्कुशा एकादशी",
+      "nameEn": "Papankusha Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-07-10": [
+    {
+      "name": "कोजाग्रत पूर्णिमा",
+      "nameEn": "Kojagrat Purnima",
+      "type": "festival"
+    }
+  ],
+
+  "2083-07-20": [
+    {
+      "name": "रमा एकादशी",
+      "nameEn": "Rama Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-07-22": [
+    {
+      "name": "काग तिहार",
+      "nameEn": "Kaag Tihar",
+      "type": "festival"
+    }
+  ],
+
+  "2083-07-23": [
+    {
+      "name": "कुकुर तिहार",
+      "nameEn": "Kukur Tihar",
+      "type": "festival"
+    }
+  ],
+
+  "2083-07-24": [
+    {
+      "name": "गाई तिहार / लक्ष्मी पूजा",
+      "nameEn": "Gai Tihar / Laxmi Puja",
+      "type": "festival"
+    }
+  ],
+
+  "2083-07-25": [
+    {
+      "name": "गोवर्धन पूजा / म्ह पूजा",
+      "nameEn": "Govardhan Puja / Mha Puja",
+      "type": "festival"
+    },
+    {
+      "name": "नेपाल सम्बत नयाँ वर्ष",
+      "nameEn": "Nepal Sambat New Year",
+      "type": "festival"
+    }
+  ],
+
+  "2083-07-26": [
+    {
+      "name": "भाइ टीका",
+      "nameEn": "Bhai Tika",
+      "type": "festival"
+    }
+  ],
+
+  "2083-07-30": [
+    {
+      "name": "छठ पर्व",
+      "nameEn": "Chhath Parva",
+      "type": "festival"
+    }
+  ],
+
+  "2083-08-01": [
+    {
+      "name": "वृश्चिक संक्रान्ति",
+      "nameEn": "Bishchik Sankranti",
+      "type": "festival"
+    }
+  ],
+
+  "2083-08-04": [
+    {
+      "name": "देवउठनी एकादशी",
+      "nameEn": "Devuthani / Hari Bodhini Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-08-18": [
+    {
+      "name": "उत्पन्ना एकादशी",
+      "nameEn": "Utpanna Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-09-04": [
+    {
+      "name": "मोक्षदा एकादशी / गीता जयन्ती",
+      "nameEn": "Mokshada Ekadashi / Gita Jayanti",
+      "type": "festival"
+    }
+  ],
+
+  "2083-09-09": [
+    {
+      "name": "योमरी पुन्ही",
+      "nameEn": "Yomari Punhi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-09-15": [
+    {
+      "name": "तमु ल्होसार",
+      "nameEn": "Tamu Lhosar",
+      "type": "festival"
+    }
+  ],
+
+  "2083-09-20": [
+    {
+      "name": "सफला एकादशी",
+      "nameEn": "Saphala Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-09-27": [
+    {
+      "name": "पृथ्वी जयन्ती / राष्ट्रिय एकता दिवस",
+      "nameEn": "Prithvi Jayanti / National Unity Day",
+      "type": "festival"
+    }
+  ],
+
+  "2083-09-30": [
+    {
+      "name": "माघे संक्रान्ति",
+      "nameEn": "Maghe Sankranti",
+      "type": "festival"
+    }
+  ],
+
+  "2083-10-04": [
+    {
+      "name": "पौष पुत्रदा एकादशी",
+      "nameEn": "Pausha Putrada Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-10-16": [
+    {
+      "name": "शहीद दिवस",
+      "nameEn": "Martyrs' Day",
+      "type": "festival"
+    }
+  ],
+
+  "2083-10-19": [
+    {
+      "name": "षट्तिला एकादशी",
+      "nameEn": "Shattila Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-10-23": [
+    {
+      "name": "सोनाम ल्होसार",
+      "nameEn": "Sonam Lhosar",
+      "type": "festival"
+    }
+  ],
+
+  "2083-10-28": [
+    {
+      "name": "वसन्त पञ्चमी / सरस्वती पूजा",
+      "nameEn": "Basant Panchami / Saraswati Puja",
+      "type": "festival"
+    }
+  ],
+
+  "2083-10-30": [
+    {
+      "name": "कुम्भ संक्रान्ति",
+      "nameEn": "Kumbh Sankranti",
+      "type": "festival"
+    }
+  ],
+
+  "2083-11-05": [
+    {
+      "name": "जया एकादशी",
+      "nameEn": "Jaya Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-11-07": [
+    {
+      "name": "प्रजातन्त्र दिवस",
+      "nameEn": "Prajatantra Diwas",
+      "type": "festival"
+    }
+  ],
+
+  "2083-11-21": [
+    {
+      "name": "विजया एकादशी",
+      "nameEn": "Vijaya Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-11-23": [
+    {
+      "name": "महाशिवरात्रि",
+      "nameEn": "Maha Shivaratri",
+      "type": "festival"
+    }
+  ],
+
+  "2083-11-25": [
+    {
+      "name": "अन्तर्राष्ट्रिय नारी दिवस",
+      "nameEn": "International Women's Day",
+      "type": "festival"
+    }
+  ],
+
+  "2083-11-26": [
+    {
+      "name": "ग्याल्पो ल्होसार",
+      "nameEn": "Gyalpo Lhosar",
+      "type": "festival"
+    }
+  ],
+
+  "2083-12-01": [
+    {
+      "name": "मीन संक्रान्ति",
+      "nameEn": "Min Sankranti",
+      "type": "festival"
+    }
+  ],
+
+  "2083-12-07": [
+    {
+      "name": "फागु पूर्णिमा / होली",
+      "nameEn": "Holi - Hill Region",
+      "type": "festival"
+    }
+  ],
+
+  "2083-12-08": [
+    {
+      "name": "होली",
+      "nameEn": "Holi - Terai Region",
+      "type": "festival"
+    }
+  ],
+
+  "2083-12-19": [
+    {
+      "name": "पापमोचनी एकादशी",
+      "nameEn": "Papamochani Ekadashi",
+      "type": "festival"
+    }
+  ],
+
+  "2083-12-23": [
+    {
+      "name": "घोडे जात्रा",
+      "nameEn": "Ghode Jatra",
       "type": "festival"
     }
   ]
