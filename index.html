@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ne">
+
 <head>
   <meta charset="utf-8">
 
@@ -53,7 +54,10 @@
     content="https://example.com/"
   >
 
-  <link rel="stylesheet" href="/style.css">
+  <link
+    rel="stylesheet"
+    href="/style.css"
+  >
 
   <script type="application/ld+json">
   {
@@ -71,32 +75,56 @@
     }
   }
   </script>
+
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     HEADER / NAVIGATION
+========================= -->
 
 <header class="site-header">
 
   <div class="container nav">
 
-    <a class="brand" href="/" aria-label="Nepali Calendar home">
+    <a
+      class="brand"
+      href="/"
+      aria-label="Nepali Calendar home"
+    >
 
-      <span class="brand-icon">📅</span>
+      <span class="brand-icon">
+        📅
+      </span>
 
       <span>
-        <strong>Nepali Calendar</strong>
-        <small>नेपाली पात्रो</small>
+
+        <strong>
+          Nepali Calendar
+        </strong>
+
+        <small>
+          नेपाली पात्रो
+        </small>
+
       </span>
 
     </a>
 
+
     <button
       class="menu-toggle"
       id="menuToggle"
+      type="button"
       aria-expanded="false"
+      aria-controls="mainNav"
     >
       ☰
     </button>
+
 
     <nav id="mainNav">
 
@@ -104,90 +132,158 @@
         Calendar
       </a>
 
+
       <a href="#converter">
         Converter
       </a>
+
+
+      <!-- =========================
+           TOOLS DROPDOWN
+      ========================== -->
 
       <div class="dropdown">
 
         <button
           class="dropbtn"
+          id="toolsButton"
           type="button"
+          aria-expanded="false"
+          aria-controls="toolsMenu"
         >
-          Tools ▾
+
+          Tools
+
+          <span class="tools-arrow">
+            ▾
+          </span>
+
         </button>
 
-<div class="dropdown">
 
-  <button
-    class="dropbtn"
-    id="toolsButton"
-    type="button"
-    aria-expanded="false"
-    aria-controls="toolsMenu"
-  >
-    Tools <span class="tools-arrow">▾</span>
-  </button>
+        <div
+          class="dropdown-menu"
+          id="toolsMenu"
+        >
 
-  <div
-    class="dropdown-menu"
-    id="toolsMenu"
-  >
+          <a href="tools/unicode.html">
 
-    <a href="tools/unicode.html">
-      <span class="tool-menu-icon">अ</span>
-      <span>
-        <strong>Nepali Unicode</strong>
-        <small>Romanized Nepali → Unicode</small>
-      </span>
-    </a>
+            <span class="tool-menu-icon">
+              अ
+            </span>
 
-    <a href="#converter">
-      <span class="tool-menu-icon">↔</span>
-      <span>
-        <strong>BS ↔ AD Converter</strong>
-        <small>Convert Nepali and English dates</small>
-      </span>
-    </a>
+            <span>
 
-    <a href="#festivals">
-      <span class="tool-menu-icon">🎉</span>
-      <span>
-        <strong>Festivals</strong>
-        <small>Nepali festivals and holidays</small>
-      </span>
-    </a>
+              <strong>
+                Nepali Unicode
+              </strong>
 
-    <a href="#date-tools">
-      <span class="tool-menu-icon">↔</span>
-      <span>
-        <strong>Date Difference</strong>
-        <small>Calculate days between dates</small>
-      </span>
-    </a>
+              <small>
+                Romanized Nepali → Unicode
+              </small>
 
-    <a href="#age-tool">
-      <span class="tool-menu-icon">🎂</span>
-      <span>
-        <strong>Age Calculator</strong>
-        <small>Calculate age from date of birth</small>
-      </span>
-    </a>
+            </span>
 
-  </div>
+          </a>
 
-</div>
+
+          <a href="#converter">
+
+            <span class="tool-menu-icon">
+              ↔
+            </span>
+
+            <span>
+
+              <strong>
+                BS ↔ AD Converter
+              </strong>
+
+              <small>
+                Convert Nepali and English dates
+              </small>
+
+            </span>
+
+          </a>
+
+
+          <a href="#festivals">
+
+            <span class="tool-menu-icon">
+              🎉
+            </span>
+
+            <span>
+
+              <strong>
+                Festivals
+              </strong>
+
+              <small>
+                Nepali festivals and events
+              </small>
+
+            </span>
+
+          </a>
+
+
+          <a href="#date-tools">
+
+            <span class="tool-menu-icon">
+              ↔
+            </span>
+
+            <span>
+
+              <strong>
+                Date Difference
+              </strong>
+
+              <small>
+                Calculate days between dates
+              </small>
+
+            </span>
+
+          </a>
+
+
+          <a href="#age-calculator">
+
+            <span class="tool-menu-icon">
+              🎂
+            </span>
+
+            <span>
+
+              <strong>
+                Age Calculator
+              </strong>
+
+              <small>
+                Calculate age from date of birth
+              </small>
+
+            </span>
+
+          </a>
+
+        </div>
 
       </div>
+
 
       <a href="#festivals">
         Festivals
       </a>
 
-  <a href="holidays.html">
-    Holidays
-  </a>
-      
+
+      <a href="holidays.html">
+        Holidays
+      </a>
+
     </nav>
 
   </div>
@@ -195,7 +291,13 @@
 </header>
 
 
+
 <main>
+
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
@@ -205,45 +307,78 @@
       NEPALI CALENDAR • BIKRAM SAMBAT
     </div>
 
+
     <h1>
+
       Nepali Calendar
-      <span>नेपाली पात्रो</span>
+
+      <span>
+        नेपाली पात्रो
+      </span>
+
     </h1>
+
 
     <p>
       View Nepali BS dates, English AD dates,
       festivals, holidays and moon phases.
     </p>
 
+
     <div class="today-card">
 
+
       <div>
-        <span>Today's Date</span>
+
+        <span>
+          Today's Date
+        </span>
+
         <strong id="todayNepali">
           Loading…
         </strong>
+
       </div>
 
+
       <div>
-        <span>English Date</span>
+
+        <span>
+          English Date
+        </span>
+
         <strong id="todayEnglish">
           Loading…
         </strong>
+
       </div>
 
+
       <div>
-        <span>Day</span>
+
+        <span>
+          Day
+        </span>
+
         <strong id="todayWeekday">
           Loading…
         </strong>
+
       </div>
 
+
       <div>
-        <span>Moon</span>
+
+        <span>
+          Moon
+        </span>
+
         <strong id="todayMoon">
           Loading…
         </strong>
+
       </div>
+
 
     </div>
 
@@ -252,10 +387,16 @@
 </section>
 
 
+
+<!-- =========================
+     CALENDAR
+========================= -->
+
 <section
   class="container section"
   id="calendar"
 >
+
 
   <div class="section-heading">
 
@@ -265,9 +406,11 @@
         CALENDAR
       </div>
 
+
       <h2 id="calendarTitle">
         Nepali Calendar
       </h2>
+
 
       <p id="calendarSubtitle">
         Bikram Sambat month calendar
@@ -275,72 +418,94 @@
 
     </div>
 
+
     <div class="calendar-controls">
+
 
       <button
         class="icon-btn"
         id="prevYear"
+        type="button"
       >
         «
       </button>
 
+
       <button
         class="icon-btn"
         id="prevMonth"
+        type="button"
       >
         ‹
       </button>
 
+
       <button
         class="today-btn"
         id="goToday"
+        type="button"
       >
         Today
       </button>
 
+
       <button
         class="icon-btn"
         id="nextMonth"
+        type="button"
       >
         ›
       </button>
 
+
       <button
         class="icon-btn"
         id="nextYear"
+        type="button"
       >
         »
       </button>
+
 
     </div>
 
   </div>
 
 
+
   <div class="year-jump">
 
+
     <label>
+
       BS Year
 
       <select id="yearSelect"></select>
 
     </label>
 
+
     <label>
+
       Month
 
       <select id="monthSelect"></select>
 
     </label>
 
+
   </div>
+
 
 
   <div class="calendar-layout">
 
+
     <div class="calendar-card">
 
+
       <div class="calendar-month-head">
+
 
         <div>
 
@@ -354,20 +519,24 @@
 
         </div>
 
+
         <div
           class="year-badge"
           id="yearBadge"
         >
-          2083 BS
+          २०८३ BS
         </div>
 
+
       </div>
+
 
 
       <div
         class="weekdays"
         id="weekdays"
       ></div>
+
 
 
       <div
@@ -377,54 +546,80 @@
       ></div>
 
 
+
       <div class="calendar-legend">
 
+
         <span>
+
           <i class="dot today-dot"></i>
+
           Today
+
         </span>
 
+
         <span>
+
           <i class="dot holiday-dot"></i>
+
           Holiday
+
         </span>
 
+
         <span>
+
           <i class="dot festival-dot"></i>
+
           Festival
+
         </span>
+
 
       </div>
+
 
     </div>
 
 
+
     <aside class="side-stack">
 
+
+      <!-- SELECTED DATE -->
+
       <div class="info-card">
+
 
         <div class="card-kicker">
           SELECTED DATE
         </div>
 
+
         <h3 id="selectedTitle">
           Select a date
         </h3>
 
+
         <p id="selectedAd">
           Click a calendar day to see details.
         </p>
+
 
         <div
           id="selectedEvents"
           class="event-list"
         ></div>
 
+
         <div class="moon-box">
+
 
           <span id="selectedMoonIcon">
             ◐
           </span>
+
 
           <div>
 
@@ -432,62 +627,111 @@
               Moon phase
             </strong>
 
+
             <small id="selectedMoonAge">
               —
             </small>
 
           </div>
 
+
         </div>
+
 
       </div>
 
 
+
+      <!-- QUICK LINKS -->
+
       <div class="info-card">
+
 
         <div class="card-kicker">
           QUICK LINKS
         </div>
 
+
         <a
           class="quick-link"
           href="#converter"
         >
+
           ↔ BS to AD Converter
-          <span>→</span>
+
+          <span>
+            →
+          </span>
+
         </a>
+
 
         <a
           class="quick-link"
           href="tools/unicode.html"
         >
+
           अ Nepali Unicode Converter
-          <span>→</span>
+
+          <span>
+            →
+          </span>
+
         </a>
+
+
+        <a
+          class="quick-link"
+          href="holidays.html"
+        >
+
+          📅 Nepali Holidays 2083
+
+          <span>
+            →
+          </span>
+
+        </a>
+
 
         <a
           class="quick-link"
           href="#festivals"
         >
+
           🎉 Nepali Festivals
-          <span>→</span>
+
+          <span>
+            →
+          </span>
+
         </a>
+
 
       </div>
 
+
     </aside>
+
 
   </div>
 
 </section>
 
 
+
+<!-- =========================
+     DATE CONVERTER
+========================= -->
+
 <section
   class="container section"
   id="converter"
 >
 
+
   <div class="section-heading">
+
 
     <div>
 
@@ -495,9 +739,11 @@
         DATE CONVERTER
       </div>
 
+
       <h2>
         BS ↔ AD Date Converter
       </h2>
+
 
       <p>
         Convert Bikram Sambat and Gregorian dates instantly.
@@ -505,38 +751,50 @@
 
     </div>
 
+
   </div>
+
 
 
   <div class="converter-card">
 
+
     <div class="tabs">
+
 
       <button
         class="tab active"
         data-mode="bs"
+        type="button"
       >
         BS → AD
       </button>
 
+
       <button
         class="tab"
         data-mode="ad"
+        type="button"
       >
         AD → BS
       </button>
 
+
     </div>
 
 
+
     <form id="converterForm">
+
 
       <div
         id="bsFields"
         class="form-grid"
       >
 
+
         <label>
+
           BS Year
 
           <input
@@ -550,7 +808,9 @@
         </label>
 
 
+
         <label>
+
           Month
 
           <select id="bsMonth"></select>
@@ -558,7 +818,9 @@
         </label>
 
 
+
         <label>
+
           Day
 
           <input
@@ -571,7 +833,9 @@
 
         </label>
 
+
       </div>
+
 
 
       <div
@@ -579,7 +843,9 @@
         class="form-grid hidden"
       >
 
+
         <label>
+
           AD Year
 
           <input
@@ -593,7 +859,9 @@
         </label>
 
 
+
         <label>
+
           Month
 
           <input
@@ -607,7 +875,9 @@
         </label>
 
 
+
         <label>
+
           Day
 
           <input
@@ -615,12 +885,14 @@
             type="number"
             min="1"
             max="31"
-            value="31"
+            value="16"
           >
 
         </label>
 
+
       </div>
+
 
 
       <button
@@ -630,7 +902,9 @@
         Convert Date
       </button>
 
+
     </form>
+
 
 
     <div
@@ -640,17 +914,25 @@
       Enter a date to convert.
     </div>
 
+
   </div>
 
 </section>
 
+
+
+<!-- =========================
+     FESTIVALS
+========================= -->
 
 <section
   class="container section"
   id="festivals"
 >
 
+
   <div class="section-heading">
+
 
     <div>
 
@@ -658,32 +940,34 @@
         EVENTS
       </div>
 
-<h2>
-  Nepali Festivals
-</h2>
 
-<p>
-  Explore festivals and important events
-  from the Nepali calendar.
-</p>
+      <h2>
+        Nepali Festivals
+      </h2>
 
-<a
-  class="section-link"
-  href="holidays.html"
->
-  View 2083 Holidays →
-</a>
 
       <p>
-        Search festivals and holiday entries.
+        Explore festivals and important events
+        from the Nepali calendar.
       </p>
 
+
+      <a
+        class="section-link"
+        href="holidays.html"
+      >
+        View 2083 Holidays →
+      </a>
+
     </div>
+
 
   </div>
 
 
+
   <div class="search-row">
+
 
     <input
       id="festivalSearch"
@@ -691,7 +975,9 @@
       placeholder="Search festivals, holidays…"
     >
 
+
   </div>
+
 
 
   <div
@@ -699,15 +985,23 @@
     id="eventGrid"
   ></div>
 
+
 </section>
 
+
+
+<!-- =========================
+     WEB TOOLS
+========================= -->
 
 <section
   class="container section tools-section"
   id="date-tools"
 >
 
+
   <div class="section-heading">
+
 
     <div>
 
@@ -715,9 +1009,11 @@
         WEB TOOLS
       </div>
 
+
       <h2>
         Useful Nepali Date Tools
       </h2>
+
 
       <p>
         Free browser-based tools for everyday use.
@@ -725,21 +1021,30 @@
 
     </div>
 
+
   </div>
 
 
+
   <div class="tool-grid">
+
+
+    <!-- UNICODE -->
 
     <a
       class="tool-card"
       href="tools/unicode.html"
     >
 
-      <span>अ</span>
+      <span>
+        अ
+      </span>
+
 
       <h3>
         Nepali Unicode Converter
       </h3>
+
 
       <p>
         Convert Romanized Nepali text into Devanagari.
@@ -748,16 +1053,24 @@
     </a>
 
 
+
+    <!-- DATE DIFFERENCE -->
+
     <button
       class="tool-card"
       id="dateDiffTool"
+      type="button"
     >
 
-      <span>↔</span>
+      <span>
+        ↔
+      </span>
+
 
       <h3>
         Date Difference
       </h3>
+
 
       <p>
         Calculate the number of days between dates.
@@ -766,35 +1079,49 @@
     </button>
 
 
-<button
-  class="tool-card"
-  id="age-tool"
-  type="button"
->
 
-  <span>🎂</span>
+    <!-- AGE CALCULATOR -->
 
-  <h3>
-    Age Calculator
-  </h3>
+    <button
+      class="tool-card"
+      id="age-tool"
+      type="button"
+    >
 
-  <p>
-    Calculate your exact age in years, months and days.
-  </p>
+      <span>
+        🎂
+      </span>
 
-</button>
 
+      <h3>
+        Age Calculator
+      </h3>
+
+
+      <p>
+        Calculate your exact age in years, months and days.
+      </p>
+
+    </button>
+
+
+
+    <!-- BS AD -->
 
     <a
       class="tool-card"
       href="#converter"
     >
 
-      <span>⇄</span>
+      <span>
+        ⇄
+      </span>
+
 
       <h3>
         BS to AD Converter
       </h3>
+
 
       <p>
         Convert Nepali dates to English dates.
@@ -802,16 +1129,50 @@
 
     </a>
 
+
+
+    <!-- HOLIDAYS -->
+
+    <a
+      class="tool-card"
+      href="holidays.html"
+    >
+
+      <span>
+        📅
+      </span>
+
+
+      <h3>
+        Nepali Holidays 2083
+      </h3>
+
+
+      <p>
+        View month-wise festivals and government holidays.
+      </p>
+
+    </a>
+
+
   </div>
 
 </section>
 
-  <section
+
+
+<!-- =========================
+     AGE CALCULATOR
+========================= -->
+
+<section
   class="container section"
   id="age-calculator"
 >
 
+
   <div class="section-heading">
+
 
     <div>
 
@@ -819,9 +1180,11 @@
         AGE CALCULATOR
       </div>
 
+
       <h2>
         Calculate Your Age
       </h2>
+
 
       <p>
         Enter your date of birth to calculate your exact age.
@@ -829,14 +1192,19 @@
 
     </div>
 
+
   </div>
+
 
 
   <div class="age-card">
 
+
     <div class="age-form">
 
+
       <label>
+
         Date of Birth
 
         <input
@@ -846,6 +1214,7 @@
 
       </label>
 
+
       <button
         class="primary"
         id="calculateAge"
@@ -854,7 +1223,9 @@
         Calculate Age
       </button>
 
+
     </div>
+
 
 
     <div
@@ -863,27 +1234,35 @@
     ></div>
 
 
+
     <div
       class="age-result hidden"
       id="ageResult"
     >
 
+
       <div class="age-main">
+
 
         <strong id="ageYears">
           0
         </strong>
 
+
         <span>
           Years
         </span>
 
+
       </div>
+
 
 
       <div class="age-details">
 
+
         <div>
+
           <strong id="ageMonths">
             0
           </strong>
@@ -891,10 +1270,12 @@
           <span>
             Months
           </span>
+
         </div>
 
 
         <div>
+
           <strong id="ageDays">
             0
           </strong>
@@ -902,10 +1283,12 @@
           <span>
             Days
           </span>
+
         </div>
 
 
         <div>
+
           <strong id="ageTotalDays">
             0
           </strong>
@@ -913,99 +1296,154 @@
           <span>
             Total Days
           </span>
+
         </div>
+
 
       </div>
 
 
+
       <p id="ageBirthday"></p>
 
+
     </div>
+
 
   </div>
 
 </section>
 
+
+
+<!-- =========================
+     SEO CONTENT
+========================= -->
+
 <section class="container section seo-copy">
+
 
   <h2>
     Nepali Calendar and नेपाली पात्रो
   </h2>
 
+
   <p>
+
     Nepali Calendar is a free online
     <strong>नेपाली पात्रो</strong>
     for viewing Bikram Sambat dates,
     English dates, festivals, holidays
     and converting BS dates to AD.
+
   </p>
 
+
   <p>
+
     The calendar supports a wide range of
     Bikram Sambat dates and uses
     year-specific calendar data rather than
     assuming that every Nepali month has
     the same number of days.
+
   </p>
 
+
 </section>
+
 
 </main>
 
 
+
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer class="footer">
+
 
   <div class="container footer-inner">
 
+
     <div>
+
 
       <strong>
         📅 Nepali Calendar
       </strong>
 
+
       <p>
         नेपाली पात्रो • Bikram Sambat Calendar
       </p>
 
+
     </div>
 
 
+
     <div>
+
 
       <a href="#calendar">
         Calendar
       </a>
 
+
       <a href="#converter">
         Converter
       </a>
+
 
       <a href="tools/unicode.html">
         Unicode
       </a>
 
+
+      <a href="holidays.html">
+        Holidays
+      </a>
+
+
       <a href="#festivals">
         Festivals
       </a>
 
+
     </div>
 
 
+
     <p>
+
       ©
+
       <span id="footerYear"></span>
+
       Nepali Calendar.
+
     </p>
+
 
   </div>
 
+
 </footer>
 
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
 <script
   type="module"
   src="/script.js"
 ></script>
 
+
 </body>
+
 </html>
