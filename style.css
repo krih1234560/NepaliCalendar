@@ -700,11 +700,319 @@ input:focus {
   color: #86efac;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
+
+  /* -----------------------------
+     MOBILE HEADER
+  ----------------------------- */
+
+  .container {
+    width: min(100% - 20px, 1180px);
+  }
+
+  .nav {
+    min-height: 64px;
+  }
+
+  .menu-toggle {
+    display: block;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+  }
+
+  nav {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+
+    display: none;
+
+    padding: 12px;
+
+    background: white;
+    border-bottom: 1px solid var(--border);
+
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+
+    box-shadow: var(--shadow);
+  }
+
+  nav.open {
+    display: flex;
+  }
+
+  nav > a,
+  .dropbtn {
+    width: 100%;
+    padding: 12px;
+    text-align: left;
+    border-radius: 8px;
+  }
+
+  nav > a:hover,
+  .dropbtn:hover {
+    background: var(--surface-2);
+  }
+
+  .dropdown {
+    width: 100%;
+  }
+
+  .dropdown-menu {
+    position: static;
+    width: 100%;
+
+    display: block;
+
+    padding: 0 0 0 12px;
+
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .dropdown-menu a {
+    padding: 10px 12px;
+  }
+
+
+  /* -----------------------------
+     HERO
+  ----------------------------- */
+
+  .hero {
+    padding: 50px 0 35px;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+
+  /* -----------------------------
+     TODAY CARD
+  ----------------------------- */
+
+  .today-card {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .today-card > div {
+    padding: 14px;
+  }
+
+  .today-card strong {
+    font-size: 15px;
+  }
+
+
+  /* -----------------------------
+     SECTIONS
+  ----------------------------- */
+
+  .section {
+    padding: 45px 0;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+
+  /* -----------------------------
+     CALENDAR CONTROLS
+  ----------------------------- */
+
+  .calendar-controls {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+  }
+
+  .icon-btn,
+  .today-btn {
+    min-width: 0;
+    width: 100%;
+  }
+
+
+  /* -----------------------------
+     YEAR / MONTH SELECT
+  ----------------------------- */
+
+  .year-jump {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .year-jump select {
+    width: 100%;
+  }
+
+
+  /* -----------------------------
+     CALENDAR
+  ----------------------------- */
 
   .calendar-layout {
     grid-template-columns: 1fr;
   }
+
+  .calendar-month-head {
+    padding: 15px;
+  }
+
+  .calendar-month-head strong {
+    font-size: 21px;
+  }
+
+  .year-badge {
+    font-size: 12px;
+    padding: 6px 9px;
+  }
+
+  .weekdays div {
+    padding: 9px 2px;
+    font-size: 11px;
+  }
+
+  .calendar-day {
+    min-height: 58px;
+    padding: 5px 2px;
+  }
+
+  .bs-day {
+    font-size: 17px;
+  }
+
+  .calendar-day small {
+    font-size: 9px;
+  }
+
+  .calendar-day i {
+    font-size: 7px;
+  }
+
+
+  /* Saturday remains red on mobile */
+  .calendar-day.saturday .bs-day,
+  .calendar-day.saturday small {
+    color: var(--danger);
+  }
+
+
+  /* -----------------------------
+     LEGEND
+  ----------------------------- */
+
+  .calendar-legend {
+    padding: 12px;
+    gap: 10px;
+    flex-wrap: wrap;
+    font-size: 11px;
+  }
+
+
+  /* -----------------------------
+     SIDE CARDS
+  ----------------------------- */
+
+  .side-stack {
+    grid-template-columns: 1fr;
+  }
+
+  .info-card {
+    padding: 18px;
+  }
+
+
+  /* -----------------------------
+     CONVERTER
+  ----------------------------- */
+
+  .converter-card {
+    padding: 16px;
+  }
+
+  .tabs {
+    width: 100%;
+  }
+
+  .tab {
+    flex: 1;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid input,
+  .form-grid select {
+    width: 100%;
+  }
+
+  .primary {
+    width: 100%;
+  }
+
+
+  /* -----------------------------
+     FESTIVALS
+  ----------------------------- */
+
+  .event-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event-card {
+    padding: 15px;
+  }
+
+
+  /* -----------------------------
+     TOOLS
+  ----------------------------- */
+
+  .tool-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tool-card {
+    padding: 18px;
+  }
+
+
+  /* -----------------------------
+     FOOTER
+  ----------------------------- */
+
+  .footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-inner > div:nth-child(2) {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+}
 
   .event-grid {
     grid-template-columns: repeat(2, 1fr);
