@@ -2159,3 +2159,487 @@ async function init() {
 /* START APP */
 
 init();
+
+/* =====================================================
+   NEPALI UNICODE CONVERTER
+===================================================== */
+
+const romanInput = document.getElementById("roman");
+const unicodeOutput = document.getElementById("output");
+const unicodeSuggestions =
+  document.getElementById("suggestions");
+const unicodeStatus =
+  document.getElementById("status");
+
+if (
+  romanInput &&
+  unicodeOutput &&
+  unicodeSuggestions &&
+  unicodeStatus
+) {
+
+  let unicodeTimer = null;
+  let unicodeRequestNumber = 0;
+  let activeSuggestion = -1;
+
+
+  function getLastWord(text) {
+
+    const match =
+      text.match(/(^|\s)([^\s]+)$/);
+
+    return match
+      ? match[2]
+      : "";
+
+  }
+
+
+  function replaceLastWord(
+    text,
+    replacement
+  ) {
+
+    return text.replace(
+      /([^\s]+)$/,
+      replacement
+    );
+
+  }
+
+
+  async function getUnicodeSuggestions(word) {
+
+    if (!word) {
+
+      unicodeSuggestions.classList.remove(
+        "show"
+      );
+
+      return;
+
+    }
+
+
+    const currentRequest =
+      ++unicodeRequestNumber;
+
+
+    unicodeStatus.textContent =
+      "Getting suggestions...";
+
+
+    try {
+
+      const url =
+        "https://inputtools.google.com/request" +
+        "?text=" +
+        encodeURIComponent(word) +
+        "&itc=ne-t-i0-und" +
+        "&num=10" +
+        "&cp=0" +
+        "&cs=1" +
+        "&ie=utf-8" +
+        "&oe=utf-8";
+
+
+      const response =
+        await fetch(url);
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          "Request failed"
+        );
+
+      }
+
+
+      const data =
+        await response.json();
+
+
+      if (
+        currentRequest !==
+        unicodeRequestNumber
+      ) {
+
+        return;
+
+      }
+
+
+      let list = [];
+
+
+      if (
+        data &&
+        data[1] &&
+        data[1][0] &&
+        data[1][0][1]
+      ) {
+
+        list =
+          data[1][0][1];
+
+      }
+
+
+      showUnicodeSuggestions(list);
+
+
+      unicodeStatus.textContent =
+        list.length
+          ? "Choose a suggestion or keep typing."
+          : "";
+
+    }
+
+    catch (error) {
+
+      unicodeSuggestions.classList.remove(
+        "show"
+      );
+
+      unicodeStatus.textContent =
+        "Suggestions unavailable. Check your internet connection.";
+
+    }
+
+  }
+
+
+  function showUnicodeSuggestions(list) {
+
+    unicodeSuggestions.innerHTML = "";
+
+    activeSuggestion = -1;
+
+
+    if (!list.length) {
+
+      unicodeSuggestions.classList.remove(
+        "show"
+      );
+
+      return;
+
+    }
+
+
+    list.forEach(function(item) {
+
+      const button =
+        document.createElement("button");
+
+
+      button.type = "button";
+
+      button.className =
+        "unicode-suggestion";
+
+
+      button.textContent = item;
+
+
+      button.addEventListener(
+        "mousedown",
+        function(event) {
+
+          event.preventDefault();
+
+          selectUnicodeSuggestion(item);
+
+        }
+      );
+
+
+      unicodeSuggestions.appendChild(
+        button
+      );
+
+    });
+
+
+    unicodeSuggestions.classList.add(
+      "show"
+    );
+
+  }
+
+
+  function selectUnicodeSuggestion(value) {
+
+    romanInput.value =
+      replaceLastWord(
+        romanInput.value,
+        value
+      );
+
+
+    unicodeOutput.value =
+      romanInput.value;
+
+
+    unicodeSuggestions.classList.remove(
+      "show"
+    );
+
+
+    unicodeStatus.textContent = "";
+
+    romanInput.focus();
+
+  }
+
+
+  romanInput.addEventListener(
+    "input",
+    function() {
+
+      unicodeOutput.value =
+        romanInput.value;
+
+
+      clearTimeout(
+        unicodeTimer
+      );
+
+
+      const word =
+        getLastWord(
+          romanInput.value
+        );
+
+
+      if (
+        !word ||
+        /[\u0900-\u097F]/.test(word)
+      ) {
+
+        unicodeSuggestions.classList.remove(
+          "show"
+        );
+
+        return;
+
+      }
+
+
+      unicodeTimer =
+        setTimeout(
+          function() {
+
+            getUnicodeSuggestions(
+              word
+            );
+
+          },
+          180
+        );
+
+    }
+  );
+
+
+  romanInput.addEventListener(
+    "keydown",
+    function(event) {
+
+      const items =
+        [
+          ...unicodeSuggestions
+            .querySelectorAll(
+              ".unicode-suggestion"
+            )
+        ];
+
+
+      if (
+        !unicodeSuggestions.classList.contains(
+          "show"
+        ) ||
+        !items.length
+      ) {
+
+        return;
+
+      }
+
+
+      if (
+        event.key ===
+        "ArrowDown"
+      ) {
+
+        event.preventDefault();
+
+        activeSuggestion =
+          (
+            activeSuggestion + 1
+          ) %
+          items.length;
+
+
+        items.forEach(
+          function(item, index) {
+
+            item.classList.toggle(
+              "active",
+              index ===
+              activeSuggestion
+            );
+
+          }
+        );
+
+      }
+
+
+      else if (
+        event.key ===
+        "ArrowUp"
+      ) {
+
+        event.preventDefault();
+
+        activeSuggestion =
+          (
+            activeSuggestion -
+            1 +
+            items.length
+          ) %
+          items.length;
+
+
+        items.forEach(
+          function(item, index) {
+
+            item.classList.toggle(
+              "active",
+              index ===
+              activeSuggestion
+            );
+
+          }
+        );
+
+      }
+
+
+      else if (
+        event.key === "Enter" &&
+        activeSuggestion >= 0
+      ) {
+
+        event.preventDefault();
+
+        selectUnicodeSuggestion(
+          items[
+            activeSuggestion
+          ].textContent
+        );
+
+      }
+
+
+      else if (
+        event.key === "Escape"
+      ) {
+
+        unicodeSuggestions.classList.remove(
+          "show"
+        );
+
+      }
+
+    }
+  );
+
+
+  document.addEventListener(
+    "click",
+    function(event) {
+
+      if (
+        !event.target.closest(
+          ".unicode-editor"
+        )
+      ) {
+
+        unicodeSuggestions.classList.remove(
+          "show"
+        );
+
+      }
+
+    }
+  );
+
+
+  document.getElementById(
+    "copy"
+  ).addEventListener(
+    "click",
+    async function() {
+
+      if (!unicodeOutput.value) {
+
+        return;
+
+      }
+
+
+      try {
+
+        await navigator.clipboard.writeText(
+          unicodeOutput.value
+        );
+
+
+        unicodeStatus.textContent =
+          "Copied to clipboard.";
+
+      }
+
+      catch (error) {
+
+        unicodeOutput.select();
+
+        document.execCommand(
+          "copy"
+        );
+
+
+        unicodeStatus.textContent =
+          "Copied to clipboard.";
+
+      }
+
+    }
+  );
+
+
+  document.getElementById(
+    "clear"
+  ).addEventListener(
+    "click",
+    function() {
+
+      romanInput.value = "";
+
+      unicodeOutput.value = "";
+
+      unicodeSuggestions.classList.remove(
+        "show"
+      );
+
+      unicodeStatus.textContent = "";
+
+      romanInput.focus();
+
+    }
+  );
+
+}
