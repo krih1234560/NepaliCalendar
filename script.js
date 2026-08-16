@@ -8,54 +8,18 @@ const MIN_BS_YEAR = 1975;
 const MAX_BS_YEAR = 2100;
 
 const MONTHS = [
-  {
-    np: "बैशाख",
-    en: "Baisakh"
-  },
-  {
-    np: "जेठ",
-    en: "Jestha"
-  },
-  {
-    np: "असार",
-    en: "Asar"
-  },
-  {
-    np: "श्रावण",
-    en: "Shrawan"
-  },
-  {
-    np: "भदौ",
-    en: "Bhadra"
-  },
-  {
-    np: "आश्विन",
-    en: "Ashwin"
-  },
-  {
-    np: "कार्तिक",
-    en: "Kartik"
-  },
-  {
-    np: "मंसिर",
-    en: "Mangsir"
-  },
-  {
-    np: "पौष",
-    en: "Poush"
-  },
-  {
-    np: "माघ",
-    en: "Magh"
-  },
-  {
-    np: "फाल्गुण",
-    en: "Falgun"
-  },
-  {
-    np: "चैत्र",
-    en: "Chaitra"
-  }
+  { np: "बैशाख", en: "Baisakh" },
+  { np: "जेठ", en: "Jestha" },
+  { np: "असार", en: "Asar" },
+  { np: "श्रावण", en: "Shrawan" },
+  { np: "भदौ", en: "Bhadra" },
+  { np: "आश्विन", en: "Ashwin" },
+  { np: "कार्तिक", en: "Kartik" },
+  { np: "मंसिर", en: "Mangsir" },
+  { np: "पौष", en: "Poush" },
+  { np: "माघ", en: "Magh" },
+  { np: "फाल्गुण", en: "Falgun" },
+  { np: "चैत्र", en: "Chaitra" }
 ];
 
 const WEEKDAYS = [
@@ -89,51 +53,44 @@ let festivals = {};
 let holidays = {};
 
 
-function nepaliNumber(number) {
+/* =========================
+   NUMBER / DATE FUNCTIONS
+========================= */
 
+function nepaliNumber(number) {
   return String(number)
     .split("")
-    .map(
-      digit => DEVANAGARI[Number(digit)] ?? digit
-    )
+    .map(digit => DEVANAGARI[Number(digit)] ?? digit)
     .join("");
-
 }
 
 
 function formatBsDate(year, month, day) {
-
   return `${nepaliNumber(day)} ${
     MONTHS[month - 1].np
   } ${nepaliNumber(year)}`;
-
 }
 
 
 function bsDateToAd(year, month, day) {
-
   return dateFromBs({
     year,
     month,
     day
   });
-
 }
 
 
 function adDateToBs(year, month, day) {
-
   return bsFromDate({
     year,
     month,
     day
   });
-
 }
 
 
 function getEvents(year, month, day) {
-
   const key =
     `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 
@@ -141,130 +98,115 @@ function getEvents(year, month, day) {
     ...(festivals[key] || []),
     ...(holidays[key] || [])
   ];
-
 }
 
 
+/* =========================
+   MOON PHASE
+========================= */
+
 function moonPhase(date) {
+  const knownNewMoon = Date.UTC(
+    2000,
+    0,
+    6,
+    18,
+    14
+  );
 
-  const knownNewMoon =
-    Date.UTC(
-      2000,
-      0,
-      6,
-      18,
-      14
-    );
-
-  const lunarCycle =
-    29.530588853;
+  const lunarCycle = 29.530588853;
 
   const days =
-    (
-      date.getTime() -
-      knownNewMoon
-    ) / 86400000;
+    (date.getTime() - knownNewMoon) /
+    86400000;
 
   const age =
     (
-      (
-        days %
-        lunarCycle
-      ) +
+      (days % lunarCycle) +
       lunarCycle
-    ) %
-    lunarCycle;
+    ) % lunarCycle;
 
 
   if (age < 1.85) {
-
     return {
       icon: "🌑",
       name: "New Moon",
       np: "औंसी"
     };
-
   }
 
-  if (age < 7.38) {
 
+  if (age < 7.38) {
     return {
       icon: "🌒",
       name: "Waxing Crescent",
       np: "शुक्ल पक्ष"
     };
-
   }
 
-  if (age < 9.23) {
 
+  if (age < 9.23) {
     return {
       icon: "🌓",
       name: "First Quarter",
       np: "अर्धचन्द्र"
     };
-
   }
 
-  if (age < 14.77) {
 
+  if (age < 14.77) {
     return {
       icon: "🌔",
       name: "Waxing Gibbous",
       np: "पूर्णिमा नजिक"
     };
-
   }
 
-  if (age < 16.62) {
 
+  if (age < 16.62) {
     return {
       icon: "🌕",
       name: "Full Moon",
       np: "पूर्णिमा"
     };
-
   }
 
-  if (age < 22.15) {
 
+  if (age < 22.15) {
     return {
       icon: "🌖",
       name: "Waning Gibbous",
       np: "कृष्ण पक्ष"
     };
-
   }
 
-  if (age < 23.99) {
 
+  if (age < 23.99) {
     return {
       icon: "🌗",
       name: "Last Quarter",
       np: "अर्धचन्द्र"
     };
-
   }
 
-  return {
 
+  return {
     icon: "🌘",
     name: "Waning Crescent",
     np: "औंसी नजिक"
-
   };
-
 }
 
 
-function getMonthLength(year, month) {
+/* =========================
+   CALENDAR HELPERS
+========================= */
 
+function getMonthLength(year, month) {
   let day = 1;
 
   while (true) {
-
     try {
-
       dateFromBs({
         year,
         month,
@@ -272,38 +214,29 @@ function getMonthLength(year, month) {
       });
 
       day++;
-
     } catch {
-
       return day - 1;
-
     }
-
   }
-
 }
 
 
 function getFirstWeekday(year, month) {
-
-  const ad =
-    bsDateToAd(
-      year,
-      month,
-      1
-    );
+  const ad = bsDateToAd(
+    year,
+    month,
+    1
+  );
 
   return ad.weekday.index;
-
 }
 
 
 function renderYearSelect() {
-
   const select =
-    document.getElementById(
-      "yearSelect"
-    );
+    document.getElementById("yearSelect");
+
+  if (!select) return;
 
   select.innerHTML = "";
 
@@ -312,49 +245,37 @@ function renderYearSelect() {
     year <= MAX_BS_YEAR;
     year++
   ) {
-
     const option =
-      document.createElement(
-        "option"
-      );
+      document.createElement("option");
 
     option.value = year;
 
     option.textContent =
       `${nepaliNumber(year)} BS (${year})`;
 
-    if (
-      year === currentYear
-    ) {
+    if (year === currentYear) {
       option.selected = true;
     }
 
     select.appendChild(option);
-
   }
-
 }
 
 
 function renderMonthSelect() {
-
   const select =
-    document.getElementById(
-      "monthSelect"
-    );
+    document.getElementById("monthSelect");
+
+  if (!select) return;
 
   select.innerHTML = "";
 
   MONTHS.forEach(
     (month, index) => {
-
       const option =
-        document.createElement(
-          "option"
-        );
+        document.createElement("option");
 
-      option.value =
-        index + 1;
+      option.value = index + 1;
 
       option.textContent =
         `${month.np} (${month.en})`;
@@ -365,130 +286,106 @@ function renderMonthSelect() {
         option.selected = true;
       }
 
-      select.appendChild(
-        option
-      );
-
+      select.appendChild(option);
     }
   );
-
 }
 
 
 function renderConverterMonths() {
-
   const select =
-    document.getElementById(
-      "bsMonth"
-    );
+    document.getElementById("bsMonth");
+
+  if (!select) return;
 
   select.innerHTML = "";
 
   MONTHS.forEach(
     (month, index) => {
-
       const option =
-        document.createElement(
-          "option"
-        );
+        document.createElement("option");
 
-      option.value =
-        index + 1;
+      option.value = index + 1;
 
       option.textContent =
         `${month.np} (${month.en})`;
 
-      select.appendChild(
-        option
-      );
-
+      select.appendChild(option);
     }
   );
 
-  select.value =
-    currentMonth;
-
+  select.value = currentMonth;
 }
 
 
 function renderWeekdays() {
-
   const container =
-    document.getElementById(
-      "weekdays"
-    );
+    document.getElementById("weekdays");
+
+  if (!container) return;
 
   container.innerHTML =
     WEEKDAYS
-      .map(
-        day => `<div>${day}</div>`
-      )
+      .map(day => `<div>${day}</div>`)
       .join("");
-
 }
 
+
+/* =========================
+   TODAY
+========================= */
 
 function isToday(
   year,
   month,
   day
 ) {
-
-  const now =
-    new Date();
+  const now = new Date();
 
   try {
-
-    const bs =
-      adDateToBs(
-        now.getFullYear(),
-        now.getMonth() + 1,
-        now.getDate()
-      );
+    const bs = adDateToBs(
+      now.getFullYear(),
+      now.getMonth() + 1,
+      now.getDate()
+    );
 
     return (
       bs.year === year &&
       bs.month === month &&
       bs.day === day
     );
-
   } catch {
-
     return false;
-
   }
-
 }
 
 
-function renderCalendar() {
+/* =========================
+   RENDER CALENDAR
+========================= */
 
+function renderCalendar() {
   const grid =
-    document.getElementById(
-      "calendarGrid"
-    );
+    document.getElementById("calendarGrid");
+
+  if (!grid) return;
 
   grid.innerHTML = "";
 
   let firstWeekday;
 
   try {
-
     firstWeekday =
       getFirstWeekday(
         currentYear,
         currentMonth
       );
-
   } catch (error) {
-
     grid.innerHTML =
       `<p>Calendar data unavailable.</p>`;
 
     console.error(error);
-
     return;
-
   }
 
 
@@ -499,26 +396,24 @@ function renderCalendar() {
     );
 
 
+  /* Empty cells before first day */
+
   for (
     let i = 0;
     i < firstWeekday;
     i++
   ) {
-
     const blank =
-      document.createElement(
-        "div"
-      );
+      document.createElement("div");
 
     blank.className =
       "calendar-day empty";
 
-    grid.appendChild(
-      blank
-    );
-
+    grid.appendChild(blank);
   }
 
+
+  /* Calendar days */
 
   for (
     let day = 1;
@@ -527,12 +422,9 @@ function renderCalendar() {
   ) {
 
     const button =
-      document.createElement(
-        "button"
-      );
+      document.createElement("button");
 
-    button.type =
-      "button";
+    button.type = "button";
 
     button.className =
       "calendar-day";
@@ -546,6 +438,8 @@ function renderCalendar() {
       );
 
 
+    /* Today */
+
     if (
       isToday(
         currentYear,
@@ -553,24 +447,20 @@ function renderCalendar() {
         day
       )
     ) {
-
-      button.classList.add(
-        "today"
-      );
-
+      button.classList.add("today");
     }
 
+
+    /* Selected */
 
     if (
       selectedDay === day
     ) {
-
-      button.classList.add(
-        "selected"
-      );
-
+      button.classList.add("selected");
     }
 
+
+    /* Holiday */
 
     if (
       events.some(
@@ -578,13 +468,11 @@ function renderCalendar() {
           event.type === "holiday"
       )
     ) {
-
-      button.classList.add(
-        "holiday"
-      );
-
+      button.classList.add("holiday");
     }
 
+
+    /* Festival */
 
     if (
       events.some(
@@ -592,115 +480,136 @@ function renderCalendar() {
           event.type === "festival"
       )
     ) {
+      button.classList.add("festival");
+    }
 
-      button.classList.add(
-        "festival"
+
+    /* =========================
+       SATURDAY = RED
+       IMPORTANT:
+       ONLY ONE "const ad"
+    ========================= */
+
+    const ad =
+      bsDateToAd(
+        currentYear,
+        currentMonth,
+        day
       );
 
+    if (
+      ad.weekday.index === 6
+    ) {
+      button.classList.add("saturday");
     }
-// Saturday = red
-const ad = bsDateToAd(
-  currentYear,
-  currentMonth,
-  day
-);
 
-if (ad.weekday.index === 6) {
-  button.classList.add("saturday");
-}
 
-const ad = bsDateToAd(
-  currentYear,
-  currentMonth,
-  day
-);
+    /* Day HTML */
 
-// Saturday = red
-if (ad.weekday.index === 6) {
-  button.classList.add("saturday");
-}
+    button.innerHTML = `
+      <span class="bs-day">
+        ${nepaliNumber(day)}
+      </span>
 
-button.innerHTML = `
+      <small>
+        ${ad.day}
+      </small>
 
-  <span class="bs-day">
-    ${nepaliNumber(day)}
-  </span>
+      ${
+        events.length
+          ? `<i>●</i>`
+          : ""
+      }
+    `;
 
-  <small>
-    ${ad.day}
-  </small>
 
-  ${
-    events.length
-      ? `<i>●</i>`
-      : ""
-  }
-
-`;
-
+    /* Click day */
 
     button.addEventListener(
       "click",
       () => {
-
-        selectedDay =
-          day;
+        selectedDay = day;
 
         renderCalendar();
 
         showSelectedDate();
-
       }
     );
 
 
-    grid.appendChild(
-      button
-    );
-
+    grid.appendChild(button);
   }
 
 
-  document.getElementById(
-    "monthNepali"
-  ).textContent =
-    MONTHS[
-      currentMonth - 1
-    ].np;
+  /* Month title */
+
+  const monthNepali =
+    document.getElementById(
+      "monthNepali"
+    );
+
+  if (monthNepali) {
+    monthNepali.textContent =
+      MONTHS[
+        currentMonth - 1
+      ].np;
+  }
 
 
-  document.getElementById(
-    "monthEnglish"
-  ).textContent =
-    MONTHS[
-      currentMonth - 1
-    ].en;
+  const monthEnglish =
+    document.getElementById(
+      "monthEnglish"
+    );
+
+  if (monthEnglish) {
+    monthEnglish.textContent =
+      MONTHS[
+        currentMonth - 1
+      ].en;
+  }
 
 
-  document.getElementById(
-    "yearBadge"
-  ).textContent =
-    `${nepaliNumber(currentYear)} BS`;
+  const yearBadge =
+    document.getElementById(
+      "yearBadge"
+    );
+
+  if (yearBadge) {
+    yearBadge.textContent =
+      `${nepaliNumber(currentYear)} BS`;
+  }
 
 
-  document.getElementById(
-    "calendarTitle"
-  ).textContent =
-    `Nepali Calendar ${nepaliNumber(currentYear)}`;
+  const calendarTitle =
+    document.getElementById(
+      "calendarTitle"
+    );
+
+  if (calendarTitle) {
+    calendarTitle.textContent =
+      `Nepali Calendar ${nepaliNumber(currentYear)}`;
+  }
 
 
-  document.getElementById(
-    "calendarSubtitle"
-  ).textContent =
-    `${MONTHS[currentMonth - 1].en} / ${
-      MONTHS[currentMonth - 1].np
-    } ${currentYear}`;
+  const calendarSubtitle =
+    document.getElementById(
+      "calendarSubtitle"
+    );
 
+  if (calendarSubtitle) {
+    calendarSubtitle.textContent =
+      `${MONTHS[currentMonth - 1].en} / ${
+        MONTHS[currentMonth - 1].np
+      } ${currentYear}`;
+  }
 }
 
 
-function showSelectedDate() {
+/* =========================
+   SELECTED DATE
+========================= */
 
+function showSelectedDate() {
   if (!selectedDay) {
     return;
   }
@@ -734,145 +643,189 @@ function showSelectedDate() {
     );
 
 
-  document.getElementById(
-    "selectedTitle"
-  ).textContent =
-    formatBsDate(
-      currentYear,
-      currentMonth,
-      selectedDay
+  const selectedTitle =
+    document.getElementById(
+      "selectedTitle"
     );
 
-
-  document.getElementById(
-    "selectedAd"
-  ).textContent =
-    `${ad.day}/${ad.month}/${ad.year} AD • ${
-      ad.weekday.name
-    }`;
-
-
-  document.getElementById(
-    "selectedEvents"
-  ).innerHTML =
-
-    events.length
-
-      ? events
-          .map(
-            event => `
-
-              <div class="event-item">
-
-                <strong>
-                  ${event.name}
-                </strong>
-
-                ${
-                  event.nameEn
-                    ? `<small>${event.nameEn}</small>`
-                    : ""
-                }
-
-              </div>
-
-            `
-          )
-          .join("")
-
-      : `<p>No festival or holiday listed.</p>`;
+  if (selectedTitle) {
+    selectedTitle.textContent =
+      formatBsDate(
+        currentYear,
+        currentMonth,
+        selectedDay
+      );
+  }
 
 
-  document.getElementById(
-    "selectedMoonIcon"
-  ).textContent =
-    moon.icon;
+  const selectedAd =
+    document.getElementById(
+      "selectedAd"
+    );
+
+  if (selectedAd) {
+    selectedAd.textContent =
+      `${ad.day}/${ad.month}/${ad.year} AD • ${
+        ad.weekday.name
+      }`;
+  }
 
 
-  document.getElementById(
-    "selectedMoon"
-  ).textContent =
-    moon.name;
+  const selectedEvents =
+    document.getElementById(
+      "selectedEvents"
+    );
+
+  if (selectedEvents) {
+    selectedEvents.innerHTML =
+      events.length
+        ? events
+            .map(
+              event => `
+                <div class="event-item">
+                  <strong>
+                    ${event.name}
+                  </strong>
+
+                  ${
+                    event.nameEn
+                      ? `<small>${event.nameEn}</small>`
+                      : ""
+                  }
+                </div>
+              `
+            )
+            .join("")
+        : `<p>No festival or holiday listed.</p>`;
+  }
 
 
-  document.getElementById(
-    "selectedMoonAge"
-  ).textContent =
-    moon.np;
+  const selectedMoonIcon =
+    document.getElementById(
+      "selectedMoonIcon"
+    );
 
+  if (selectedMoonIcon) {
+    selectedMoonIcon.textContent =
+      moon.icon;
+  }
+
+
+  const selectedMoon =
+    document.getElementById(
+      "selectedMoon"
+    );
+
+  if (selectedMoon) {
+    selectedMoon.textContent =
+      moon.name;
+  }
+
+
+  const selectedMoonAge =
+    document.getElementById(
+      "selectedMoonAge"
+    );
+
+  if (selectedMoonAge) {
+    selectedMoonAge.textContent =
+      moon.np;
+  }
 }
 
 
+/* =========================
+   TODAY DISPLAY
+========================= */
+
 function updateToday() {
-
   try {
-
     const bs =
       todayBs({
         timezone:
           "Asia/Kathmandu"
       });
 
-
     const now =
       new Date();
 
 
-    document.getElementById(
-      "todayNepali"
-    ).textContent =
-      formatBsDate(
-        bs.year,
-        bs.month,
-        bs.day
+    const todayNepali =
+      document.getElementById(
+        "todayNepali"
       );
 
+    if (todayNepali) {
+      todayNepali.textContent =
+        formatBsDate(
+          bs.year,
+          bs.month,
+          bs.day
+        );
+    }
 
-    document.getElementById(
-      "todayEnglish"
-    ).textContent =
-      now.toLocaleDateString(
-        "en-US",
-        {
-          year: "numeric",
-          month: "long",
-          day: "numeric"
-        }
+
+    const todayEnglish =
+      document.getElementById(
+        "todayEnglish"
       );
 
+    if (todayEnglish) {
+      todayEnglish.textContent =
+        now.toLocaleDateString(
+          "en-US",
+          {
+            year: "numeric",
+            month: "long",
+            day: "numeric"
+          }
+        );
+    }
 
-    document.getElementById(
-      "todayWeekday"
-    ).textContent =
-      bs.weekday.name;
+
+    const todayWeekday =
+      document.getElementById(
+        "todayWeekday"
+      );
+
+    if (todayWeekday) {
+      todayWeekday.textContent =
+        bs.weekday.name;
+    }
 
 
-    document.getElementById(
-      "todayMoon"
-    ).textContent =
-      moonPhase(
-        now
-      ).name;
+    const todayMoon =
+      document.getElementById(
+        "todayMoon"
+      );
+
+    if (todayMoon) {
+      todayMoon.textContent =
+        moonPhase(now).name;
+    }
 
   } catch (error) {
-
     console.error(
       "Today's date error:",
       error
     );
-
   }
-
 }
 
 
+/* =========================
+   NAVIGATION
+========================= */
+
 function setupNavigation() {
 
-  document
-    .getElementById(
+  const prevMonth =
+    document.getElementById(
       "prevMonth"
-    )
-    .addEventListener(
+    );
+
+  if (prevMonth) {
+    prevMonth.addEventListener(
       "click",
       () => {
 
@@ -881,10 +834,8 @@ function setupNavigation() {
         if (
           currentMonth < 1
         ) {
-
           currentMonth = 12;
           currentYear--;
-
         }
 
         currentYear =
@@ -893,20 +844,21 @@ function setupNavigation() {
             currentYear
           );
 
-        selectedDay =
-          null;
+        selectedDay = null;
 
         renderCalendar();
-
       }
     );
+  }
 
 
-  document
-    .getElementById(
+  const nextMonth =
+    document.getElementById(
       "nextMonth"
-    )
-    .addEventListener(
+    );
+
+  if (nextMonth) {
+    nextMonth.addEventListener(
       "click",
       () => {
 
@@ -915,10 +867,8 @@ function setupNavigation() {
         if (
           currentMonth > 12
         ) {
-
           currentMonth = 1;
           currentYear++;
-
         }
 
         currentYear =
@@ -927,20 +877,21 @@ function setupNavigation() {
             currentYear
           );
 
-        selectedDay =
-          null;
+        selectedDay = null;
 
         renderCalendar();
-
       }
     );
+  }
 
 
-  document
-    .getElementById(
+  const prevYear =
+    document.getElementById(
       "prevYear"
-    )
-    .addEventListener(
+    );
+
+  if (prevYear) {
+    prevYear.addEventListener(
       "click",
       () => {
 
@@ -950,20 +901,21 @@ function setupNavigation() {
             currentYear - 1
           );
 
-        selectedDay =
-          null;
+        selectedDay = null;
 
         renderCalendar();
-
       }
     );
+  }
 
 
-  document
-    .getElementById(
+  const nextYear =
+    document.getElementById(
       "nextYear"
-    )
-    .addEventListener(
+    );
+
+  if (nextYear) {
+    nextYear.addEventListener(
       "click",
       () => {
 
@@ -973,20 +925,21 @@ function setupNavigation() {
             currentYear + 1
           );
 
-        selectedDay =
-          null;
+        selectedDay = null;
 
         renderCalendar();
-
       }
     );
+  }
 
 
-  document
-    .getElementById(
+  const goToday =
+    document.getElementById(
       "goToday"
-    )
-    .addEventListener(
+    );
+
+  if (goToday) {
+    goToday.addEventListener(
       "click",
       () => {
 
@@ -1012,22 +965,20 @@ function setupNavigation() {
           showSelectedDate();
 
         } catch (error) {
-
-          console.error(
-            error
-          );
-
+          console.error(error);
         }
-
       }
     );
+  }
 
 
-  document
-    .getElementById(
+  const yearSelect =
+    document.getElementById(
       "yearSelect"
-    )
-    .addEventListener(
+    );
+
+  if (yearSelect) {
+    yearSelect.addEventListener(
       "change",
       event => {
 
@@ -1036,20 +987,21 @@ function setupNavigation() {
             event.target.value
           );
 
-        selectedDay =
-          null;
+        selectedDay = null;
 
         renderCalendar();
-
       }
     );
+  }
 
 
-  document
-    .getElementById(
+  const monthSelect =
+    document.getElementById(
       "monthSelect"
-    )
-    .addEventListener(
+    );
+
+  if (monthSelect) {
+    monthSelect.addEventListener(
       "change",
       event => {
 
@@ -1058,16 +1010,18 @@ function setupNavigation() {
             event.target.value
           );
 
-        selectedDay =
-          null;
+        selectedDay = null;
 
         renderCalendar();
-
       }
     );
-
+  }
 }
 
+
+/* =========================
+   CONVERTER
+========================= */
 
 function setupConverter() {
 
@@ -1075,6 +1029,8 @@ function setupConverter() {
     document.getElementById(
       "converterForm"
     );
+
+  if (!form) return;
 
 
   form.addEventListener(
@@ -1089,11 +1045,19 @@ function setupConverter() {
           "converterResult"
         );
 
+      if (!result) return;
 
-      const mode =
+
+      const activeTab =
         document.querySelector(
           ".tab.active"
-        ).dataset.mode;
+        );
+
+      if (!activeTab) return;
+
+
+      const mode =
+        activeTab.dataset.mode;
 
 
       try {
@@ -1109,12 +1073,14 @@ function setupConverter() {
               ).value
             );
 
+
           const month =
             Number(
               document.getElementById(
                 "bsMonth"
               ).value
             );
+
 
           const day =
             Number(
@@ -1133,7 +1099,6 @@ function setupConverter() {
 
 
           result.innerHTML = `
-
             <strong>
               ${formatBsDate(
                 year,
@@ -1161,7 +1126,6 @@ function setupConverter() {
               )}
               ${ad.year} AD
             </strong>
-
           `;
 
         } else {
@@ -1173,12 +1137,14 @@ function setupConverter() {
               ).value
             );
 
+
           const month =
             Number(
               document.getElementById(
                 "adMonth"
               ).value
             );
+
 
           const day =
             Number(
@@ -1197,7 +1163,6 @@ function setupConverter() {
 
 
           result.innerHTML = `
-
             <strong>
               ${day}/${month}/${year} AD
             </strong>
@@ -1211,9 +1176,7 @@ function setupConverter() {
                 bs.day
               )}
             </strong>
-
           `;
-
         }
 
       } catch (error) {
@@ -1221,21 +1184,20 @@ function setupConverter() {
         result.textContent =
           error.message ||
           "Invalid date.";
-
       }
-
     }
   );
-
 }
 
+
+/* =========================
+   CONVERTER TABS
+========================= */
 
 function setupTabs() {
 
   document
-    .querySelectorAll(
-      ".tab"
-    )
+    .querySelectorAll(".tab")
     .forEach(
       tab => {
 
@@ -1244,9 +1206,7 @@ function setupTabs() {
           () => {
 
             document
-              .querySelectorAll(
-                ".tab"
-              )
+              .querySelectorAll(".tab")
               .forEach(
                 button =>
                   button.classList.remove(
@@ -1264,33 +1224,40 @@ function setupTabs() {
               tab.dataset.mode;
 
 
-            document
-              .getElementById(
+            const bsFields =
+              document.getElementById(
                 "bsFields"
-              )
-              .classList.toggle(
+              );
+
+            if (bsFields) {
+              bsFields.classList.toggle(
                 "hidden",
                 mode !== "bs"
               );
+            }
 
 
-            document
-              .getElementById(
+            const adFields =
+              document.getElementById(
                 "adFields"
-              )
-              .classList.toggle(
+              );
+
+            if (adFields) {
+              adFields.classList.toggle(
                 "hidden",
                 mode !== "ad"
               );
-
+            }
           }
         );
-
       }
     );
-
 }
 
+
+/* =========================
+   LOAD FESTIVALS / HOLIDAYS
+========================= */
 
 async function loadEvents() {
 
@@ -1312,20 +1279,16 @@ async function loadEvents() {
     if (
       festivalResponse.ok
     ) {
-
       festivals =
         await festivalResponse.json();
-
     }
 
 
     if (
       holidayResponse.ok
     ) {
-
       holidays =
         await holidayResponse.json();
-
     }
 
   } catch (error) {
@@ -1334,11 +1297,13 @@ async function loadEvents() {
       "Event data could not be loaded.",
       error
     );
-
   }
-
 }
 
+
+/* =========================
+   EVENT SEARCH
+========================= */
 
 function renderEvents() {
 
@@ -1351,6 +1316,14 @@ function renderEvents() {
     document.getElementById(
       "festivalSearch"
     );
+
+
+  if (
+    !container ||
+    !input
+  ) {
+    return;
+  }
 
 
   function render() {
@@ -1379,7 +1352,6 @@ function renderEvents() {
 
           }
         );
-
       }
     );
 
@@ -1399,7 +1371,6 @@ function renderEvents() {
 
           }
         );
-
       }
     );
 
@@ -1432,7 +1403,6 @@ function renderEvents() {
 
 
             return `
-
               <article class="event-card">
 
                 <div class="event-date">
@@ -1467,9 +1437,7 @@ function renderEvents() {
                 </div>
 
               </article>
-
             `;
-
           }
         )
         .join("");
@@ -1478,12 +1446,9 @@ function renderEvents() {
     if (
       !filtered.length
     ) {
-
       container.innerHTML =
         "<p>No matching events found.</p>";
-
     }
-
   }
 
 
@@ -1494,120 +1459,203 @@ function renderEvents() {
 
 
   render();
-
 }
 
+
+/* =========================
+   DATE DIFFERENCE TOOL
+========================= */
 
 function setupTools() {
 
-  document
-    .getElementById(
+  const dateDiffTool =
+    document.getElementById(
       "dateDiffTool"
-    )
-    .addEventListener(
-      "click",
-      () => {
-
-        const start =
-          prompt(
-            "Start date YYYY-MM-DD"
-          );
-
-        const end =
-          prompt(
-            "End date YYYY-MM-DD"
-          );
-
-        if (
-          !start ||
-          !end
-        ) return;
+    );
 
 
-        const a =
-          new Date(
-            `${start}T00:00:00`
-          );
-
-        const b =
-          new Date(
-            `${end}T00:00:00`
-          );
+  if (!dateDiffTool) {
+    return;
+  }
 
 
-        const days =
-          Math.abs(
-            b - a
-          ) / 86400000;
+  dateDiffTool.addEventListener(
+    "click",
+    () => {
 
-
-        alert(
-          `Difference: ${days} days`
+      const start =
+        prompt(
+          "Start date YYYY-MM-DD"
         );
 
+
+      const end =
+        prompt(
+          "End date YYYY-MM-DD"
+        );
+
+
+      if (
+        !start ||
+        !end
+      ) {
+        return;
       }
-    );
+
+
+      const a =
+        new Date(
+          `${start}T00:00:00`
+        );
+
+
+      const b =
+        new Date(
+          `${end}T00:00:00`
+        );
+
+
+      if (
+        Number.isNaN(a.getTime()) ||
+        Number.isNaN(b.getTime())
+      ) {
+
+        alert(
+          "Please enter valid dates."
+        );
+
+        return;
+      }
+
+
+      const days =
+        Math.abs(
+          b - a
+        ) / 86400000;
+
+
+      alert(
+        `Difference: ${days} days`
+      );
+    }
+  );
 }
+
+
+/* =========================
+   AGE CALCULATOR
+========================= */
 
 function setupAgeCalculator() {
 
   const ageTool =
-    document.getElementById("age-tool");
+    document.getElementById(
+      "age-tool"
+    );
+
 
   const dobInput =
-    document.getElementById("ageDob");
+    document.getElementById(
+      "ageDob"
+    );
+
 
   const calculateButton =
-    document.getElementById("calculateAge");
+    document.getElementById(
+      "calculateAge"
+    );
+
 
   const result =
-    document.getElementById("ageResult");
+    document.getElementById(
+      "ageResult"
+    );
+
 
   const error =
-    document.getElementById("ageError");
+    document.getElementById(
+      "ageError"
+    );
+
 
   const years =
-    document.getElementById("ageYears");
+    document.getElementById(
+      "ageYears"
+    );
+
 
   const months =
-    document.getElementById("ageMonths");
+    document.getElementById(
+      "ageMonths"
+    );
+
 
   const days =
-    document.getElementById("ageDays");
+    document.getElementById(
+      "ageDays"
+    );
+
 
   const totalDays =
-    document.getElementById("ageTotalDays");
+    document.getElementById(
+      "ageTotalDays"
+    );
+
 
   const birthday =
-    document.getElementById("ageBirthday");
+    document.getElementById(
+      "ageBirthday"
+    );
 
 
   if (
-    !ageTool ||
     !dobInput ||
-    !calculateButton
+    !calculateButton ||
+    !result ||
+    !error ||
+    !years ||
+    !months ||
+    !days ||
+    !totalDays ||
+    !birthday
   ) {
     return;
   }
 
 
-  ageTool.addEventListener("click", () => {
+  /* Scroll from tool card */
 
-    document
-      .getElementById("age-calculator")
-      ?.scrollIntoView({
-        behavior: "smooth"
-      });
+  if (ageTool) {
 
-  });
+    ageTool.addEventListener(
+      "click",
+      () => {
 
+        document
+          .getElementById(
+            "age-calculator"
+          )
+          ?.scrollIntoView({
+            behavior: "smooth"
+          });
+
+      }
+    );
+
+  }
+
+
+  /* Calculate */
 
   calculateButton.addEventListener(
     "click",
     () => {
 
       error.textContent = "";
-      result.classList.add("hidden");
+
+      result.classList.add(
+        "hidden"
+      );
 
 
       if (!dobInput.value) {
@@ -1616,11 +1664,14 @@ function setupAgeCalculator() {
           "Please select your date of birth.";
 
         return;
-
       }
 
 
-      const [year, month, day] =
+      const [
+        year,
+        month,
+        day
+      ] =
         dobInput.value
           .split("-")
           .map(Number);
@@ -1633,13 +1684,28 @@ function setupAgeCalculator() {
           day
         );
 
+
       const today =
         new Date();
 
 
-      today.setHours(0, 0, 0, 0);
-      birthDate.setHours(0, 0, 0, 0);
+      today.setHours(
+        0,
+        0,
+        0,
+        0
+      );
 
+
+      birthDate.setHours(
+        0,
+        0,
+        0,
+        0
+      );
+
+
+      /* Invalid date */
 
       if (
         birthDate.getFullYear() !== year ||
@@ -1651,17 +1717,19 @@ function setupAgeCalculator() {
           "Please enter a valid date.";
 
         return;
-
       }
 
 
-      if (birthDate > today) {
+      /* Future date */
+
+      if (
+        birthDate > today
+      ) {
 
         error.textContent =
           "Date of birth cannot be in the future.";
 
         return;
-
       }
 
 
@@ -1669,18 +1737,25 @@ function setupAgeCalculator() {
         today.getFullYear() -
         birthDate.getFullYear();
 
+
       let ageMonths =
         today.getMonth() -
         birthDate.getMonth();
+
 
       let ageDays =
         today.getDate() -
         birthDate.getDate();
 
 
-      if (ageDays < 0) {
+      /* Borrow days */
+
+      if (
+        ageDays < 0
+      ) {
 
         ageMonths--;
+
 
         const previousMonth =
           new Date(
@@ -1689,26 +1764,39 @@ function setupAgeCalculator() {
             0
           );
 
+
         ageDays +=
           previousMonth.getDate();
-
       }
 
 
-      if (ageMonths < 0) {
+      /* Borrow months */
+
+      if (
+        ageMonths < 0
+      ) {
 
         ageYears--;
-        ageMonths += 12;
 
+        ageMonths += 12;
       }
 
 
+      /* Total days */
+
       const millisecondsPerDay =
-        1000 * 60 * 60 * 24;
+        1000 *
+        60 *
+        60 *
+        24;
+
 
       const total =
         Math.floor(
-          (today - birthDate) /
+          (
+            today -
+            birthDate
+          ) /
           millisecondsPerDay
         );
 
@@ -1716,22 +1804,46 @@ function setupAgeCalculator() {
       years.textContent =
         ageYears;
 
+
       months.textContent =
         ageMonths;
 
+
       days.textContent =
         ageDays;
+
 
       totalDays.textContent =
         total.toLocaleString();
 
 
-      const birthdayThisYear =
+      /* Birthday */
+
+      let birthdayThisYear =
         new Date(
           today.getFullYear(),
           month - 1,
           day
         );
+
+
+      /*
+        Handle February 29 birthdays
+      */
+
+      if (
+        month === 2 &&
+        day === 29 &&
+        birthdayThisYear.getMonth() !== 1
+      ) {
+
+        birthdayThisYear =
+          new Date(
+            today.getFullYear(),
+            1,
+            28
+          );
+      }
 
 
       if (
@@ -1748,7 +1860,9 @@ function setupAgeCalculator() {
           birthdayThisYear;
 
 
-        if (nextBirthday < today) {
+        if (
+          nextBirthday < today
+        ) {
 
           nextBirthday =
             new Date(
@@ -1757,185 +1871,291 @@ function setupAgeCalculator() {
               day
             );
 
+
+          if (
+            month === 2 &&
+            day === 29 &&
+            nextBirthday.getMonth() !== 1
+          ) {
+
+            nextBirthday =
+              new Date(
+                today.getFullYear() + 1,
+                1,
+                28
+              );
+          }
         }
 
 
         const daysUntil =
           Math.ceil(
-            (nextBirthday - today) /
+            (
+              nextBirthday -
+              today
+            ) /
             millisecondsPerDay
           );
 
 
         birthday.textContent =
           `Your next birthday is in ${daysUntil} days.`;
-
       }
 
 
-      result.classList.remove("hidden");
-
+      result.classList.remove(
+        "hidden"
+      );
     }
   );
-
 }
+
+
+/* =========================
+   MOBILE MENU
+========================= */
 
 function setupMobileMenu() {
 
   const menuToggle =
-    document.getElementById("menuToggle");
+    document.getElementById(
+      "menuToggle"
+    );
+
 
   const mainNav =
-    document.getElementById("mainNav");
+    document.getElementById(
+      "mainNav"
+    );
 
-  if (!menuToggle || !mainNav) {
+
+  if (
+    !menuToggle ||
+    !mainNav
+  ) {
     return;
   }
+
 
   menuToggle.addEventListener(
     "click",
     () => {
 
       const isOpen =
-        mainNav.classList.toggle("open");
+        mainNav.classList.toggle(
+          "open"
+        );
+
 
       menuToggle.setAttribute(
         "aria-expanded",
         String(isOpen)
       );
 
+
       menuToggle.textContent =
-        isOpen ? "✕" : "☰";
-
+        isOpen
+          ? "✕"
+          : "☰";
     }
   );
 
-  // Close menu after clicking a link
-  mainNav.querySelectorAll("a").forEach(
-    link => {
 
-      link.addEventListener(
-        "click",
-        () => {
+  mainNav
+    .querySelectorAll("a")
+    .forEach(
+      link => {
 
-          mainNav.classList.remove("open");
+        link.addEventListener(
+          "click",
+          () => {
 
-          menuToggle.setAttribute(
-            "aria-expanded",
-            "false"
-          );
+            mainNav.classList.remove(
+              "open"
+            );
 
-          menuToggle.textContent = "☰";
 
-        }
-      );
+            menuToggle.setAttribute(
+              "aria-expanded",
+              "false"
+            );
 
-    }
-  );
 
+            menuToggle.textContent =
+              "☰";
+          }
+        );
+      }
+    );
 }
+
+
+/* =========================
+   TOOLS DROPDOWN
+========================= */
+
 function setupToolsDropdown() {
 
   const button =
-    document.getElementById("toolsButton");
+    document.getElementById(
+      "toolsButton"
+    );
+
 
   const menu =
-    document.getElementById("toolsMenu");
+    document.getElementById(
+      "toolsMenu"
+    );
 
-  if (!button || !menu) {
+
+  if (
+    !button ||
+    !menu
+  ) {
     return;
   }
 
 
-  button.addEventListener("click", (event) => {
+  button.addEventListener(
+    "click",
+    event => {
 
-    event.stopPropagation();
-
-    const isOpen =
-      menu.classList.toggle("open");
-
-    button.classList.toggle(
-      "active",
-      isOpen
-    );
-
-    button.setAttribute(
-      "aria-expanded",
-      String(isOpen)
-    );
-
-  });
+      event.stopPropagation();
 
 
-  // Prevent clicks inside menu from closing it
-  menu.addEventListener("click", (event) => {
-    event.stopPropagation();
-  });
+      const isOpen =
+        menu.classList.toggle(
+          "open"
+        );
 
 
-  // Close when clicking outside
-  document.addEventListener("click", () => {
-
-    menu.classList.remove("open");
-
-    button.classList.remove("active");
-
-    button.setAttribute(
-      "aria-expanded",
-      "false"
-    );
-
-  });
+      button.classList.toggle(
+        "active",
+        isOpen
+      );
 
 
-  // Close after selecting a tool
-  menu.querySelectorAll("a").forEach((link) => {
+      button.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+    }
+  );
 
-    link.addEventListener("click", () => {
 
-      menu.classList.remove("open");
+  menu.addEventListener(
+    "click",
+    event => {
+      event.stopPropagation();
+    }
+  );
 
-      button.classList.remove("active");
+
+  document.addEventListener(
+    "click",
+    () => {
+
+      menu.classList.remove(
+        "open"
+      );
+
+
+      button.classList.remove(
+        "active"
+      );
+
 
       button.setAttribute(
         "aria-expanded",
         "false"
       );
+    }
+  );
 
-    });
 
-  });
+  menu
+    .querySelectorAll("a")
+    .forEach(
+      link => {
 
+        link.addEventListener(
+          "click",
+          () => {
+
+            menu.classList.remove(
+              "open"
+            );
+
+
+            button.classList.remove(
+              "active"
+            );
+
+
+            button.setAttribute(
+              "aria-expanded",
+              "false"
+            );
+          }
+        );
+      }
+    );
 }
+
+
+/* =========================
+   INITIALIZATION
+========================= */
 
 async function init() {
 
   await loadEvents();
 
+
   renderYearSelect();
+
   renderMonthSelect();
+
   renderConverterMonths();
+
   renderWeekdays();
 
+
   setupNavigation();
+
   setupConverter();
+
   setupTabs();
+
   renderEvents();
+
   setupTools();
 
   setupToolsDropdown();
+
   setupMobileMenu();
 
   setupAgeCalculator();
 
+
   updateToday();
+
   renderCalendar();
 
-  document.getElementById(
-    "footerYear"
-  ).textContent =
-    new Date().getFullYear();
 
+  const footerYear =
+    document.getElementById(
+      "footerYear"
+    );
+
+
+  if (footerYear) {
+    footerYear.textContent =
+      new Date().getFullYear();
+  }
 }
+
+
+/* START APP */
 
 init();
