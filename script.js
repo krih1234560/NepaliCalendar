@@ -1302,7 +1302,7 @@ fetch(
 
 
 /* =========================
-   EVENT SEARCH
+   FESTIVAL / EVENT SEARCH
 ========================= */
 
 function renderEvents() {
@@ -1318,10 +1318,7 @@ function renderEvents() {
     );
 
 
-  if (
-    !container ||
-    !input
-  ) {
+  if (!container) {
     return;
   }
 
@@ -1329,62 +1326,143 @@ function renderEvents() {
   function render() {
 
     const query =
-      input.value
-        .trim()
-        .toLowerCase();
+      input
+        ? input.value
+            .trim()
+            .toLowerCase()
+        : "";
 
 
     const all = [];
 
 
+    /* =========================
+       FESTIVALS
+    ========================= */
+
     Object.entries(
-      festivals
+      festivals || {}
     ).forEach(
       ([date, items]) => {
+
+        if (!Array.isArray(items)) {
+          return;
+        }
+
 
         items.forEach(
           item => {
 
             all.push({
               date,
-              ...item
+              ...item,
+              type:
+                item.type ||
+                "festival"
             });
 
           }
         );
+
       }
     );
 
 
+    /* =========================
+       HOLIDAYS
+    ========================= */
+
     Object.entries(
-      holidays
+      holidays || {}
     ).forEach(
       ([date, items]) => {
+
+        if (!Array.isArray(items)) {
+          return;
+        }
+
 
         items.forEach(
           item => {
 
             all.push({
               date,
-              ...item
+              ...item,
+              type:
+                item.type ||
+                "holiday"
             });
 
           }
         );
+
       }
     );
 
+
+    /* =========================
+       SEARCH
+    ========================= */
 
     const filtered =
       all.filter(
-        item =>
-          `${item.name} ${
-            item.nameEn || ""
-          }`
-            .toLowerCase()
-            .includes(query)
+        item => {
+
+          const searchText =
+            `${item.name || ""} ${
+              item.nameEn || ""
+            } ${item.date || ""}`
+              .toLowerCase();
+
+
+          return searchText.includes(
+            query
+          );
+
+        }
       );
 
+
+    /* =========================
+       SORT BY DATE
+    ========================= */
+
+    filtered.sort(
+      (a, b) =>
+        a.date.localeCompare(
+          b.date
+        )
+    );
+
+
+    /* =========================
+       EMPTY STATE
+    ========================= */
+
+    if (!filtered.length) {
+
+      container.innerHTML = `
+        <div class="event-empty">
+
+          <strong>
+            No festivals found
+          </strong>
+
+          <p>
+            Try searching another festival name.
+          </p>
+
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    /* =========================
+       RENDER CARDS
+    ========================= */
 
     container.innerHTML =
       filtered
@@ -1402,8 +1480,33 @@ function renderEvents() {
                 .map(Number);
 
 
+            const monthData =
+              MONTHS[
+                month - 1
+              ];
+
+
+            const dateText =
+              monthData
+                ? `${nepaliNumber(day)}
+                   ${monthData.np}
+                   ${nepaliNumber(year)}`
+                : item.date;
+
+
+            const badge =
+              item.type ===
+              "holiday"
+                ? "Holiday"
+                : "Festival";
+
+
             return `
-              <article class="event-card">
+
+              <article
+                class="event-card"
+                data-type="${item.type}"
+              >
 
                 <div class="event-date">
 
@@ -1412,53 +1515,72 @@ function renderEvents() {
                   </strong>
 
                   <span>
-                    ${MONTHS[
-                      month - 1
-                    ].np}
+                    ${
+                      monthData
+                        ? monthData.np
+                        : ""
+                    }
                   </span>
 
                 </div>
 
 
-                <div>
+                <div class="event-content">
+
+                  <div class="event-badge">
+                    ${badge}
+                  </div>
+
 
                   <h3>
-                    ${item.name}
+                    ${item.name || ""}
                   </h3>
 
-                  <p>
-                    ${item.nameEn || ""}
-                  </p>
+
+                  ${
+                    item.nameEn
+                      ? `
+                        <p>
+                          ${item.nameEn}
+                        </p>
+                      `
+                      : ""
+                  }
+
 
                   <small>
-                    ${nepaliNumber(year)} BS
+                    ${dateText}
                   </small>
 
                 </div>
 
               </article>
+
             `;
+
           }
         )
         .join("");
 
-
-    if (
-      !filtered.length
-    ) {
-      container.innerHTML =
-        "<p>No matching events found.</p>";
-    }
   }
 
 
-  input.addEventListener(
-    "input",
-    render
-  );
-
+  /* Initial render */
 
   render();
+
+
+  /* Search */
+
+  if (input) {
+
+    input.addEventListener(
+      "input",
+      render
+    );
+
+  }
+
 }
 
 
