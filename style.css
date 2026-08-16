@@ -343,6 +343,10 @@ input:focus {
   color: var(--muted);
 }
 
+.weekdays div:last-child {
+  color: var(--danger);
+}
+
 .calendar-day {
   min-height: 82px;
   border: 0;
