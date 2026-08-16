@@ -394,6 +394,16 @@ input:focus {
   color: var(--danger);
 }
 
+/* Every Saturday is red */
+.calendar-day.saturday .bs-day,
+.calendar-day.saturday small {
+  color: var(--danger);
+}
+
+/* Saturday event dot */
+.calendar-day.saturday i {
+  color: var(--danger);
+}
 .calendar-day.festival .bs-day {
   color: var(--primary);
 }
