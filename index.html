@@ -1438,6 +1438,71 @@
 
 
 
+
+<!-- =====================================================
+     FESTIVALS SECTION
+===================================================== -->
+
+<section id="festivalsSection" class="festivals-section">
+
+  <div class="festivals-container">
+
+    <div class="festivals-header">
+
+      <span class="festival-badge">
+        २०८३ BS
+      </span>
+
+      <h2>
+        नेपाली चाडपर्व २०८३
+      </h2>
+
+      <p>
+        Nepali Festivals &amp; Holidays 2083
+      </p>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="festival-search">
+
+      <input
+        type="text"
+        id="festivalSearch"
+        placeholder="Search festival..."
+        autocomplete="off"
+      >
+
+    </div>
+
+
+    <!-- FESTIVALS WILL APPEAR HERE -->
+
+    <div
+      id="festivalList"
+      class="festival-list"
+    ></div>
+
+
+    <!-- NO RESULTS -->
+
+    <div
+      id="festivalEmpty"
+      class="festival-empty"
+      style="display:none;"
+    >
+      कुनै चाडपर्व भेटिएन।
+    </div>
+
+  </div>
+
+</section>
+
+
+  
+
 <!-- =========================
      FOOTER
 ========================= -->
@@ -1526,6 +1591,446 @@
 </script>
 
 
+
+<script>
+
+/* =====================================================
+   FESTIVALS 2083
+===================================================== */
+
+const festivals2083 = [
+
+  {
+    date: "बैशाख १, २०८३",
+    name: "नयाँ वर्ष",
+    english: "Nepali New Year",
+    type: "Public Holiday"
+  },
+
+  {
+    date: "बैशाख १८, २०८३",
+    name: "मातातीर्थ औंसी",
+    english: "Mother's Day",
+    type: "Festival"
+  },
+
+  {
+    date: "जेठ ४, २०८३",
+    name: "बुद्ध जयन्ती",
+    english: "Buddha Jayanti",
+    type: "Festival"
+  },
+
+  {
+    date: "श्रावण १५, २०८३",
+    name: "जनै पूर्णिमा",
+    english: "Janai Purnima",
+    type: "Festival"
+  },
+
+  {
+    date: "श्रावण १६, २०८३",
+    name: "गाईजात्रा",
+    english: "Gai Jatra",
+    type: "Festival"
+  },
+
+  {
+    date: "भाद्र ३, २०८३",
+    name: "कृष्ण जन्माष्टमी",
+    english: "Krishna Janmashtami",
+    type: "Festival"
+  },
+
+  {
+    date: "भाद्र ६, २०८३",
+    name: "तीज",
+    english: "Teej",
+    type: "Festival"
+  },
+
+  {
+    date: "भाद्र २१, २०८३",
+    name: "इन्द्रजात्रा",
+    english: "Indra Jatra",
+    type: "Festival"
+  },
+
+  {
+    date: "आश्विन ३, २०८३",
+    name: "घटस्थापना",
+    english: "Ghatasthapana",
+    type: "Festival"
+  },
+
+  {
+    date: "आश्विन १०, २०८३",
+    name: "फूलपाती",
+    english: "Phulpati",
+    type: "Festival"
+  },
+
+  {
+    date: "आश्विन ११, २०८३",
+    name: "महाअष्टमी",
+    english: "Maha Ashtami",
+    type: "Festival"
+  },
+
+  {
+    date: "आश्विन १२, २०८३",
+    name: "महानवमी",
+    english: "Maha Navami",
+    type: "Festival"
+  },
+
+  {
+    date: "आश्विन १३, २०८३",
+    name: "विजया दशमी",
+    english: "Dashain",
+    type: "Public Holiday"
+  },
+
+  {
+    date: "आश्विन २३, २०८३",
+    name: "कोजाग्रत पूर्णिमा",
+    english: "Kojagrat Purnima",
+    type: "Festival"
+  },
+
+  {
+    date: "कार्तिक ५, २०८३",
+    name: "तिहार",
+    english: "Tihar",
+    type: "Festival"
+  },
+
+  {
+    date: "कार्तिक ६, २०८३",
+    name: "लक्ष्मी पूजा",
+    english: "Laxmi Puja",
+    type: "Festival"
+  },
+
+  {
+    date: "कार्तिक ७, २०८३",
+    name: "गोवर्धन पूजा",
+    english: "Govardhan Puja",
+    type: "Festival"
+  },
+
+  {
+    date: "कार्तिक ८, २०८३",
+    name: "भाइटीका",
+    english: "Bhai Tika",
+    type: "Festival"
+  },
+
+  {
+    date: "मंसिर १, २०८३",
+    name: "छठ पर्व",
+    english: "Chhath",
+    type: "Festival"
+  },
+
+  {
+    date: "पौष १५, २०८३",
+    name: "तमु ल्होसार",
+    english: "Tamu Lhosar",
+    type: "Festival"
+  },
+
+  {
+    date: "माघ १, २०८३",
+    name: "माघे सङ्क्रान्ति",
+    english: "Maghe Sankranti",
+    type: "Festival"
+  },
+
+  {
+    date: "माघ १, २०८३",
+    name: "सोनाम ल्होसार",
+    english: "Sonam Lhosar",
+    type: "Festival"
+  },
+
+  {
+    date: "माघ १५, २०८३",
+    name: "शहीद दिवस",
+    english: "Martyrs' Day",
+    type: "Public Holiday"
+  },
+
+  {
+    date: "फाल्गुण १, २०८३",
+    name: "महाशिवरात्रि",
+    english: "Maha Shivaratri",
+    type: "Festival"
+  },
+
+  {
+    date: "फाल्गुण ६, २०८३",
+    name: "ग्याल्पो ल्होसार",
+    english: "Gyalpo Lhosar",
+    type: "Festival"
+  },
+
+  {
+    date: "फाल्गुण १५, २०८३",
+    name: "फागु पूर्णिमा",
+    english: "Holi",
+    type: "Festival"
+  },
+
+  {
+    date: "चैत्र १, २०८३",
+    name: "घोडेजात्रा",
+    english: "Ghode Jatra",
+    type: "Festival"
+  },
+
+  {
+    date: "चैत्र १५, २०८३",
+    name: "राम नवमी",
+    english: "Ram Navami",
+    type: "Festival"
+  }
+
+];
+
+
+/* =====================================================
+   DISPLAY FESTIVALS
+===================================================== */
+
+function displayFestivals(list) {
+
+  const container =
+    document.getElementById("festivalList");
+
+  const empty =
+    document.getElementById("festivalEmpty");
+
+
+  if (!container) {
+
+    console.error(
+      "festivalList element not found."
+    );
+
+    return;
+
+  }
+
+
+  container.innerHTML = "";
+
+
+  if (list.length === 0) {
+
+    if (empty) {
+
+      empty.style.display =
+        "block";
+
+    }
+
+    return;
+
+  }
+
+
+  if (empty) {
+
+    empty.style.display =
+      "none";
+
+  }
+
+
+  list.forEach(function(festival) {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "festival-card";
+
+
+    card.innerHTML = `
+
+      <div class="festival-date">
+        ${festival.date}
+      </div>
+
+      <h3>
+        ${festival.name}
+      </h3>
+
+      <p>
+        ${festival.english}
+      </p>
+
+      <span class="festival-type">
+        ${festival.type}
+      </span>
+
+    `;
+
+
+    container.appendChild(card);
+
+  });
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    displayFestivals(
+      festivals2083
+    );
+
+
+    const search =
+      document.getElementById(
+        "festivalSearch"
+      );
+
+
+    if (search) {
+
+      search.addEventListener(
+        "input",
+        function() {
+
+          const text =
+            this.value
+              .trim()
+              .toLowerCase();
+
+
+          const results =
+            festivals2083.filter(
+              function(festival) {
+
+                return (
+
+                  festival.name
+                    .toLowerCase()
+                    .includes(text)
+
+                  ||
+
+                  festival.english
+                    .toLowerCase()
+                    .includes(text)
+
+                  ||
+
+                  festival.date
+                    .includes(text)
+
+                );
+
+              }
+            );
+
+
+          displayFestivals(
+            results
+          );
+
+        }
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   FESTIVAL NAVBAR
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    const link =
+      document.querySelector(
+        'a[href="#festivalsSection"]'
+      );
+
+
+    const section =
+      document.getElementById(
+        "festivalsSection"
+      );
+
+
+    if (!link) {
+
+      console.error(
+        "Festival navbar link not found."
+      );
+
+      return;
+
+    }
+
+
+    if (!section) {
+
+      console.error(
+        "Festival section not found."
+      );
+
+      return;
+
+    }
+
+
+    link.addEventListener(
+      "click",
+      function(event) {
+
+        event.preventDefault();
+
+
+        section.scrollIntoView({
+
+          behavior: "smooth",
+
+          block: "start"
+
+        });
+
+
+        history.pushState(
+          null,
+          "",
+          "#festivalsSection"
+        );
+
+      }
+    );
+
+  }
+);
+
+</script>
+
+
+
+  
 </body>
 
 </html>
