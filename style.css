@@ -1751,129 +1751,545 @@ input:focus {
 
 
 
-/* =========================
-   FESTIVAL EVENTS
-========================= */
-
-.event-empty {
-  grid-column: 1 / -1;
-
-  padding: 40px 20px;
-
-  text-align: center;
-
-  background: #ffffff;
-
-  border: 1px solid #e1e6ef;
-
-  border-radius: 16px;
-
-  color: #68738a;
-}
-
-.event-empty strong {
-  display: block;
-
-  margin-bottom: 6px;
-
-  color: #172033;
-
-  font-size: 18px;
-}
-
-.event-empty p {
-  margin: 0;
-}
-
-
-.event-content {
-  min-width: 0;
-}
-
-
-.event-badge {
-  display: inline-block;
-
-  margin-bottom: 7px;
-
-  padding: 4px 9px;
-
-  border-radius: 20px;
-
-  background: #eef3ff;
-
-  color: #4778ff;
-
-  font-size: 11px;
-
-  font-weight: 800;
-
-  text-transform: uppercase;
-}
-
-
-.event-content h3 {
-  margin: 0 0 5px;
-
-  color: #172033;
-
-  font-size: 18px;
-}
-
-
-.event-content p {
-  margin: 0 0 6px;
-
-  color: #68738a;
-
-  font-size: 14px;
-}
-
-
-.event-content small {
-  color: #8a94a6;
-
-  font-size: 12px;
-}
-
-
-.event-card[data-type="holiday"]
-.event-badge {
-  background: #fff2f2;
-
-  color: #d04444;
-}
-
-
 /* =====================================================
-   FESTIVALS SECTION
+   NEPALI FESTIVALS 2083
+   ATTRACTIVE GRID DESIGN
 ===================================================== */
 
 .festivals-section {
   width: 100%;
-  padding: 70px 20px;
-  background: linear-gradient(
-    135deg,
-    #f4f7ff,
-    #eef2f8
-  );
+  padding: 80px 20px;
+  background:
+    linear-gradient(
+      135deg,
+      #f5f7ff 0%,
+      #eef3ff 50%,
+      #f8faff 100%
+    );
   scroll-margin-top: 90px;
 }
 
-/* ...your remaining Festival CSS... */
+.festivals-container {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+}
 
-@media (max-width: 700px) {
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.festivals-header {
+  text-align: center;
+  margin-bottom: 42px;
+}
+
+.festival-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 7px 16px;
+
+  border-radius: 50px;
+
+  background: #e7edff;
+  color: #4778ff;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  letter-spacing: .5px;
+
+  box-shadow:
+    0 5px 15px rgba(71, 120, 255, .10);
+}
+
+.festivals-header h2 {
+  margin: 14px 0 8px;
+
+  font-family:
+    "Noto Sans Devanagari",
+    "Nirmala UI",
+    Mangal,
+    Arial,
+    sans-serif;
+
+  font-size: 34px;
+  line-height: 1.3;
+
+  color: #172033;
+
+  letter-spacing: -.5px;
+}
+
+.festivals-header p {
+  margin: 0;
+
+  color: #68738a;
+
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.festival-search {
+  width: min(650px, 100%);
+  margin: 0 auto 35px;
+}
+
+#festivalSearch {
+  width: 100%;
+
+  min-height: 52px;
+
+  padding: 13px 18px;
+
+  border:
+    1px solid #d8dfeb;
+
+  border-radius: 13px;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #172033;
+
+  font-size: 15px;
+
+  box-shadow:
+    0 8px 25px rgba(30, 45, 75, .06);
+
+  transition:
+    border-color .2s,
+    box-shadow .2s,
+    transform .2s;
+}
+
+#festivalSearch::placeholder {
+  color: #9aa4b5;
+}
+
+#festivalSearch:focus {
+  border-color: #4778ff;
+
+  box-shadow:
+    0 0 0 4px rgba(71, 120, 255, .10),
+    0 10px 28px rgba(30, 45, 75, .08);
+}
+
+
+/* =====================================================
+   FESTIVAL GRID
+===================================================== */
+
+.festival-list {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+
+/* =====================================================
+   FESTIVAL CARD
+===================================================== */
+
+.festival-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 205px;
+
+  padding: 22px;
+
+  background: #ffffff;
+
+  border:
+    1px solid #e1e6ef;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 8px 25px
+    rgba(30, 45, 75, .07);
+
+  overflow: hidden;
+
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease,
+    border-color .22s ease;
+}
+
+
+/* Decorative top line */
+
+.festival-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #4778ff,
+      #7899ff
+    );
+}
+
+
+/* Hover */
+
+.festival-card:hover {
+  transform:
+    translateY(-5px);
+
+  border-color:
+    #cbd8ff;
+
+  box-shadow:
+    0 16px 38px
+    rgba(40, 65, 120, .13);
+}
+
+
+/* =====================================================
+   FESTIVAL CARD TOP
+===================================================== */
+
+.festival-card-top {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 18px;
+}
+
+
+/* =====================================================
+   FESTIVAL ICON
+===================================================== */
+
+.festival-icon {
+  width: 48px;
+  height: 48px;
+
+  flex: 0 0 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #eef3ff,
+      #e4ebff
+    );
+
+  color: #4778ff;
+
+  font-size: 22px;
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(71, 120, 255, .08);
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+.festival-date {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding:
+    7px 10px;
+
+  border-radius:
+    8px;
+
+  background:
+    #f2f5fa;
+
+  color:
+    #5e6a7e;
+
+  font-family:
+    "Noto Sans Devanagari",
+    "Nirmala UI",
+    Mangal,
+    Arial,
+    sans-serif;
+
+  font-size:
+    12px;
+
+  font-weight:
+    800;
+
+  white-space:
+    nowrap;
+}
+
+
+/* =====================================================
+   FESTIVAL NAME
+===================================================== */
+
+.festival-card h3 {
+  margin:
+    0 0 6px;
+
+  font-family:
+    "Noto Sans Devanagari",
+    "Nirmala UI",
+    Mangal,
+    Arial,
+    sans-serif;
+
+  font-size:
+    21px;
+
+  line-height:
+    1.45;
+
+  color:
+    #172033;
+}
+
+
+/* English name */
+
+.festival-card p {
+  margin:
+    0 0 18px;
+
+  color:
+    #7a8597;
+
+  font-size:
+    14px;
+
+  line-height:
+    1.5;
+}
+
+
+/* =====================================================
+   FESTIVAL TYPE
+===================================================== */
+
+.festival-type {
+  display:
+    inline-flex;
+
+  align-items:
+    center;
+
+  width:
+    fit-content;
+
+  margin-top:
+    auto;
+
+  padding:
+    6px 10px;
+
+  border-radius:
+    7px;
+
+  background:
+    #f1f4f8;
+
+  color:
+    #59657a;
+
+  font-size:
+    11px;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    .3px;
+
+  text-transform:
+    uppercase;
+}
+
+
+/* =====================================================
+   PUBLIC HOLIDAY CARD
+===================================================== */
+
+.festival-card.public-holiday {
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f8faff
+    );
+
+  border-color:
+    #cbd8ff;
+}
+
+.festival-card.public-holiday::before {
+  background:
+    linear-gradient(
+      90deg,
+      #4778ff,
+      #8aa6ff
+    );
+}
+
+.festival-card.public-holiday
+.festival-type {
+  background:
+    #eaf0ff;
+
+  color:
+    #3564e8;
+}
+
+
+/* =====================================================
+   EMPTY RESULT
+===================================================== */
+
+.festival-empty {
+  padding:
+    45px 20px;
+
+  text-align:
+    center;
+
+  background:
+    #ffffff;
+
+  border:
+    1px solid #e1e6ef;
+
+  border-radius:
+    16px;
+
+  color:
+    #68738a;
+
+  font-size:
+    15px;
+
+  box-shadow:
+    0 8px 25px
+    rgba(30, 45, 75, .05);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 950px) {
+
+  .festival-list {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
 
   .festivals-section {
-    padding: 45px 15px;
+    padding:
+      55px 15px;
+  }
+
+  .festivals-header {
+    margin-bottom:
+      30px;
   }
 
   .festivals-header h2 {
-    font-size: 26px;
+    font-size:
+      27px;
+  }
+
+  .festivals-header p {
+    font-size:
+      14px;
   }
 
   .festival-list {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr;
+
+    gap:
+      15px;
+  }
+
+  .festival-card {
+    min-height:
+      190px;
+
+    padding:
+      20px;
+  }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+  .festivals-section {
+    padding:
+      45px 12px;
+  }
+
+  .festivals-header h2 {
+    font-size:
+      24px;
+  }
+
+  .festival-card h3 {
+    font-size:
+      19px;
   }
 
 }
