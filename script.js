@@ -1660,36 +1660,100 @@ function setupMobileMenu() {
   );
 
 }
+function setupToolsDropdown() {
+
+  const button =
+    document.getElementById("toolsButton");
+
+  const menu =
+    document.getElementById("toolsMenu");
+
+  if (!button || !menu) {
+    return;
+  }
+
+
+  button.addEventListener("click", (event) => {
+
+    event.stopPropagation();
+
+    const isOpen =
+      menu.classList.toggle("open");
+
+    button.classList.toggle(
+      "active",
+      isOpen
+    );
+
+    button.setAttribute(
+      "aria-expanded",
+      String(isOpen)
+    );
+
+  });
+
+
+  // Prevent clicks inside menu from closing it
+  menu.addEventListener("click", (event) => {
+    event.stopPropagation();
+  });
+
+
+  // Close when clicking outside
+  document.addEventListener("click", () => {
+
+    menu.classList.remove("open");
+
+    button.classList.remove("active");
+
+    button.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+  });
+
+
+  // Close after selecting a tool
+  menu.querySelectorAll("a").forEach((link) => {
+
+    link.addEventListener("click", () => {
+
+      menu.classList.remove("open");
+
+      button.classList.remove("active");
+
+      button.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+    });
+
+  });
+
+}
 
 async function init() {
 
   await loadEvents();
 
-
   renderYearSelect();
-
   renderMonthSelect();
-
   renderConverterMonths();
-
   renderWeekdays();
 
   setupNavigation();
-
   setupConverter();
-  
-  setupMobileMenu();
-
   setupTabs();
-
   renderEvents();
-
   setupTools();
 
+  setupToolsDropdown();
+  setupMobileMenu();
+
   updateToday();
-
   renderCalendar();
-
 
   document.getElementById(
     "footerYear"
@@ -1697,6 +1761,5 @@ async function init() {
     new Date().getFullYear();
 
 }
-
 
 init();
