@@ -3,7 +3,6 @@
 <html lang="ne">
 
 <head>
-
   <meta charset="utf-8">
 
   <meta
@@ -25,15 +24,15 @@
     content="Nepal holidays 2083, Nepali holidays 2083, government holidays Nepal, Dashain 2083, Tihar 2083, Teej 2083, Maghe Sankranti 2083, Nepali New Year 2083"
   >
 
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
-
+  <link rel="stylesheet" href="style.css">
 </head>
 
 
 <body>
+
+<!-- =========================
+     HEADER / NAVIGATION
+========================= -->
 
 <header class="site-header">
 
@@ -44,13 +43,11 @@
       href="index.html"
       aria-label="Nepali Calendar home"
     >
-
       <span class="brand-icon">
         📅
       </span>
 
       <span>
-
         <strong>
           Nepali Calendar
         </strong>
@@ -58,11 +55,11 @@
         <small>
           नेपाली पात्रो
         </small>
-
       </span>
-
     </a>
 
+
+    <!-- Mobile menu button -->
 
     <button
       class="menu-toggle"
@@ -76,14 +73,23 @@
 
     <nav id="mainNav">
 
+      <!-- Calendar -->
+
       <a href="index.html#calendar">
         Calendar
       </a>
+
+
+      <!-- Converter -->
 
       <a href="index.html#converter">
         Converter
       </a>
 
+
+      <!-- =========================
+           TOOLS DROPDOWN
+      ========================== -->
 
       <div class="dropdown">
 
@@ -95,6 +101,7 @@
           aria-controls="toolsMenu"
         >
           Tools
+
           <span class="tools-arrow">
             ▾
           </span>
@@ -106,7 +113,10 @@
           id="toolsMenu"
         >
 
+          <!-- Unicode -->
+
           <a href="tools/unicode.html">
+
             <span class="tool-menu-icon">
               अ
             </span>
@@ -120,10 +130,14 @@
                 Romanized Nepali → Unicode
               </small>
             </span>
+
           </a>
 
 
+          <!-- Converter -->
+
           <a href="index.html#converter">
+
             <span class="tool-menu-icon">
               ↔
             </span>
@@ -137,10 +151,14 @@
                 Convert dates
               </small>
             </span>
+
           </a>
 
 
+          <!-- Date Tools -->
+
           <a href="index.html#date-tools">
+
             <span class="tool-menu-icon">
               🛠
             </span>
@@ -154,6 +172,7 @@
                 Useful Nepali tools
               </small>
             </span>
+
           </a>
 
         </div>
@@ -161,10 +180,14 @@
       </div>
 
 
+      <!-- Festivals -->
+
       <a href="index.html#festivals">
         Festivals
       </a>
 
+
+      <!-- Holidays -->
 
       <a
         href="holidays.html"
@@ -180,137 +203,181 @@
 </header>
 
 
+<!-- =========================
+     MAIN CONTENT
+========================= -->
+
 <main>
 
-<section class="holiday-hero">
 
-  <div class="container">
+  <!-- =========================
+       HOLIDAY HERO
+  ========================== -->
 
-    <div class="eyebrow">
-      NEPAL HOLIDAYS • २०८३ BS
+  <section class="holiday-hero">
+
+    <div class="container">
+
+      <div class="eyebrow">
+        NEPAL HOLIDAYS • २०८३ BS
+      </div>
+
+
+      <h1>
+
+        Government Holidays & Festivals
+
+        <span>
+          २०८३ सालका बिदा तथा चाडपर्व
+        </span>
+
+      </h1>
+
+
+      <p>
+        Month-wise public holidays, major festivals,
+        national days and important cultural celebrations
+        of Nepali Calendar 2083 BS.
+      </p>
+
     </div>
 
-    <h1>
-      Government Holidays & Festivals
-      <span>
-        २०८३ सालका बिदा तथा चाडपर्व
-      </span>
-    </h1>
+  </section>
+
+
+  <!-- =========================
+       HOLIDAY SUMMARY
+  ========================== -->
+
+  <section class="container section">
+
+    <div class="holiday-summary">
+
+      <div>
+
+        <strong>
+          २०८३
+        </strong>
+
+        <span>
+          Bikram Sambat
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          १२
+        </strong>
+
+        <span>
+          Months
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <strong>
+          २०२६–२७
+        </strong>
+
+        <span>
+          AD
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         HOLIDAY FILTERS
+    ========================== -->
+
+    <div class="holiday-filters">
+
+      <button
+        class="holiday-filter active"
+        data-filter="all"
+        type="button"
+      >
+        All
+      </button>
+
+
+      <button
+        class="holiday-filter"
+        data-filter="government"
+        type="button"
+      >
+        Government Holidays
+      </button>
+
+
+      <button
+        class="holiday-filter"
+        data-filter="festival"
+        type="button"
+      >
+        Major Festivals
+      </button>
+
+    </div>
+
+
+    <!-- Holidays are inserted here by holidays.js -->
+
+    <div
+      id="holidayMonths"
+      class="holiday-months"
+    ></div>
+
+  </section>
+
+
+  <!-- =========================
+       HOLIDAY INFORMATION
+  ========================== -->
+
+  <section class="container section holiday-note">
+
+    <h2>
+      About 2083 BS Holidays
+    </h2>
+
 
     <p>
-      Month-wise public holidays, major festivals,
-      national days and important cultural celebrations
-      of Nepali Calendar 2083 BS.
+      Holiday dates are based on the Government of
+      Nepal's 2083 BS public holiday notice.
+      Some holidays apply nationally while others
+      apply to particular communities, regions,
+      religious groups or locations.
     </p>
 
-  </div>
 
-</section>
+    <p>
+      Dates for some Islamic holidays and Bhoto Jatra
+      are announced separately when their dates are
+      determined.
+    </p>
 
-
-<section
-  class="container section"
->
-
-  <div class="holiday-summary">
-
-    <div>
-      <strong>
-        २०८३
-      </strong>
-
-      <span>
-        Bikram Sambat
-      </span>
-    </div>
-
-
-    <div>
-      <strong>
-        १२
-      </strong>
-
-      <span>
-        Months
-      </span>
-    </div>
-
-
-    <div>
-      <strong>
-        २०२६–२७
-      </strong>
-
-      <span>
-        AD
-      </span>
-    </div>
-
-  </div>
-
-
-  <div class="holiday-filters">
-
-    <button
-      class="holiday-filter active"
-      data-filter="all"
-    >
-      All
-    </button>
-
-    <button
-      class="holiday-filter"
-      data-filter="government"
-    >
-      Government Holidays
-    </button>
-
-    <button
-      class="holiday-filter"
-      data-filter="festival"
-    >
-      Major Festivals
-    </button>
-
-  </div>
-
-
-  <div
-    id="holidayMonths"
-    class="holiday-months"
-  ></div>
-
-</section>
-
-
-<section class="container section holiday-note">
-
-  <h2>
-    About 2083 BS Holidays
-  </h2>
-
-  <p>
-    Holiday dates are based on the Government of
-    Nepal's 2083 BS public holiday notice.
-    Some holidays apply nationally while others
-    apply to particular communities, regions,
-    religious groups or locations.
-  </p>
-
-  <p>
-    Dates for some Islamic holidays and Bhoto Jatra
-    are announced separately when their dates are
-    determined.
-  </p>
-
-</section>
+  </section>
 
 </main>
 
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer class="footer">
 
   <div class="container footer-inner">
+
 
     <div>
 
@@ -331,13 +398,18 @@
         Calendar
       </a>
 
+
       <a href="index.html#converter">
         Converter
       </a>
 
+
+      <!-- Unicode link -->
+
       <a href="tools/unicode.html">
         Unicode
       </a>
+
 
       <a href="holidays.html">
         Holidays
@@ -347,9 +419,13 @@
 
 
     <p>
+
       ©
+
       <span id="footerYear"></span>
+
       Nepali Calendar.
+
     </p>
 
   </div>
@@ -357,8 +433,16 @@
 </footer>
 
 
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 <script src="holidays.js"></script>
+
+<!-- Main navigation / Tools dropdown -->
+
 <script src="script.js"></script>
+
 
 </body>
 
