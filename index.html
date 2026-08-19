@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="ne">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>
+    Nepali Calendar 2083 | नेपाली पात्रो २०८३ | BS to AD
+  </title>
+
+  <meta
+    name="description"
+    content="Nepali Calendar (नेपाली पात्रो) with Bikram Sambat dates, English dates, festivals, holidays, moon phase and BS to AD or AD to BS date conversion."
+  >
+
+  <meta
+    name="robots"
+    content="index,follow,max-image-preview:large"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Nepali Calendar",
+    "alternateName": "नेपाली पात्रो",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "description": "Bikram Sambat Nepali calendar, BS to AD converter, festivals and holidays.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+</head>
+
+
+<body>
+
+
+<header class="site-header">
+
+  <div class="container nav">
+
+    <a
+      class="brand"
+      href="index.html"
+      aria-label="Nepali Calendar home"
+    >
+
+      <span class="brand-icon">
+        📅
+      </span>
+
+      <span>
+
+        <strong>
+          Nepali Calendar
+        </strong>
+
+        <small>
+          नेपाली पात्रो
+        </small>
+
+      </span>
+
+    </a>
+
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mainNav"
+    >
+      ☰
+    </button>
+
+
+    <nav id="mainNav">
+
+  <a href="index.html#calendar" class="active">
+    Calendar
+  </a>
+
+  <a href="calendar-2083.html" class="calendar-2083-nav">
+    📅 पात्रो २०८३
+  </a>
+
+  <a href="converter.html">
+    Converter
+  </a>
+
+  <!-- =========================
+       TOOLS DROPDOWN
+  ========================== -->
+
+  <div class="dropdown">
+
+    <button
+      class="dropbtn"
+      id="toolsButton"
+      type="button"
+      aria-expanded="false"
+      aria-controls="toolsMenu"
+    >
+      Tools <span class="tools-arrow">▾</span>
+    </button>
+
+    <div
+      class="dropdown-menu"
+      id="toolsMenu"
+    >
+
+      <a href="unicode.html">
+        <span>अ</span>
+        <span>
+          <strong>Nepali Unicode</strong>
+          <small>Romanized Nepali → Unicode</small>
+        </span>
+      </a>
+
+      <a href="converter.html">
+        <span class="tool-menu-icon">↔</span>
+        <span>
+          <strong>BS ↔ AD Converter</strong>
+          <small>Convert Nepali and English dates</small>
+        </span>
+      </a>
+
+      <a href="festivals.html">
+        <span class="tool-menu-icon">🎉</span>
+        <span>
+          <strong>Festivals</strong>
+          <small>Nepali festivals and holidays</small>
+        </span>
+      </a>
+
+      <a href="tools.html">
+        <span class="tool-menu-icon">↔</span>
+        <span>
+          <strong>Date Difference</strong>
+          <small>Calculate days between dates</small>
+        </span>
+      </a>
+
+      <a href="age-calculator.html">
+        <span class="tool-menu-icon">🎂</span>
+        <span>
+          <strong>Age Calculator</strong>
+          <small>Calculate age from date of birth</small>
+        </span>
+      </a>
+
+    </div>
+
+  </div>
+
+  <a href="festivals.html">
+    Festivals
+  </a>
+
+  <a href="holidays.html">
+    Holidays
+  </a>
+
+</nav>
+
+  </div>
+
+</header>
+
+
+<main>
+
+<section class="hero">
+
+  <div class="container">
+
+    <div class="eyebrow">
+      NEPALI CALENDAR • BIKRAM SAMBAT
+    </div>
+
+
+    <h1>
+
+      Nepali Calendar
+
+      <span>
+        नेपाली पात्रो
+      </span>
+
+    </h1>
+
+
+    <p>
+      View Nepali BS dates, English AD dates,
+      festivals, holidays and moon phases.
+    </p>
+
+
+    <div class="today-card">
+
+
+      <div>
+
+        <span>
+          Today's Date
+        </span>
+
+        <strong id="todayNepali">
+          Loading…
+        </strong>
+
+      </div>
+
+
+      <div>
+
+        <span>
+          English Date
+        </span>
+
+        <strong id="todayEnglish">
+          Loading…
+        </strong>
+
+      </div>
+
+
+      <div>
+
+        <span>
+          Day
+        </span>
+
+        <strong id="todayWeekday">
+          Loading…
+        </strong>
+
+      </div>
+
+
+      <div>
+
+        <span>
+          Moon
+        </span>
+
+        <strong id="todayMoon">
+          Loading…
+        </strong>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section
+  class="container section"
+  id="calendar"
+>
+
+
+  <div class="section-heading">
+
+    <div>
+
+      <div class="eyebrow">
+        CALENDAR
+      </div>
+
+
+      <h2 id="calendarTitle">
+        Nepali Calendar
+      </h2>
+
+
+      <p id="calendarSubtitle">
+        Bikram Sambat month calendar
+      </p>
+
+    </div>
+
+
+    <div class="calendar-controls">
+
+
+      <button
+        class="icon-btn"
+        id="prevYear"
+        type="button"
+      >
+        «
+      </button>
+
+
+      <button
+        class="icon-btn"
+        id="prevMonth"
+        type="button"
+      >
+        ‹
+      </button>
+
+
+      <button
+        class="today-btn"
+        id="goToday"
+        type="button"
+      >
+        Today
+      </button>
+
+
+      <button
+        class="icon-btn"
+        id="nextMonth"
+        type="button"
+      >
+        ›
+      </button>
+
+
+      <button
+        class="icon-btn"
+        id="nextYear"
+        type="button"
+      >
+        »
+      </button>
+
+
+    </div>
+
+  </div>
+
+
+
+  <div class="year-jump">
+
+
+    <label>
+
+      BS Year
+
+      <select id="yearSelect"></select>
+
+    </label>
+
+
+    <label>
+
+      Month
+
+      <select id="monthSelect"></select>
+
+    </label>
+
+
+  </div>
+
+
+
+  <div class="calendar-layout">
+
+
+    <div class="calendar-card">
+
+
+      <div class="calendar-month-head">
+
+
+        <div>
+
+          <strong id="monthNepali">
+            बैशाख
+          </strong>
+
+          <span id="monthEnglish">
+            Baisakh
+          </span>
+
+        </div>
+
+
+        <div
+          class="year-badge"
+          id="yearBadge"
+        >
+          २०८३ BS
+        </div>
+
+
+      </div>
+
+
+
+      <div
+        class="weekdays"
+        id="weekdays"
+      ></div>
+
+
+
+      <div
+        class="calendar-grid"
+        id="calendarGrid"
+        aria-live="polite"
+      ></div>
+
+
+
+      <div class="calendar-legend">
+
+
+        <span>
+
+          <i class="dot today-dot"></i>
+
+          Today
+
+        </span>
+
+
+        <span>
+
+          <i class="dot holiday-dot"></i>
+
+          Holiday
+
+        </span>
+
+
+        <span>
+
+          <i class="dot festival-dot"></i>
+
+          Festival
+
+        </span>
+
+
+      </div>
+
+
+    </div>
+
+
+
+    <aside class="side-stack">
+
+
+      <!-- SELECTED DATE -->
+
+      <div class="info-card">
+
+
+        <div class="card-kicker">
+          SELECTED DATE
+        </div>
+
+
+        <h3 id="selectedTitle">
+          Select a date
+        </h3>
+
+
+        <p id="selectedAd">
+          Click a calendar day to see details.
+        </p>
+
+
+        <div
+          id="selectedEvents"
+          class="event-list"
+        ></div>
+
+
+        <div class="moon-box">
+
+
+          <span id="selectedMoonIcon">
+            ◐
+          </span>
+
+
+          <div>
+
+            <strong id="selectedMoon">
+              Moon phase
+            </strong>
+
+
+            <small id="selectedMoonAge">
+              —
+            </small>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- QUICK LINKS -->
+
+      <div class="info-card">
+
+
+        <div class="card-kicker">
+          QUICK LINKS
+        </div>
+
+
+        <a
+          class="quick-link"
+          href="converter.html"
+        >
+
+          ↔ BS to AD Converter
+
+          <span>
+            →
+          </span>
+
+        </a>
+
+
+        <a
+          class="quick-link"
+          href="unicode.html"
+        >
+
+          अ Nepali Unicode Converter
+
+          <span>
+            →
+          </span>
+
+        </a>
+
+
+        <a
+          class="quick-link"
+          href="holidays.html"
+        >
+
+          📅 Nepali Holidays 2083
+
+          <span>
+            →
+          </span>
+
+        </a>
+
+
+        <a
+          class="quick-link"
+          href="festivals.html"
+        >
+
+          🎉 Nepali Festivals
+
+          <span>
+            →
+          </span>
+
+        </a>
+
+
+      </div>
+
+
+    </aside>
+
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+
+  <div class="container footer-inner">
+
+
+    <div>
+
+
+      <strong>
+        📅 Nepali Calendar
+      </strong>
+
+
+      <p>
+        नेपाली पात्रो • Bikram Sambat Calendar
+      </p>
+
+
+    </div>
+
+
+
+    <div>
+
+
+      <a href="index.html#calendar">
+        Calendar
+      </a>
+
+
+      <a href="converter.html">
+        Converter
+      </a>
+
+
+      <a href="unicode.html">
+        Unicode
+      </a>
+
+
+      <a href="holidays.html">
+        Holidays
+      </a>
+
+
+      <a href="festivals.html">
+        Festivals
+      </a>
+
+
+    </div>
+
+
+
+    <p>
+
+      ©
+
+      <span id="footerYear"></span>
+
+      Nepali Calendar.
+
+    </p>
+
+
+  </div>
+
+
+</footer>
+
+
+<script src="script.js" defer></script>
+
+
+</body>
+
+</html>
