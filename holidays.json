@@ -1,0 +1,346 @@
+{
+  "2083-01-01": [
+    {
+      "name": "नयाँ वर्ष २०८३ / बिस्का जात्रा / मेष संक्रान्ति",
+      "nameEn": "Nepali New Year / Biska Jatra / Mesh Sankranti",
+      "type": "government",
+      "ad": "2026-04-14"
+    }
+  ],
+  "2083-01-18": [
+    {
+      "name": "अन्तर्राष्ट्रिय श्रमिक दिवस / उभौली पर्व / बुद्ध जयन्ती / चण्डी पूर्णिमा",
+      "nameEn": "International Labour Day / Ubhauli / Buddha Jayanti / Chandi Purnima",
+      "type": "government",
+      "ad": "2026-05-01"
+    }
+  ],
+  "2083-02-14": [
+    {
+      "name": "बकर ईद (ईद-उल-अधा) / प्रदोष व्रत",
+      "nameEn": "Eid al-Adha",
+      "type": "government",
+      "ad": "2026-05-28"
+    }
+  ],
+  "2083-02-15": [
+    {
+      "name": "गणतन्त्र दिवस / अन्तर्राष्ट्रिय सगरमाथा दिवस",
+      "nameEn": "Republic Day / International Everest Day",
+      "type": "government",
+      "ad": "2026-05-29"
+    }
+  ],
+  "2083-03-06": [
+    {
+      "name": "भोटो जात्रा / विश्व शरणार्थी दिवस / कुमारषष्ठी / सिथि नखः",
+      "nameEn": "Bhoto Jatra / World Refugee Day / Sithi Nakha",
+      "type": "regional",
+      "ad": "2026-06-20"
+    }
+  ],
+  "2083-05-12": [
+    {
+      "name": "जनै पूर्णिमा / रक्षा बन्धन / ऋषितर्पणी / संस्कृत दिवस",
+      "nameEn": "Janai Purnima / Raksha Bandhan",
+      "type": "government",
+      "ad": "2026-08-28"
+    }
+  ],
+  "2083-05-13": [
+    {
+      "name": "गाईजात्रा",
+      "nameEn": "Gai Jatra",
+      "type": "regional",
+      "ad": "2026-08-29"
+    }
+  ],
+  "2083-05-19": [
+    {
+      "name": "श्रीकृष्ण जन्माष्टमी / गौरा पर्व",
+      "nameEn": "Krishna Janmashtami / Gaura Parva",
+      "type": "government",
+      "ad": "2026-09-04"
+    }
+  ],
+  "2083-05-29": [
+    {
+      "name": "हरितालिका तीज / राष्ट्रिय बाल दिवस",
+      "nameEn": "Haritalika Teej / National Children's Day",
+      "type": "restricted",
+      "ad": "2026-09-14"
+    }
+  ],
+  "2083-06-03": [
+    {
+      "name": "संविधान दिवस / राष्ट्रिय दिवस",
+      "nameEn": "Constitution Day / National Day",
+      "type": "government",
+      "ad": "2026-09-19"
+    }
+  ],
+  "2083-06-09": [
+    {
+      "name": "इन्द्रजात्रा",
+      "nameEn": "Indra Jatra",
+      "type": "regional",
+      "ad": "2026-09-25"
+    }
+  ],
+  "2083-06-18": [
+    {
+      "name": "जितिया पर्व",
+      "nameEn": "Jitiya Parva",
+      "type": "restricted",
+      "ad": "2026-10-04"
+    }
+  ],
+  "2083-06-25": [
+    {
+      "name": "घटस्थापना / नवरात्र आरम्भ",
+      "nameEn": "Ghatasthapana / Dashain Begins",
+      "type": "government",
+      "ad": "2026-10-11"
+    }
+  ],
+  "2083-06-31": [
+    {
+      "name": "फूलपाती / दशैं बिदा",
+      "nameEn": "Phulpati / Dashain Holiday",
+      "type": "government",
+      "ad": "2026-10-17"
+    }
+  ],
+  "2083-07-01": [
+    {
+      "name": "महाअष्टमी / कालरात्रि",
+      "nameEn": "Maha Ashtami",
+      "type": "government",
+      "ad": "2026-10-18"
+    }
+  ],
+  "2083-07-02": [
+    {
+      "name": "दशैं बिदा",
+      "nameEn": "Dashain Holiday",
+      "type": "government",
+      "ad": "2026-10-19"
+    }
+  ],
+  "2083-07-03": [
+    {
+      "name": "महानवमी",
+      "nameEn": "Maha Navami",
+      "type": "government",
+      "ad": "2026-10-20"
+    }
+  ],
+  "2083-07-04": [
+    {
+      "name": "विजया दशमी / देवी विसर्जन",
+      "nameEn": "Vijaya Dashami / Dashain",
+      "type": "government",
+      "ad": "2026-10-21"
+    }
+  ],
+  "2083-07-05": [
+    {
+      "name": "पापांकुशा एकादशी व्रत",
+      "nameEn": "Papankusha Ekadashi",
+      "type": "festival",
+      "ad": "2026-10-22"
+    }
+  ],
+  "2083-07-06": [
+    {
+      "name": "दशैं बिदा",
+      "nameEn": "Dashain Holiday",
+      "type": "government",
+      "ad": "2026-10-23"
+    }
+  ],
+  "2083-07-22": [
+    {
+      "name": "लक्ष्मी पूजा / कुकुर तिहार / नरक चतुर्दशी",
+      "nameEn": "Laxmi Puja / Kukur Tihar",
+      "type": "government",
+      "ad": "2026-11-08"
+    }
+  ],
+  "2083-07-23": [
+    {
+      "name": "तिहार बिदा / गाई पूजा",
+      "nameEn": "Tihar Holiday / Gai Puja",
+      "type": "government",
+      "ad": "2026-11-09"
+    }
+  ],
+  "2083-07-24": [
+    {
+      "name": "नेपाल संवत् ११४७ / गोवर्धन पूजा / म्ह पूजा",
+      "nameEn": "Nepal Sambat New Year / Govardhan Puja / Mha Puja",
+      "type": "government",
+      "ad": "2026-11-10"
+    }
+  ],
+  "2083-07-25": [
+    {
+      "name": "भाइटीका / महागुरु फाल्गुनन्द जयन्ती",
+      "nameEn": "Bhai Tika / Mahaguru Falgunanda Jayanti",
+      "type": "government",
+      "ad": "2026-11-11"
+    }
+  ],
+  "2083-07-26": [
+    {
+      "name": "तिहार बिदा",
+      "nameEn": "Tihar Holiday",
+      "type": "government",
+      "ad": "2026-11-12"
+    }
+  ],
+  "2083-07-29": [
+    {
+      "name": "छठ पर्व",
+      "nameEn": "Chhath Parva",
+      "type": "government",
+      "ad": "2026-11-15"
+    }
+  ],
+  "2083-08-08": [
+    {
+      "name": "गुरु नानक जयन्ती / सकिमना पुन्हि",
+      "nameEn": "Guru Nanak Jayanti",
+      "type": "restricted",
+      "ad": "2026-11-24"
+    }
+  ],
+  "2083-08-17": [
+    {
+      "name": "अन्तर्राष्ट्रिय अपाङ्ग दिवस",
+      "nameEn": "International Day of Persons with Disabilities",
+      "type": "restricted",
+      "ad": "2026-12-03"
+    }
+  ],
+  "2083-09-09": [
+    {
+      "name": "उधौली पर्व / धान्य पूर्णिमा / योमरी पुन्हि / ज्यापु दिवस",
+      "nameEn": "Udhauli / Yomari Punhi / Dhanya Purnima / Jyapu Day",
+      "type": "government",
+      "ad": "2026-12-24"
+    }
+  ],
+  "2083-09-10": [
+    {
+      "name": "क्रिसमस डे",
+      "nameEn": "Christmas Day",
+      "type": "government",
+      "ad": "2026-12-25"
+    }
+  ],
+  "2083-09-15": [
+    {
+      "name": "तमु ल्होसार / कवि शिरोमणि लेखनाथ जयन्ती",
+      "nameEn": "Tamu Lhosar",
+      "type": "government",
+      "ad": "2026-12-30"
+    }
+  ],
+  "2083-09-27": [
+    {
+      "name": "राष्ट्रिय एकता दिवस / पृथ्वी जयन्ती",
+      "nameEn": "National Unity Day / Prithvi Jayanti",
+      "type": "government",
+      "ad": "2027-01-11"
+    }
+  ],
+  "2083-10-01": [
+    {
+      "name": "माघे संक्रान्ति / मकर संक्रान्ति",
+      "nameEn": "Maghe Sankranti / Maghi Parva",
+      "type": "government",
+      "ad": "2027-01-15"
+    }
+  ],
+  "2083-10-16": [
+    {
+      "name": "शहीद दिवस",
+      "nameEn": "Martyrs' Day",
+      "type": "government",
+      "ad": "2027-01-30"
+    }
+  ],
+  "2083-10-24": [
+    {
+      "name": "सोनाम ल्होछार",
+      "nameEn": "Sonam Lhosar",
+      "type": "government",
+      "ad": "2027-02-07"
+    }
+  ],
+  "2083-10-28": [
+    {
+      "name": "वसन्तपञ्चमी / सरस्वती पूजा",
+      "nameEn": "Vasant Panchami / Saraswati Puja",
+      "type": "festival",
+      "ad": "2027-02-11"
+    }
+  ],
+  "2083-11-07": [
+    {
+      "name": "प्रजातन्त्र दिवस / निर्वाचन दिवस",
+      "nameEn": "National Democracy Day / Election Day",
+      "type": "government",
+      "ad": "2027-02-19"
+    }
+  ],
+  "2083-11-22": [
+    {
+      "name": "महाशिवरात्रि / नेपाली सेना दिवस",
+      "nameEn": "Maha Shivaratri / Nepali Army Day",
+      "type": "government",
+      "ad": "2027-03-06"
+    }
+  ],
+  "2083-11-24": [
+    {
+      "name": "अन्तर्राष्ट्रिय नारी दिवस",
+      "nameEn": "International Women's Day",
+      "type": "restricted",
+      "ad": "2027-03-08"
+    }
+  ],
+  "2083-11-25": [
+    {
+      "name": "ग्याल्पो ल्होसार",
+      "nameEn": "Gyalpo Lhosar",
+      "type": "government",
+      "ad": "2027-03-09"
+    }
+  ],
+  "2083-12-07": [
+    {
+      "name": "फागु पूर्णिमा (पहाडी जिल्ला)",
+      "nameEn": "Fagu Purnima / Holi (Hills and Mountains)",
+      "type": "regional",
+      "ad": "2027-03-21"
+    }
+  ],
+  "2083-12-08": [
+    {
+      "name": "फागु पूर्णिमा (तराई)",
+      "nameEn": "Fagu Purnima / Holi (Terai)",
+      "type": "regional",
+      "ad": "2027-03-22"
+    }
+  ],
+  "2083-12-23": [
+    {
+      "name": "घोडेजात्रा",
+      "nameEn": "Ghode Jatra (Kathmandu Valley)",
+      "type": "regional",
+      "ad": "2027-04-06"
+    }
+  ]
+}

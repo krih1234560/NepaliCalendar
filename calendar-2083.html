@@ -1,0 +1,49 @@
+<!-- २०८३ BS calendar component -->
+<section class="np83-section" id="calendar2083" aria-labelledby="np83-title">
+  <div class="container">
+    <div class="np83-header">
+      <div>
+        <div class="eyebrow">BIKRAM SAMBAT • २०८३</div>
+        <h2 id="np83-title">नेपाली पात्रो २०८३</h2>
+        <p class="np83-subtitle" id="np83-month-subtitle">Bhadra · Aug/Sep 2026</p>
+      </div>
+      <button class="np83-today" id="np83-today" type="button">आज</button>
+    </div>
+
+    <div class="np83-toolbar">
+      <button type="button" id="np83-prev" aria-label="अघिल्लो महिना">‹</button>
+      <select id="np83-month" aria-label="महिना"></select>
+      <button type="button" id="np83-next" aria-label="अर्को महिना">›</button>
+    </div>
+
+    <div class="np83-layout">
+      <div class="np83-calendar-card">
+        <div class="np83-month-title">
+          <div>
+            <h3 id="np83-month-name">भदौ २०८३</h3>
+            <span id="np83-month-en">Bhadra · Aug/Sep 2026</span>
+          </div>
+          <span class="np83-year">२०८३ BS</span>
+        </div>
+
+        <div class="np83-weekdays" id="np83-weekdays"></div>
+        <div class="np83-grid" id="np83-grid" aria-live="polite"></div>
+
+        <div class="np83-legend">
+          <span><i class="np83-dot np83-dot-today"></i>आज</span>
+          <span><i class="np83-dot np83-dot-event"></i>पर्व / कार्यक्रम</span>
+          <span><i class="np83-dot np83-dot-tithi"></i>तिथि</span>
+        </div>
+      </div>
+
+      <aside class="np83-sidebar" aria-label="पर्व र साइत">
+        <div class="np83-tabs" role="tablist">
+          <button class="active" data-np83-tab="festivals" role="tab">पर्वहरू</button>
+          <button data-np83-tab="saits" role="tab">साइतहरू</button>
+          <button data-np83-tab="holidays" role="tab">आगामी बिदा</button>
+        </div>
+        <div id="np83-side-content" class="np83-side-content"></div>
+      </aside>
+    </div>
+  </div>
+</section>
