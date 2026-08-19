@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="ne">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>
+    BS to AD Converter | Nepali Calendar
+  </title>
+
+  <meta
+    name="description"
+    content="Convert Bikram Sambat (BS) dates to Gregorian (AD) dates and back, instantly, for free."
+  >
+
+  <meta
+    name="robots"
+    content="index,follow,max-image-preview:large"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<header class="site-header">
+
+  <div class="container nav">
+
+    <a
+      class="brand"
+      href="index.html"
+      aria-label="Nepali Calendar home"
+    >
+
+      <span class="brand-icon">
+        📅
+      </span>
+
+      <span>
+
+        <strong>
+          Nepali Calendar
+        </strong>
+
+        <small>
+          नेपाली पात्रो
+        </small>
+
+      </span>
+
+    </a>
+
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mainNav"
+    >
+      ☰
+    </button>
+
+
+    <nav id="mainNav">
+
+  <a href="index.html#calendar">
+    Calendar
+  </a>
+
+  <a href="calendar-2083.html" class="calendar-2083-nav">
+    📅 पात्रो २०८३
+  </a>
+
+  <a href="converter.html" class="active">
+    Converter
+  </a>
+
+  <!-- =========================
+       TOOLS DROPDOWN
+  ========================== -->
+
+  <div class="dropdown">
+
+    <button
+      class="dropbtn"
+      id="toolsButton"
+      type="button"
+      aria-expanded="false"
+      aria-controls="toolsMenu"
+    >
+      Tools <span class="tools-arrow">▾</span>
+    </button>
+
+    <div
+      class="dropdown-menu"
+      id="toolsMenu"
+    >
+
+      <a href="unicode.html">
+        <span>अ</span>
+        <span>
+          <strong>Nepali Unicode</strong>
+          <small>Romanized Nepali → Unicode</small>
+        </span>
+      </a>
+
+      <a href="converter.html">
+        <span class="tool-menu-icon">↔</span>
+        <span>
+          <strong>BS ↔ AD Converter</strong>
+          <small>Convert Nepali and English dates</small>
+        </span>
+      </a>
+
+      <a href="festivals.html">
+        <span class="tool-menu-icon">🎉</span>
+        <span>
+          <strong>Festivals</strong>
+          <small>Nepali festivals and holidays</small>
+        </span>
+      </a>
+
+      <a href="tools.html">
+        <span class="tool-menu-icon">↔</span>
+        <span>
+          <strong>Date Difference</strong>
+          <small>Calculate days between dates</small>
+        </span>
+      </a>
+
+      <a href="age-calculator.html">
+        <span class="tool-menu-icon">🎂</span>
+        <span>
+          <strong>Age Calculator</strong>
+          <small>Calculate age from date of birth</small>
+        </span>
+      </a>
+
+    </div>
+
+  </div>
+
+  <a href="festivals.html">
+    Festivals
+  </a>
+
+  <a href="holidays.html">
+    Holidays
+  </a>
+
+</nav>
+
+  </div>
+
+</header>
+
+
+<main>
+
+<section
+  class="container section"
+  id="converter"
+>
+
+
+  <div class="section-heading">
+
+
+    <div>
+
+      <div class="eyebrow">
+        DATE CONVERTER
+      </div>
+
+
+      <h2>
+        BS ↔ AD Date Converter
+      </h2>
+
+
+      <p>
+        Convert Bikram Sambat and Gregorian dates instantly.
+      </p>
+
+    </div>
+
+
+  </div>
+
+
+
+  <div class="converter-card">
+
+
+    <div class="tabs">
+
+
+      <button
+        class="tab active"
+        data-mode="bs"
+        type="button"
+      >
+        BS → AD
+      </button>
+
+
+      <button
+        class="tab"
+        data-mode="ad"
+        type="button"
+      >
+        AD → BS
+      </button>
+
+
+    </div>
+
+
+
+    <form id="converterForm">
+
+
+      <div
+        id="bsFields"
+        class="form-grid"
+      >
+
+
+        <label>
+
+          BS Year
+
+          <input
+            id="bsYear"
+            type="number"
+            min="1975"
+            max="2100"
+            value="2083"
+          >
+
+        </label>
+
+
+
+        <label>
+
+          Month
+
+          <select id="bsMonth"></select>
+
+        </label>
+
+
+
+        <label>
+
+          Day
+
+          <input
+            id="bsDay"
+            type="number"
+            min="1"
+            max="32"
+            value="1"
+          >
+
+        </label>
+
+
+      </div>
+
+
+
+      <div
+        id="adFields"
+        class="form-grid hidden"
+      >
+
+
+        <label>
+
+          AD Year
+
+          <input
+            id="adYear"
+            type="number"
+            min="1918"
+            max="2044"
+            value="2026"
+          >
+
+        </label>
+
+
+
+        <label>
+
+          Month
+
+          <input
+            id="adMonth"
+            type="number"
+            min="1"
+            max="12"
+            value="8"
+          >
+
+        </label>
+
+
+
+        <label>
+
+          Day
+
+          <input
+            id="adDay"
+            type="number"
+            min="1"
+            max="31"
+            value="16"
+          >
+
+        </label>
+
+
+      </div>
+
+
+
+      <button
+        class="primary"
+        type="submit"
+      >
+        Convert Date
+      </button>
+
+
+    </form>
+
+
+
+    <div
+      class="result"
+      id="converterResult"
+    >
+      Enter a date to convert.
+    </div>
+
+
+  </div>
+
+
+    <div class="tool-seo">
+      <h3>BS to AD and AD to BS Date Converter</h3>
+      <p>
+        Convert Bikram Sambat dates to Gregorian dates and Gregorian dates
+        back to Nepali BS dates. This Nepali date converter is useful for
+        citizenship dates, documents, birthdays, applications, travel and
+        everyday calendar planning.
+      </p>
+      <p>
+        Enter the year, month and day carefully to get the corresponding
+        Nepali Calendar 2083 date or English AD date.
+      </p>
+    </div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+
+  <div class="container footer-inner">
+
+
+    <div>
+
+
+      <strong>
+        📅 Nepali Calendar
+      </strong>
+
+
+      <p>
+        नेपाली पात्रो • Bikram Sambat Calendar
+      </p>
+
+
+    </div>
+
+
+
+    <div>
+
+
+      <a href="index.html#calendar">
+        Calendar
+      </a>
+
+
+      <a href="converter.html">
+        Converter
+      </a>
+
+
+      <a href="unicode.html">
+        Unicode
+      </a>
+
+
+      <a href="holidays.html">
+        Holidays
+      </a>
+
+
+      <a href="festivals.html">
+        Festivals
+      </a>
+
+
+    </div>
+
+
+
+    <p>
+
+      ©
+
+      <span id="footerYear"></span>
+
+      Nepali Calendar.
+
+    </p>
+
+
+  </div>
+
+
+</footer>
+
+
+<script src="script.js" defer></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="ne">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>
+    Nepali Unicode Converter | Nepali Calendar
+  </title>
+
+  <meta
+    name="description"
+    content="Type Romanized Nepali and convert it into Nepali Unicode (Devanagari) instantly."
+  >
+
+  <meta
+    name="robots"
+    content="index,follow,max-image-preview:large"
+  >
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+</head>
+
+
+<body>
+
+
+<header class="site-header">
+
+  <div class="container nav">
+
+    <a
+      class="brand"
+      href="index.html"
+      aria-label="Nepali Calendar home"
+    >
+
+      <span class="brand-icon">
+        📅
+      </span>
+
+      <span>
+
+        <strong>
+          Nepali Calendar
+        </strong>
+
+        <small>
+          नेपाली पात्रो
+        </small>
+
+      </span>
+
+    </a>
+
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mainNav"
+    >
+      ☰
+    </button>
+
+
+    <nav id="mainNav">
+
+  <a href="index.html#calendar">
+    Calendar
+  </a>
+
+  <a href="calendar-2083.html" class="calendar-2083-nav">
+    📅 पात्रो २०८३
+  </a>
+
+  <a href="converter.html">
+    Converter
+  </a>
+
+  <!-- =========================
+       TOOLS DROPDOWN
+  ========================== -->
+
+  <div class="dropdown">
+
+    <button
+      class="dropbtn"
+      id="toolsButton"
+      type="button"
+      aria-expanded="false"
+      aria-controls="toolsMenu"
+    >
+      Tools <span class="tools-arrow">▾</span>
+    </button>
+
+    <div
+      class="dropdown-menu"
+      id="toolsMenu"
+    >
+
+      <a href="unicode.html">
+        <span>अ</span>
+        <span>
+          <strong>Nepali Unicode</strong>
+          <small>Romanized Nepali → Unicode</small>
+        </span>
+      </a>
+
+      <a href="converter.html">
+        <span class="tool-menu-icon">↔</span>
+        <span>
+          <strong>BS ↔ AD Converter</strong>
+          <small>Convert Nepali and English dates</small>
+        </span>
+      </a>
+
+      <a href="festivals.html">
+        <span class="tool-menu-icon">🎉</span>
+        <span>
+          <strong>Festivals</strong>
+          <small>Nepali festivals and holidays</small>
+        </span>
+      </a>
+
+      <a href="tools.html">
+        <span class="tool-menu-icon">↔</span>
+        <span>
+          <strong>Date Difference</strong>
+          <small>Calculate days between dates</small>
+        </span>
+      </a>
+
+      <a href="age-calculator.html">
+        <span class="tool-menu-icon">🎂</span>
+        <span>
+          <strong>Age Calculator</strong>
+          <small>Calculate age from date of birth</small>
+        </span>
+      </a>
+
+    </div>
+
+  </div>
+
+  <a href="festivals.html">
+    Festivals
+  </a>
+
+  <a href="holidays.html">
+    Holidays
+  </a>
+
+</nav>
+
+  </div>
+
+</header>
+
+
+<main>
+
+<section
+  class="container section"
+  id="unicode"
+>
+
+  <div class="unicode-card">
+
+    <div class="unicode-header">
+
+      <div class="eyebrow">
+        NEPALI UNICODE
+      </div>
+
+      <h2>
+        Type Romanized Nepali
+      </h2>
+
+      <p>
+        Type Nepali words in English and convert them
+        into Nepali Unicode.
+      </p>
+
+    </div>
+
+
+    <div class="unicode-content">
+
+      <!-- ROMANIZED INPUT -->
+
+      <div class="unicode-label-row">
+
+        <span class="unicode-label">
+          Romanized Nepali
+        </span>
+
+        <span class="unicode-hint">
+          Type in English
+        </span>
+
+      </div>
+
+
+      <div class="unicode-editor">
+
+        <textarea
+          id="roman"
+          spellcheck="false"
+          autocomplete="off"
+          placeholder="Type here... e.g. mero naam ram ho"
+        ></textarea>
+
+
+        <!-- GOOGLE SUGGESTIONS -->
+
+        <div
+          id="suggestions"
+          class="unicode-suggestions"
+        ></div>
+
+      </div>
+
+
+      <!-- ARROW -->
+
+      <div class="unicode-arrow">
+        ↓
+      </div>
+
+
+      <!-- OUTPUT -->
+
+      <div class="unicode-label-row">
+
+        <span class="unicode-label">
+          Nepali Unicode
+        </span>
+
+        <span class="unicode-hint">
+          Devanagari Unicode
+        </span>
+
+      </div>
+
+
+      <textarea
+        id="output"
+        class="unicode-output"
+        readonly
+        placeholder="नेपाली Unicode यहाँ देखिन्छ..."
+      ></textarea>
+
+
+      <!-- BUTTONS -->
+
+      <div class="unicode-actions">
+
+        <button
+          class="unicode-action unicode-copy"
+          id="copy"
+          type="button"
+        >
+          Copy Unicode
+        </button>
+
+
+        <button
+          class="unicode-action unicode-clear"
+          id="clear"
+          type="button"
+        >
+          Clear
+        </button>
+
+      </div>
+
+
+      <div
+        id="status"
+        class="unicode-status"
+      ></div>
+
+
+      <!-- EXAMPLES -->
+
+      <div class="unicode-examples">
+
+        <strong>
+          Try:
+        </strong>
+
+        <code>namaste</code>
+
+        <code>mero naam ram ho</code>
+
+        <code>tapai lai kasto cha</code>
+
+        <code>nepal sundar desh ho</code>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+    <div class="tool-seo">
+      <h3>Nepali Unicode Typing Tool</h3>
+      <p>
+        Type Romanized Nepali such as <strong>namaste</strong> or
+        <strong>mero naam ram ho</strong> and use the suggestions to produce
+        Nepali Unicode text in Devanagari. You can copy the finished text
+        directly from the browser.
+      </p>
+      <p>
+        The Nepali Unicode tool is useful for social media, documents,
+        websites, messages and everyday Nepali typing.
+      </p>
+    </div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+
+  <div class="container footer-inner">
+
+
+    <div>
+
+
+      <strong>
+        📅 Nepali Calendar
+      </strong>
+
+
+      <p>
+        नेपाली पात्रो • Bikram Sambat Calendar
+      </p>
+
+
+    </div>
+
+
+
+    <div>
+
+
+      <a href="index.html#calendar">
+        Calendar
+      </a>
+
+
+      <a href="converter.html">
+        Converter
+      </a>
+
+
+      <a href="unicode.html">
+        Unicode
+      </a>
+
+
+      <a href="holidays.html">
+        Holidays
+      </a>
+
+
+      <a href="festivals.html">
+        Festivals
+      </a>
+
+
+    </div>
+
+
+
+    <p>
+
+      ©
+
+      <span id="footerYear"></span>
+
+      Nepali Calendar.
+
+    </p>
+
+
+  </div>
+
+
+</footer>
+
+
+<script src="script.js" defer></script>
+
+
+</body>
+
+</html>

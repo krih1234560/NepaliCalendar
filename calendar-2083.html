@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ne">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>नेपाली पात्रो २०८३ | Nepali Calendar 2083</title>
+  <meta name="description" content="नेपाली पात्रो २०८३ — Bikram Sambat calendar with AD dates, festivals, tithi and month-wise holidays.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="calendar-2083.css">
+</head>
+<body class="np83-page">
+
+<header class="site-header">
+
+  <div class="container nav">
+
+    <a
+      class="brand"
+      href="index.html"
+      aria-label="Nepali Calendar home"
+    >
+
+      <span class="brand-icon">
+        📅
+      </span>
+
+      <span>
+
+        <strong>
+          Nepali Calendar
+        </strong>
+
+        <small>
+          नेपाली पात्रो
+        </small>
+
+      </span>
+
+    </a>
+
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mainNav"
+    >
+      ☰
+    </button>
+
+
+    <nav id="mainNav">
+
+  <a href="index.html#calendar">
+    Calendar
+  </a>
+
+  <a href="calendar-2083.html" class="calendar-2083-nav active">
+    📅 पात्रो २०८३
+  </a>
+
+  <a href="converter.html">
+    Converter
+  </a>
+
+  <!-- =========================
+       TOOLS DROPDOWN
+  ========================== -->
+
+  <div class="dropdown">
+
+    <button
+      class="dropbtn"
+      id="toolsButton"
+      type="button"
+      aria-expanded="false"
+      aria-controls="toolsMenu"
+    >
+      Tools <span class="tools-arrow">▾</span>
+    </button>
+
+    <div
+      class="dropdown-menu"
+      id="toolsMenu"
+    >
+
+      <a href="unicode.html">
+        <span>अ</span>
+        <span>
+          <strong>Nepali Unicode</strong>
+          <small>Romanized Nepali → Unicode</small>
+        </span>
+      </a>
+
+      <a href="converter.html">
+        <span class="tool-menu-icon">↔</span>
+        <span>
+          <strong>BS ↔ AD Converter</strong>
+          <small>Convert Nepali and English dates</small>
+        </span>
+      </a>
+
+      <a href="festivals.html">
+        <span class="tool-menu-icon">🎉</span>
+        <span>
+          <strong>Festivals</strong>
+          <small>Nepali festivals and holidays</small>
+        </span>
+      </a>
+
+      <a href="tools.html">
+        <span class="tool-menu-icon">↔</span>
+        <span>
+          <strong>Date Difference</strong>
+          <small>Calculate days between dates</small>
+        </span>
+      </a>
+
+      <a href="age-calculator.html">
+        <span class="tool-menu-icon">🎂</span>
+        <span>
+          <strong>Age Calculator</strong>
+          <small>Calculate age from date of birth</small>
+        </span>
+      </a>
+
+    </div>
+
+  </div>
+
+  <a href="festivals.html">
+    Festivals
+  </a>
+
+  <a href="holidays.html">
+    Holidays
+  </a>
+
+</nav>
+
+  </div>
+
+</header>
+
+<main class="np83-page-main">
+<section class="np83-section" id="calendar2083" aria-labelledby="np83-title">
+  <div class="container">
+    <div class="np83-header">
+      <div>
+        <div class="eyebrow">BIKRAM SAMBAT • २०८३</div>
+        <h1 id="np83-title">नेपाली पात्रो २०८३</h1>
+        <p class="np83-subtitle" id="np83-month-subtitle">Bhadra · Aug/Sep 2026</p>
+      </div>
+      <button class="np83-today" id="np83-today" type="button">आज</button>
+    </div>
+
+    <div class="np83-holiday-summary" id="np83-holiday-summary" aria-live="polite"></div>
+
+    <div class="np83-toolbar">
+      <button type="button" id="np83-prev" aria-label="अघिल्लो महिना">‹</button>
+      <select id="np83-month" aria-label="महिना"></select>
+      <button type="button" id="np83-next" aria-label="अर्को महिना">›</button>
+    </div>
+
+    <div class="np83-layout">
+      <div class="np83-calendar-card">
+        <div class="np83-month-title">
+          <div><h2 id="np83-month-name">भदौ २०८३</h2><span id="np83-month-en">Bhadra · Aug/Sep 2026</span></div>
+          <span class="np83-year">२०८३ BS</span>
+        </div>
+        <div class="np83-weekdays" id="np83-weekdays"></div>
+        <div class="np83-grid" id="np83-grid" aria-live="polite"></div>
+        <div class="np83-legend">
+          <span><i class="np83-dot np83-dot-today"></i>आज</span>
+          <span><i class="np83-dot np83-dot-event"></i>पर्व / कार्यक्रम</span>
+          <span><i class="np83-dot np83-dot-tithi"></i>तिथि</span>
+          <span><i class="np83-dot np83-dot-holiday"></i>शनिवार / आइतवार बिदा</span>
+        </div>
+      </div>
+
+      <aside class="np83-sidebar" aria-label="पर्व र साइत">
+        <div class="np83-tabs" role="tablist">
+          <button class="active" data-np83-tab="festivals" role="tab">पर्वहरू</button>
+          <button data-np83-tab="saits" role="tab">साइतहरू</button>
+          <button data-np83-tab="holidays" role="tab">आगामी बिदा</button>
+        </div>
+        <div id="np83-side-content" class="np83-side-content"></div>
+      </aside>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+
+
+  <div class="container footer-inner">
+
+
+    <div>
+
+
+      <strong>
+        📅 Nepali Calendar
+      </strong>
+
+
+      <p>
+        नेपाली पात्रो • Bikram Sambat Calendar
+      </p>
+
+
+    </div>
+
+
+
+    <div>
+
+
+      <a href="index.html#calendar">
+        Calendar
+      </a>
+
+
+      <a href="converter.html">
+        Converter
+      </a>
+
+
+      <a href="unicode.html">
+        Unicode
+      </a>
+
+
+      <a href="holidays.html">
+        Holidays
+      </a>
+
+
+      <a href="festivals.html">
+        Festivals
+      </a>
+
+
+    </div>
+
+
+
+    <p>
+
+      ©
+
+      <span id="footerYear"></span>
+
+      Nepali Calendar.
+
+    </p>
+
+
+  </div>
+
+
+</footer>
+
+<script src="calendar-2083.js" defer></script>
+<script src="script.js" defer></script>
+</body>
+</html>

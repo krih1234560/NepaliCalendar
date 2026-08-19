@@ -1,0 +1,97 @@
+
+/* =========================================================
+   Nepali Calendar 2083 - isolated component styles
+   All selectors are prefixed with .np83- to avoid changing
+   the existing project navbar/calendar/styles.
+========================================================= */
+.np83-section{
+  padding:72px 0;
+  background:linear-gradient(180deg,#f8fafc 0%,#fff 100%);
+  border-top:1px solid var(--border);
+}
+.np83-section *{box-sizing:border-box}
+.np83-header{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:22px}
+.np83-header h2{margin:6px 0 2px;font-size:clamp(30px,5vw,48px);line-height:1.1}
+.np83-subtitle{margin:0;color:var(--muted);font-size:16px}
+.np83-today{border:0;background:var(--primary);color:#fff;border-radius:10px;padding:11px 18px;font-weight:800}
+.np83-today:hover{background:var(--primary-2)}
+.np83-toolbar{display:flex;gap:8px;align-items:center;margin-bottom:16px}
+.np83-toolbar button{width:42px;height:42px;border:1px solid var(--border);background:#fff;border-radius:10px;font-size:26px;color:var(--text)}
+.np83-toolbar select{height:42px;min-width:210px;border:1px solid var(--border);border-radius:10px;background:#fff;padding:0 12px;color:var(--text)}
+.np83-layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;align-items:start}
+.np83-calendar-card,.np83-sidebar{background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow)}
+.np83-calendar-card{padding:18px}
+.np83-month-title{display:flex;justify-content:space-between;align-items:center;padding:4px 4px 16px}
+.np83-month-title h3{margin:0;font-size:25px}
+.np83-month-title span{color:var(--muted)}
+.np83-year{padding:7px 10px;border-radius:9px;background:var(--surface-2);font-weight:700;color:var(--primary)!important}
+.np83-weekdays,.np83-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.np83-weekdays{margin-bottom:6px}
+.np83-weekdays div{text-align:center;color:var(--muted);font-size:13px;font-weight:800;padding:8px 2px}
+.np83-weekdays div:last-child{color:#b91c1c}
+.np83-day{min-height:94px;border:1px solid var(--border);border-radius:11px;background:#fff;padding:8px;text-align:left;position:relative;cursor:pointer;transition:.15s}
+.np83-day:hover{border-color:#94a3b8;transform:translateY(-1px)}
+.np83-day.empty{visibility:hidden;cursor:default}
+.np83-day.today{outline:2px solid var(--accent);background:#fffbeb}
+.np83-day.selected{box-shadow:inset 0 0 0 2px var(--primary)}
+.np83-day.saturday .np83-bs{color:#b91c1c}
+.np83-bs{font-size:22px;font-weight:850;display:block;line-height:1.05}
+.np83-ad{font-size:12px;color:var(--muted)}
+.np83-tithi{display:block;margin-top:8px;font-size:11px;color:#475569;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.np83-events{margin-top:5px;display:flex;gap:3px;flex-wrap:wrap}
+.np83-event-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);display:inline-block}
+.np83-event-name{display:block;margin-top:3px;font-size:10px;line-height:1.25;color:#334155;max-height:25px;overflow:hidden}
+.np83-legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:13px;color:var(--muted);font-size:12px}
+.np83-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:5px}
+.np83-dot-today{background:var(--accent)}
+.np83-dot-event{background:var(--primary)}
+.np83-dot-tithi{background:#94a3b8}
+.np83-tabs{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border)}
+.np83-tabs button{border:0;background:#fff;padding:13px 7px;font-weight:800;color:var(--muted);cursor:pointer}
+.np83-tabs button.active{color:var(--primary);box-shadow:inset 0 -2px 0 var(--primary)}
+.np83-side-content{padding:14px}
+.np83-side-title{font-size:14px;font-weight:850;margin:0 0 10px}
+.np83-side-item{padding:10px 0;border-bottom:1px solid var(--border)}
+.np83-side-item:last-child{border-bottom:0}
+.np83-side-date{font-weight:850;font-size:15px}
+.np83-side-name{font-size:13px;color:#334155;margin-top:2px}
+.np83-side-empty{padding:20px 4px;color:var(--muted);font-size:13px}
+.np83-side-list{margin:0;padding:0;list-style:none}
+.np83-number{font-variant-numeric:tabular-nums}
+
+@media (max-width:900px){
+  .np83-layout{grid-template-columns:1fr}
+}
+@media (max-width:650px){
+  .np83-section{padding:48px 0}
+  .np83-header{align-items:flex-start}
+  .np83-header h2{font-size:30px}
+  .np83-day{min-height:78px;padding:6px}
+  .np83-bs{font-size:18px}
+  .np83-tithi{font-size:9px;margin-top:5px}
+  .np83-event-name{display:none}
+  .np83-grid,.np83-weekdays{gap:3px}
+  .np83-calendar-card{padding:10px}
+  .np83-month-title h3{font-size:20px}
+  .np83-year{font-size:12px}
+  .np83-toolbar select{min-width:0;flex:1}
+  .np83-sidebar{border-radius:14px}
+}
+
+/* Separate २०८३ page enhancements */
+.np83-page-main{min-height:calc(100vh - 80px)}
+.np83-page .site-header{z-index:50}
+.np83-page nav .calendar-2083-nav{font-weight:800}
+.np83-holiday-summary{display:grid;grid-template-columns:repeat(12,minmax(70px,1fr));gap:8px;margin:0 0 18px}
+.np83-holiday-month{border:1px solid var(--border);background:#fff;border-radius:12px;padding:9px 6px;text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;line-height:1.15;transition:.15s}
+.np83-holiday-month:hover,.np83-holiday-month.active{border-color:var(--danger);box-shadow:0 0 0 1px var(--danger)}
+.np83-holiday-month span{font-weight:800;font-size:13px}
+.np83-holiday-month strong{font-size:22px;color:var(--danger);margin-top:3px}
+.np83-holiday-month small{font-size:10px;color:var(--muted)}
+.np83-weekdays .holiday-weekday{color:var(--danger)}
+.np83-day.sunday,.np83-day.saturday{border-color:#fecaca;background:#fffafa}
+.np83-day.sunday .np83-bs,.np83-day.saturday .np83-bs{color:var(--danger)}
+.np83-day.holiday .np83-ad{color:var(--danger);font-weight:700}
+.np83-dot-holiday{background:var(--danger)}
+@media(max-width:1050px){.np83-holiday-summary{grid-template-columns:repeat(6,1fr)}}
+@media(max-width:650px){.np83-holiday-summary{grid-template-columns:repeat(4,1fr);gap:5px}.np83-holiday-month{padding:7px 3px}.np83-holiday-month span{font-size:11px}.np83-holiday-month strong{font-size:18px}}
